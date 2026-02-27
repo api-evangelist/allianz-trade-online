@@ -1,0 +1,70 @@
+name: Allianz Trade Online APIs
+description: APIs for Allianz Trade's online services including credit insurance, trade credit information, and risk management solutions
+image: https://www.allianz-trade.com/content/dam/onemarketing/aztrade/allianz-trade_logo.png
+url: https://www.allianz-trade.com
+created: '2024'
+modified: '2024'
+apis:
+- name: Allianz Trade Credit Insurance API
+  description: API for accessing credit insurance services, policy management, and claims processing
+  image: https://www.allianz-trade.com/content/dam/onemarketing/aztrade/allianz-trade_logo.png
+  humanURL: https://www.allianz-trade.com
+  baseURL: https://api.allianz-trade.com/v1
+  tags:
+  - Credit Insurance
+  - Trade Credit
+  - Risk Management
+  - Insurance
+  properties:
+  - type: Documentation
+    url: https://developer.allianz-trade.com/docs
+  - type: OpenAPI
+    url: https://api.allianz-trade.com/v1/openapi.json
+  - type: Authentication
+    url: https://developer.allianz-trade.com/docs/authentication
+- name: Allianz Trade Risk API
+  description: API for credit risk assessment, company information, and credit limit recommendations
+  image: https://www.allianz-trade.com/content/dam/onemarketing/aztrade/allianz-trade_logo.png
+  humanURL: https://www.allianz-trade.com/risk-services
+  baseURL: https://api.allianz-trade.com/risk/v1
+  tags:
+  - Risk Assessment
+  - Credit Reports
+  - Company Data
+  - Due Diligence
+  properties:
+  - type: Documentation
+    url: https://developer.allianz-trade.com/docs/risk-api
+  - type: OpenAPI
+    url: https://api.allianz-trade.com/risk/v1/openapi.json
+- name: Allianz Trade Collections API
+  description: API for debt collection services and receivables management
+  image: https://www.allianz-trade.com/content/dam/onemarketing/aztrade/allianz-trade_logo.png
+  humanURL: https://www.allianz-trade.com/collections
+  baseURL: https://api.allianz-trade.com/collections/v1
+  tags:
+  - Debt Collection
+  - Receivables
+  - Payment Recovery
+  properties:
+  - type: Documentation
+    url: https://developer.allianz-trade.com/docs/collections-api
+  - type: OpenAPI
+    url: https://api.allianz-trade.com/collections/v1/openapi.json
+maintainers:
+- name: Allianz Trade
+  email: api-support@allianz-trade.com
+  url: https://www.allianz-trade.com
+common:
+- type: Portal
+  url: https://developer.allianz-trade.com
+- type: Terms of Service
+  url: https://www.allianz-trade.com/terms
+- type: Privacy Policy
+  url: https://www.allianz-trade.com/privacy
+- type: Support
+  url: https://www.allianz-trade.com/support
+- type: Status
+  url: https://status.allianz-trade.com
+- type: Pricing
+  url: https://www.allianz-trade.com/pricing
