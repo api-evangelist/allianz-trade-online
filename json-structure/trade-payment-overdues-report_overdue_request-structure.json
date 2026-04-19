@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api.allianz-trade.com/structures/trade-payment-overdues-report_overdue_request-structure.json",
+  "title": "ReportOverdueRequest",
+  "type": "object",
+  "description": "Request body for reporting a payment overdue",
+  "properties": {
+    "policyId": {
+      "type": "xs:string",
+      "description": "Trade credit insurance policy identifier"
+    },
+    "overdueCategoryTypeCode": {
+      "type": "xs:string",
+      "description": "Overdue category type code"
+    },
+    "debtorName": {
+      "type": "xs:string",
+      "description": "Name of the debtor"
+    },
+    "debtorId": {
+      "type": "xs:string",
+      "description": "Allianz Trade debtor identifier"
+    },
+    "overdueAmount": {
+      "type": "xs:decimal",
+      "description": "Amount overdue"
+    },
+    "currency": {
+      "type": "xs:string",
+      "description": "ISO 4217 currency code"
+    },
+    "dueDate": {
+      "type": "xs:string",
+      "description": "Original invoice due date"
+    },
+    "invoiceReference": {
+      "type": "xs:string",
+      "description": "Customer invoice reference"
+    }
+  }
+}

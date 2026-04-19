@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api.allianz-trade.com/structures/trade-claims-claim_list-structure.json",
+  "title": "ClaimList",
+  "type": "object",
+  "description": "Paginated list of insurance claims",
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "List of insurance claim records"
+    }
+  }
+}

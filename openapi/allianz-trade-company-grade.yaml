@@ -1,0 +1,447 @@
+openapi: 3.0.3
+info:
+  title: Allianz Trade Company Grade API
+  description: >-
+    Retrieve creditworthiness grades for clients and prospects after cover
+    requests. Supports bulk operations for grading multiple companies
+    simultaneously, enabling automated credit risk assessment within ERP systems.
+  version: 1.0.0
+  contact:
+    name: Allianz Trade API Support
+    email: api@allianz-trade.com
+    url: https://developers.allianz-trade.com/
+  x-generated-from: documentation
+servers:
+  - url: https://api.allianz-trade.com/v1
+    description: Allianz Trade API production server
+security:
+  - OAuth2: []
+tags:
+  - name: Company Grade
+    description: Company creditworthiness grading operations
+paths:
+  /company-grades:
+    get:
+      operationId: listCompanyGrades
+      summary: Allianz Trade List Company Grades
+      description: Retrieve a paginated list of company creditworthiness grades for your portfolio.
+      tags:
+        - Company Grade
+      parameters:
+        - name: pageSize
+          in: query
+          required: false
+          description: Number of items per page (Allianz Trade pagination standard)
+          schema:
+            type: integer
+            default: 20
+            minimum: 1
+            maximum: 100
+          example: 20
+        - name: page
+          in: query
+          required: false
+          description: Page number starting from 1
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+          example: 1
+        - name: totalRequired
+          in: query
+          required: false
+          description: Whether to include total count in response headers
+          schema:
+            type: boolean
+            default: false
+          example: false
+        - name: policyId
+          in: query
+          required: false
+          description: Filter grades by policy identifier
+          schema:
+            type: string
+          example: "POL-500123"
+      responses:
+        '200':
+          description: Company grades retrieved successfully
+          headers:
+            Total-Items:
+              description: Total number of grades (when totalRequired=true)
+              schema:
+                type: integer
+            Total-Pages:
+              description: Total number of pages (when totalRequired=true)
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyGradeList'
+              examples:
+                ListCompanyGrades200Example:
+                  summary: Default listCompanyGrades 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      - gradeId: "GRD-500123"
+                        policyId: "POL-500123"
+                        companyName: "Acme Corp"
+                        grade: B
+                        gradeScore: 65
+                        currency: EUR
+                        creditLimit: 100000.00
+                        validUntil: "2026-12-31"
+        '401':
+          description: Unauthorized - invalid or missing OAuth2 token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden - insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+    post:
+      operationId: requestCompanyGrade
+      summary: Allianz Trade Request Company Grade
+      description: >-
+        Request a creditworthiness grade for a company or submit a bulk grading
+        request for multiple companies within the same policy.
+      tags:
+        - Company Grade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyGradeRequest'
+            examples:
+              CompanyGradeRequestExample:
+                summary: Default requestCompanyGrade request
+                x-microcks-default: true
+                value:
+                  policyId: "POL-500123"
+                  companyName: "Acme Corp"
+                  companyRegistrationNumber: "FR123456789"
+                  country: FR
+                  requestedCreditLimit: 100000.00
+                  currency: EUR
+      responses:
+        '202':
+          description: Grade request accepted for processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobResponse'
+              examples:
+                RequestCompanyGrade202Example:
+                  summary: Default requestCompanyGrade 202 response
+                  x-microcks-default: true
+                  value:
+                    jobId: "JOB-500789"
+                    status: pending
+                    createdAt: "2026-04-19T10:30:00Z"
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /company-grades/{gradeId}:
+    get:
+      operationId: getCompanyGrade
+      summary: Allianz Trade Get Company Grade
+      description: Retrieve the creditworthiness grade for a specific company by grade identifier.
+      tags:
+        - Company Grade
+      parameters:
+        - name: gradeId
+          in: path
+          required: true
+          description: Unique identifier of the company grade
+          schema:
+            type: string
+          example: "GRD-500123"
+      responses:
+        '200':
+          description: Company grade retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyGrade'
+              examples:
+                GetCompanyGrade200Example:
+                  summary: Default getCompanyGrade 200 response
+                  x-microcks-default: true
+                  value:
+                    gradeId: "GRD-500123"
+                    policyId: "POL-500123"
+                    companyName: "Acme Corp"
+                    companyRegistrationNumber: "FR123456789"
+                    country: FR
+                    grade: B
+                    gradeScore: 65
+                    currency: EUR
+                    creditLimit: 100000.00
+                    requestedCreditLimit: 100000.00
+                    validUntil: "2026-12-31"
+                    gradedAt: "2026-04-19T10:31:00Z"
+        '404':
+          description: Grade not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /jobs/{jobId}:
+    get:
+      operationId: getJobStatus
+      summary: Allianz Trade Get Job Status
+      description: Poll for the status of an asynchronous grading operation submitted via POST.
+      tags:
+        - Company Grade
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: Unique identifier of the async job
+          schema:
+            type: string
+          example: "JOB-500789"
+      responses:
+        '200':
+          description: Job status retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobResponse'
+              examples:
+                GetJobStatus200Example:
+                  summary: Default getJobStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    jobId: "JOB-500789"
+                    status: processed
+                    result:
+                      gradeId: "GRD-500123"
+                    createdAt: "2026-04-19T10:30:00Z"
+                    completedAt: "2026-04-19T10:31:00Z"
+        '404':
+          description: Job not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth2 client credentials for Allianz Trade API access
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.allianz-trade.com/oauth2/token
+          scopes:
+            grades:read: Read company grades
+            grades:write: Request company grades
+
+  schemas:
+    CompanyGrade:
+      title: CompanyGrade
+      type: object
+      description: A company creditworthiness grade from Allianz Trade
+      properties:
+        gradeId:
+          type: string
+          description: Unique identifier for the company grade
+          example: "GRD-500123"
+        policyId:
+          type: string
+          description: Trade credit insurance policy identifier
+          example: "POL-500123"
+        companyName:
+          type: string
+          description: Name of the graded company
+          example: "Acme Corp"
+        companyRegistrationNumber:
+          type: string
+          description: Official company registration number
+          example: "FR123456789"
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: FR
+        grade:
+          type: string
+          description: Creditworthiness grade letter
+          enum:
+            - A
+            - B
+            - C
+            - D
+            - E
+          example: B
+        gradeScore:
+          type: integer
+          description: Numeric score underlying the grade (0-100)
+          minimum: 0
+          maximum: 100
+          example: 65
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: EUR
+        creditLimit:
+          type: number
+          format: double
+          description: Approved credit limit amount
+          example: 100000.00
+        requestedCreditLimit:
+          type: number
+          format: double
+          description: Originally requested credit limit
+          example: 100000.00
+        validUntil:
+          type: string
+          format: date
+          description: Date until which the grade is valid
+          example: "2026-12-31"
+        gradedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the grade was issued
+          example: "2026-04-19T10:31:00Z"
+
+    CompanyGradeList:
+      title: CompanyGradeList
+      type: object
+      description: Paginated list of company grades
+      properties:
+        data:
+          type: array
+          description: List of company grade records
+          items:
+            $ref: '#/components/schemas/CompanyGrade'
+
+    CompanyGradeRequest:
+      title: CompanyGradeRequest
+      type: object
+      description: Request body for requesting a company creditworthiness grade
+      required:
+        - policyId
+        - companyName
+        - country
+        - requestedCreditLimit
+        - currency
+      properties:
+        policyId:
+          type: string
+          description: Trade credit insurance policy identifier
+          example: "POL-500123"
+        companyName:
+          type: string
+          description: Name of the company to grade
+          example: "Acme Corp"
+        companyRegistrationNumber:
+          type: string
+          description: Official company registration number
+          example: "FR123456789"
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code of the company
+          example: FR
+        requestedCreditLimit:
+          type: number
+          format: double
+          description: Requested credit limit amount
+          example: 100000.00
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: EUR
+
+    JobResponse:
+      title: JobResponse
+      type: object
+      description: Async job status response
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the async job
+          example: "JOB-500789"
+        status:
+          type: string
+          description: Current status of the job
+          enum:
+            - pending
+            - processed
+            - failed
+          example: processed
+        result:
+          type: object
+          description: Result data after successful job completion
+          example:
+            gradeId: "GRD-500123"
+        createdAt:
+          type: string
+          format: date-time
+          description: When the job was created
+          example: "2026-04-19T10:30:00Z"
+        completedAt:
+          type: string
+          format: date-time
+          description: When the job completed (null if still pending)
+          example: "2026-04-19T10:31:00Z"
+
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: INVALID_REQUEST
+        message:
+          type: string
+          description: Human-readable error description
+          example: "The requestedCreditLimit must be a positive number"
+        requestId:
+          type: string
+          description: Request identifier for support reference
+          example: "req-500999"

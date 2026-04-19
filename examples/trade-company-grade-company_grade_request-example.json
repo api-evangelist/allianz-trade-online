@@ -1,0 +1,8 @@
+{
+  "policyId": "POL-500123",
+  "companyName": "Acme Corp",
+  "companyRegistrationNumber": "FR123456789",
+  "country": "FR",
+  "requestedCreditLimit": 100000.0,
+  "currency": "EUR"
+}

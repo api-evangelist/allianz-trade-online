@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.allianz-trade.com/schemas/trade-claims-claim-schema.json",
+  "title": "Claim",
+  "type": "object",
+  "description": "An insurance claim filed with Allianz Trade",
+  "properties": {
+    "claimId": {
+      "type": "string",
+      "description": "Unique identifier for the insurance claim"
+    },
+    "policyId": {
+      "type": "string",
+      "description": "Trade credit insurance policy identifier"
+    },
+    "debtorName": {
+      "type": "string",
+      "description": "Name of the debtor who defaulted on payment"
+    },
+    "debtorId": {
+      "type": "string",
+      "description": "Allianz Trade debtor identifier"
+    },
+    "claimAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Total amount claimed"
+    },
+    "approvedAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Amount approved by Allianz Trade (after processing)"
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code"
+    },
+    "claimStatus": {
+      "type": "string",
+      "description": "Current status of the claim",
+      "enum": [
+        "submitted",
+        "under_review",
+        "approved",
+        "rejected",
+        "paid"
+      ]
+    },
+    "lossDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when the financial loss occurred"
+    },
+    "invoiceReference": {
+      "type": "string",
+      "description": "Customer invoice reference number"
+    },
+    "overdueId": {
+      "type": "string",
+      "description": "Related payment overdue identifier"
+    },
+    "submittedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the claim was submitted"
+    },
+    "resolvedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the claim was resolved"
+    }
+  }
+}

@@ -1,0 +1,103 @@
+name: Trade Credit Management
+description: >-
+  Workflow capability composition for end-to-end trade credit insurance management
+  using the Allianz Trade APIs. Supports the complete credit risk lifecycle from
+  policy management through overdue reporting and claims declaration.
+version: 1.0.0
+capabilities:
+  - shared/payment-overdues.yaml
+  - shared/company-grade.yaml
+  - shared/claims.yaml
+  - shared/policy.yaml
+workflows:
+  - id: credit-risk-monitoring
+    name: Credit Risk Monitoring
+    description: Monitor buyer creditworthiness and respond to payment defaults
+    steps:
+      - step: grade-buyer
+        capability: company-grade
+        operation: requestCompanyGrade
+        description: Request creditworthiness grade for a buyer
+      - step: poll-grade-job
+        capability: company-grade
+        operation: getJobStatus
+        description: Wait for grade assessment to complete
+      - step: report-overdue
+        capability: payment-overdues
+        operation: reportOverdue
+        description: Report payment default using OVD category code
+      - step: poll-overdue-job
+        capability: payment-overdues
+        operation: getJobStatus
+        description: Wait for overdue report to be processed
+  - id: claims-declaration
+    name: Claims Declaration
+    description: Declare an insurance claim after payment default
+    steps:
+      - step: verify-overdue
+        capability: payment-overdues
+        operation: getOverdue
+        description: Retrieve overdue record to reference in claim
+      - step: submit-claim
+        capability: claims
+        operation: submitClaim
+        description: Submit insurance claim referencing the overdue
+      - step: poll-claim-job
+        capability: claims
+        operation: getJobStatus
+        description: Wait for claim submission to be processed
+      - step: track-claim
+        capability: claims
+        operation: getClaim
+        description: Monitor claim status through resolution
+  - id: policy-onboarding
+    name: Policy Onboarding
+    description: Onboard subsidiaries as joint insureds under a policy
+    steps:
+      - step: list-policies
+        capability: policy
+        operation: listPolicies
+        description: Retrieve the policy portfolio
+      - step: add-joint-insured
+        capability: policy
+        operation: addJointInsured
+        description: Add subsidiary as joint insured
+      - step: poll-joint-insured-job
+        capability: policy
+        operation: getJobStatus
+        description: Wait for joint insured registration to complete
+tools:
+  - id: list-overdues
+    capability: payment-overdues
+    operation: listOverdues
+    description: Retrieve paginated payment overdues list
+  - id: report-overdue
+    capability: payment-overdues
+    operation: reportOverdue
+    description: Report a new payment default to Allianz Trade
+  - id: get-company-grade
+    capability: company-grade
+    operation: getCompanyGrade
+    description: Retrieve a company creditworthiness grade
+  - id: request-grade
+    capability: company-grade
+    operation: requestCompanyGrade
+    description: Request a new company credit grade
+  - id: list-claims
+    capability: claims
+    operation: listClaims
+    description: Retrieve paginated insurance claims list
+  - id: submit-claim
+    capability: claims
+    operation: submitClaim
+    description: Submit a new insurance claim
+  - id: list-policies
+    capability: policy
+    operation: listPolicies
+    description: Retrieve paginated policy portfolio
+  - id: add-joint-insured
+    capability: policy
+    operation: addJointInsured
+    description: Add a joint insured to a policy
+rest_port: 8080
+mcp_port: 9090

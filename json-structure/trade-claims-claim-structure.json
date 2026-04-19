@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api.allianz-trade.com/structures/trade-claims-claim-structure.json",
+  "title": "Claim",
+  "type": "object",
+  "description": "An insurance claim filed with Allianz Trade",
+  "properties": {
+    "claimId": {
+      "type": "xs:string",
+      "description": "Unique identifier for the insurance claim"
+    },
+    "policyId": {
+      "type": "xs:string",
+      "description": "Trade credit insurance policy identifier"
+    },
+    "debtorName": {
+      "type": "xs:string",
+      "description": "Name of the debtor who defaulted on payment"
+    },
+    "debtorId": {
+      "type": "xs:string",
+      "description": "Allianz Trade debtor identifier"
+    },
+    "claimAmount": {
+      "type": "xs:decimal",
+      "description": "Total amount claimed"
+    },
+    "approvedAmount": {
+      "type": "xs:decimal",
+      "description": "Amount approved by Allianz Trade (after processing)"
+    },
+    "currency": {
+      "type": "xs:string",
+      "description": "ISO 4217 currency code"
+    },
+    "claimStatus": {
+      "type": "xs:string",
+      "description": "Current status of the claim"
+    },
+    "lossDate": {
+      "type": "xs:string",
+      "description": "Date when the financial loss occurred"
+    },
+    "invoiceReference": {
+      "type": "xs:string",
+      "description": "Customer invoice reference number"
+    },
+    "overdueId": {
+      "type": "xs:string",
+      "description": "Related payment overdue identifier"
+    },
+    "submittedAt": {
+      "type": "xs:string",
+      "description": "Timestamp when the claim was submitted"
+    },
+    "resolvedAt": {
+      "type": "xs:string",
+      "description": "Timestamp when the claim was resolved"
+    }
+  }
+}

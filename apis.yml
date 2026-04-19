@@ -1,24 +1,233 @@
 aid: allianz-trade-online
 url: >-
   https://raw.githubusercontent.com/api-evangelist/allianz-trade-online/refs/heads/main/apis.yml
-name: Allianz Trade Online
+name: Allianz Trade
 tags:
   - Credit Insurance
   - Insurance
   - Risk Management
   - Trade Credit
+  - E-Commerce
+  - Surety
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 description: >-
-  APIs for Allianz Trade's online services including credit insurance, trade
-  credit information, and risk management solutions.
+  Allianz Trade APIs enable businesses to automate trade credit insurance
+  management including cover requests, credit limit monitoring, payment overdue
+  reporting, claims management, and company credit grading. Built on secure
+  REST architecture with OAuth2, the APIs support three business lines: Trade
+  Credit Insurance, E-Commerce B2B, and Surety/Guarantee.
 created: '2024-01-01'
-modified: '2026-03-16'
+modified: '2026-04-19'
 specificationVersion: '0.19'
-apis: []
+apis:
+  - aid: allianz-trade-online:payment-overdues-api
+    name: Allianz Trade Payment Overdues API
+    tags:
+      - Trade Credit
+      - Payment
+      - Overdues
+      - Risk Management
+    properties:
+      - url: https://developers.allianz-trade.com/welcome-trade-credit-insurance-api-world/payment-overdues
+        type: Documentation
+      - url: https://developers.allianz-trade.com/
+        type: Portal
+      - url: openapi/allianz-trade-payment-overdues.yaml
+        type: OpenAPI
+      - url: json-schema/trade-payment-overdues-overdue-schema.json
+        type: JSONSchema
+      - url: json-structure/trade-payment-overdues-overdue-structure.json
+        type: JSONStructure
+      - url: json-ld/allianz-trade-payment-overdues-context.jsonld
+        type: JSONLD
+      - url: examples/trade-payment-overdues-overdue-example.json
+        type: Example
+      - url: examples/trade-payment-overdues-job_response-example.json
+        type: Example
+      - url: capabilities/shared/payment-overdues.yaml
+        type: NaftikoCapability
+    description: >-
+      Report payment overdues, request extension periods, and manage debt
+      rescheduling for trade credit insurance policies. Supports three overdue
+      category types: OVD (report default), EXP (extension period), and RES
+      (rescheduling/repayment plan).
+    humanURL: https://developers.allianz-trade.com/welcome-trade-credit-insurance-api-world/payment-overdues
+    baseURL: https://api.allianz-trade.com/v1
+
+  - aid: allianz-trade-online:company-grade-api
+    name: Allianz Trade Company Grade API
+    tags:
+      - Credit Rating
+      - Risk Assessment
+      - Trade Credit
+    properties:
+      - url: https://developers.allianz-trade.com/api-catalogue
+        type: Documentation
+      - url: openapi/allianz-trade-company-grade.yaml
+        type: OpenAPI
+      - url: json-schema/trade-company-grade-company_grade-schema.json
+        type: JSONSchema
+      - url: json-structure/trade-company-grade-company_grade-structure.json
+        type: JSONStructure
+      - url: json-ld/allianz-trade-company-grade-context.jsonld
+        type: JSONLD
+      - url: examples/trade-company-grade-company_grade-example.json
+        type: Example
+      - url: capabilities/shared/company-grade.yaml
+        type: NaftikoCapability
+    description: >-
+      Retrieve the creditworthiness grade of clients after a cover request.
+      Supports bulk operations for grading multiple companies simultaneously,
+      enabling automated credit risk assessment within ERP systems.
+    humanURL: https://developers.allianz-trade.com/api-catalogue
+    baseURL: https://api.allianz-trade.com/v1
+
+  - aid: allianz-trade-online:claims-api
+    name: Allianz Trade Claims API
+    tags:
+      - Claims
+      - Insurance
+      - Trade Credit
+    properties:
+      - url: https://developers.allianz-trade.com/api-catalogue
+        type: Documentation
+      - url: openapi/allianz-trade-claims.yaml
+        type: OpenAPI
+      - url: json-schema/trade-claims-claim-schema.json
+        type: JSONSchema
+      - url: json-structure/trade-claims-claim-structure.json
+        type: JSONStructure
+      - url: json-ld/allianz-trade-claims-context.jsonld
+        type: JSONLD
+      - url: examples/trade-claims-claim-example.json
+        type: Example
+      - url: capabilities/shared/claims.yaml
+        type: NaftikoCapability
+    description: >-
+      Access and manage all insurance claims declared to Allianz Trade from
+      within your ERP system. Retrieve claim status, submit new claims, and
+      track claim progression for trade credit insurance policies.
+    humanURL: https://developers.allianz-trade.com/api-catalogue
+    baseURL: https://api.allianz-trade.com/v1
+
+  - aid: allianz-trade-online:policy-api
+    name: Allianz Trade Policy API
+    tags:
+      - Policy Management
+      - Insurance
+      - Trade Credit
+    properties:
+      - url: https://developers.allianz-trade.com/api-catalogue
+        type: Documentation
+      - url: openapi/allianz-trade-policy.yaml
+        type: OpenAPI
+      - url: json-schema/trade-policy-policy-schema.json
+        type: JSONSchema
+      - url: json-structure/trade-policy-policy-structure.json
+        type: JSONStructure
+      - url: json-ld/allianz-trade-policy-context.jsonld
+        type: JSONLD
+      - url: examples/trade-policy-policy-example.json
+        type: Example
+      - url: capabilities/shared/policy.yaml
+        type: NaftikoCapability
+    description: >-
+      Manage your trade credit insurance policy portfolio. Retrieve policy
+      details, create joint insured policies, and manage policy configurations
+      directly from your ERP or credit management system.
+    humanURL: https://developers.allianz-trade.com/api-catalogue
+    baseURL: https://api.allianz-trade.com/v1
+
 common:
   - url: https://www.allianz-trade.com/
     type: Website
+  - url: https://developers.allianz-trade.com/
+    type: Portal
+  - url: https://developers.allianz-trade.com/docs/getting-started
+    type: GettingStarted
+  - url: https://developers.allianz-trade.com/docs/api-design-guidelines
+    type: Documentation
+  - url: https://developers.allianz-trade.com/whatsnew
+    type: ChangeLog
+  - url: mailto:api@allianz-trade.com
+    type: Support
+  - url: rules/allianz-trade-online-spectral-rules.yml
+    type: SpectralRules
+  - url: vocabulary/allianz-trade-online-vocabulary.yaml
+    type: Vocabulary
+  - url: capabilities/trade-credit-management.yaml
+    type: NaftikoCapability
+  - type: Features
+    data:
+      - name: Credit Limit Management
+        description: >-
+          Automate credit limit and cover information importing from Allianz Trade
+          into ERP systems for real-time credit risk management.
+      - name: Company Credit Grading
+        description: >-
+          Retrieve creditworthiness grades for clients and prospects with bulk
+          operations supporting large portfolio risk assessments.
+      - name: Payment Overdue Reporting
+        description: >-
+          Report payment defaults, request extension periods, and manage debt
+          rescheduling through standardized overdue category codes.
+      - name: Claims Management
+        description: >-
+          Integrate claims declaration and tracking directly into ERP systems
+          for streamlined insurance claim management.
+      - name: Policy Portfolio Management
+        description: >-
+          Manage trade credit insurance policy portfolios including joint insured
+          policies and policy configuration from enterprise systems.
+      - name: E-Commerce B2B Credit
+        description: >-
+          Real-time credit evaluation on a per-transaction basis for B2B
+          e-commerce platforms enabling buy-now-pay-later type scenarios.
+      - name: OAuth2 Security
+        description: >-
+          Secure OAuth2 authentication for all API endpoints with client
+          credentials flow for machine-to-machine ERP integrations.
+      - name: Webhook Notifications
+        description: >-
+          Webhook-based notifications for technical events (job completion)
+          and functional events (business decisions) with HTTPS and IP whitelisting.
+  - type: UseCases
+    data:
+      - name: ERP Credit Management Integration
+        description: >-
+          Integrate Allianz Trade APIs into SAP, Oracle, or other ERP systems
+          to automate credit risk management and policy administration.
+      - name: Automated Credit Risk Dashboard
+        description: >-
+          Build custom credit management dashboards pulling live credit grades,
+          cover status, and claim data from Allianz Trade APIs.
+      - name: B2B E-Commerce Credit Evaluation
+        description: >-
+          Enable real-time per-transaction credit underwriting for B2B online
+          marketplaces and trade platforms using the E-Commerce APIs.
+      - name: Payment Monitoring and Overdue Automation
+        description: >-
+          Automate payment overdue reporting to Allianz Trade when customers
+          miss payment deadlines, triggering insurance coverage workflows.
+  - type: Integrations
+    data:
+      - name: SAP
+        description: >-
+          ERP integration with SAP for automated trade credit management,
+          policy data synchronization, and claims processing.
+      - name: Oracle
+        description: >-
+          Oracle ERP integration for credit limit monitoring and automated
+          policy data synchronization.
+      - name: Postman
+        description: >-
+          OpenAPI collections downloadable from the developer portal for
+          Postman, Insomnia, and HTTPie testing.
+      - name: Salesforce
+        description: >-
+          CRM integration for combining Allianz Trade risk data with customer
+          relationship management workflows.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

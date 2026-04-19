@@ -1,0 +1,30 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "trade": "https://api.allianz-trade.com/vocab/",
+    "claimId": {"@id": "trade:claimId", "@type": "xsd:string"},
+    "policyId": {"@id": "trade:policyId", "@type": "xsd:string"},
+    "debtorName": {"@id": "schema:name", "@type": "xsd:string"},
+    "debtorId": {"@id": "trade:debtorId", "@type": "xsd:string"},
+    "claimAmount": {"@id": "schema:amount", "@type": "xsd:decimal"},
+    "approvedAmount": {"@id": "trade:approvedAmount", "@type": "xsd:decimal"},
+    "currency": {"@id": "schema:currency", "@type": "xsd:string"},
+    "claimStatus": {"@id": "schema:status", "@type": "xsd:string"},
+    "lossDate": {"@id": "trade:lossDate", "@type": "xsd:date"},
+    "invoiceReference": {"@id": "trade:invoiceReference", "@type": "xsd:string"},
+    "overdueId": {"@id": "trade:overdueId", "@type": "xsd:string"},
+    "submittedAt": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+    "resolvedAt": {"@id": "schema:dateModified", "@type": "xsd:dateTime"},
+    "jobId": {"@id": "trade:jobId", "@type": "xsd:string"},
+    "status": {"@id": "schema:status", "@type": "xsd:string"},
+    "result": {"@id": "trade:result"},
+    "createdAt": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+    "completedAt": {"@id": "schema:dateModified", "@type": "xsd:dateTime"},
+    "code": {"@id": "trade:errorCode", "@type": "xsd:string"},
+    "message": {"@id": "schema:description", "@type": "xsd:string"},
+    "requestId": {"@id": "trade:requestId", "@type": "xsd:string"},
+    "data": {"@id": "trade:data", "@container": "@list"}
+  }
+}

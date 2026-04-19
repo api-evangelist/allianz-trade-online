@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.allianz-trade.com/schemas/trade-policy-policy_list-schema.json",
+  "title": "PolicyList",
+  "type": "object",
+  "description": "Paginated list of trade credit insurance policies",
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "List of policy records",
+      "items": {
+        "$ref": "#/$defs/Policy"
+      }
+    }
+  }
+}

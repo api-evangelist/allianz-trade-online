@@ -1,0 +1,31 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "trade": "https://api.allianz-trade.com/vocab/",
+    "policyId": {"@id": "trade:policyId", "@type": "xsd:string"},
+    "policyNumber": {"@id": "schema:identifier", "@type": "xsd:string"},
+    "policyHolderName": {"@id": "schema:name", "@type": "xsd:string"},
+    "policyType": {"@id": "trade:policyType", "@type": "xsd:string"},
+    "policyStatus": {"@id": "schema:status", "@type": "xsd:string"},
+    "currency": {"@id": "schema:currency", "@type": "xsd:string"},
+    "maxCoverageAmount": {"@id": "trade:maxCoverageAmount", "@type": "xsd:decimal"},
+    "coveragePercentage": {"@id": "trade:coveragePercentage", "@type": "xsd:integer"},
+    "startDate": {"@id": "schema:startDate", "@type": "xsd:date"},
+    "endDate": {"@id": "schema:endDate", "@type": "xsd:date"},
+    "country": {"@id": "schema:addressCountry", "@type": "xsd:string"},
+    "createdAt": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+    "jointInsuredId": {"@id": "trade:jointInsuredId", "@type": "xsd:string"},
+    "companyName": {"@id": "schema:name", "@type": "xsd:string"},
+    "registrationNumber": {"@id": "schema:taxID", "@type": "xsd:string"},
+    "status": {"@id": "schema:status", "@type": "xsd:string"},
+    "jobId": {"@id": "trade:jobId", "@type": "xsd:string"},
+    "result": {"@id": "trade:result"},
+    "completedAt": {"@id": "schema:dateModified", "@type": "xsd:dateTime"},
+    "code": {"@id": "trade:errorCode", "@type": "xsd:string"},
+    "message": {"@id": "schema:description", "@type": "xsd:string"},
+    "requestId": {"@id": "trade:requestId", "@type": "xsd:string"},
+    "data": {"@id": "trade:data", "@container": "@list"}
+  }
+}

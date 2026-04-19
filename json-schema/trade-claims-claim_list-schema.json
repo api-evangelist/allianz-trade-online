@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.allianz-trade.com/schemas/trade-claims-claim_list-schema.json",
+  "title": "ClaimList",
+  "type": "object",
+  "description": "Paginated list of insurance claims",
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "List of insurance claim records",
+      "items": {
+        "$ref": "#/$defs/Claim"
+      }
+    }
+  }
+}

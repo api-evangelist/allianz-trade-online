@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.allianz-trade.com/schemas/trade-company-grade-company_grade_request-schema.json",
+  "title": "CompanyGradeRequest",
+  "type": "object",
+  "description": "Request body for requesting a company creditworthiness grade",
+  "properties": {
+    "policyId": {
+      "type": "string",
+      "description": "Trade credit insurance policy identifier"
+    },
+    "companyName": {
+      "type": "string",
+      "description": "Name of the company to grade"
+    },
+    "companyRegistrationNumber": {
+      "type": "string",
+      "description": "Official company registration number"
+    },
+    "country": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 country code of the company"
+    },
+    "requestedCreditLimit": {
+      "type": "number",
+      "format": "double",
+      "description": "Requested credit limit amount"
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code"
+    }
+  },
+  "required": [
+    "policyId",
+    "companyName",
+    "country",
+    "requestedCreditLimit",
+    "currency"
+  ]
+}

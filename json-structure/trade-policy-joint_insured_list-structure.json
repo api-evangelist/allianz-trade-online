@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api.allianz-trade.com/structures/trade-policy-joint_insured_list-structure.json",
+  "title": "JointInsuredList",
+  "type": "object",
+  "description": "Paginated list of joint insured entities",
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "List of joint insured records"
+    }
+  }
+}

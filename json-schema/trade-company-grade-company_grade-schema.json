@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.allianz-trade.com/schemas/trade-company-grade-company_grade-schema.json",
+  "title": "CompanyGrade",
+  "type": "object",
+  "description": "A company creditworthiness grade from Allianz Trade",
+  "properties": {
+    "gradeId": {
+      "type": "string",
+      "description": "Unique identifier for the company grade"
+    },
+    "policyId": {
+      "type": "string",
+      "description": "Trade credit insurance policy identifier"
+    },
+    "companyName": {
+      "type": "string",
+      "description": "Name of the graded company"
+    },
+    "companyRegistrationNumber": {
+      "type": "string",
+      "description": "Official company registration number"
+    },
+    "country": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 country code"
+    },
+    "grade": {
+      "type": "string",
+      "description": "Creditworthiness grade letter",
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },
+    "gradeScore": {
+      "type": "integer",
+      "description": "Numeric score underlying the grade (0-100)",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code"
+    },
+    "creditLimit": {
+      "type": "number",
+      "format": "double",
+      "description": "Approved credit limit amount"
+    },
+    "requestedCreditLimit": {
+      "type": "number",
+      "format": "double",
+      "description": "Originally requested credit limit"
+    },
+    "validUntil": {
+      "type": "string",
+      "format": "date",
+      "description": "Date until which the grade is valid"
+    },
+    "gradedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the grade was issued"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.allianz-trade.com/schemas/trade-company-grade-company_grade_list-schema.json",
+  "title": "CompanyGradeList",
+  "type": "object",
+  "description": "Paginated list of company grades",
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "List of company grade records",
+      "items": {
+        "$ref": "#/$defs/CompanyGrade"
+      }
+    }
+  }
+}

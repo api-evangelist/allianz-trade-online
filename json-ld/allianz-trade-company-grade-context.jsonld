@@ -1,0 +1,29 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "trade": "https://api.allianz-trade.com/vocab/",
+    "gradeId": {"@id": "trade:gradeId", "@type": "xsd:string"},
+    "policyId": {"@id": "trade:policyId", "@type": "xsd:string"},
+    "companyName": {"@id": "schema:name", "@type": "xsd:string"},
+    "companyRegistrationNumber": {"@id": "schema:taxID", "@type": "xsd:string"},
+    "country": {"@id": "schema:addressCountry", "@type": "xsd:string"},
+    "grade": {"@id": "trade:creditGrade", "@type": "xsd:string"},
+    "gradeScore": {"@id": "trade:gradeScore", "@type": "xsd:integer"},
+    "currency": {"@id": "schema:currency", "@type": "xsd:string"},
+    "creditLimit": {"@id": "trade:creditLimit", "@type": "xsd:decimal"},
+    "requestedCreditLimit": {"@id": "trade:requestedCreditLimit", "@type": "xsd:decimal"},
+    "validUntil": {"@id": "schema:validThrough", "@type": "xsd:date"},
+    "gradedAt": {"@id": "schema:dateModified", "@type": "xsd:dateTime"},
+    "jobId": {"@id": "trade:jobId", "@type": "xsd:string"},
+    "status": {"@id": "schema:status", "@type": "xsd:string"},
+    "result": {"@id": "trade:result"},
+    "createdAt": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+    "completedAt": {"@id": "schema:dateModified", "@type": "xsd:dateTime"},
+    "code": {"@id": "trade:errorCode", "@type": "xsd:string"},
+    "message": {"@id": "schema:description", "@type": "xsd:string"},
+    "requestId": {"@id": "trade:requestId", "@type": "xsd:string"},
+    "data": {"@id": "trade:data", "@container": "@list"}
+  }
+}

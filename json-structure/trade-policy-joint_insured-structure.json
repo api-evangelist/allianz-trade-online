@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api.allianz-trade.com/structures/trade-policy-joint_insured-structure.json",
+  "title": "JointInsured",
+  "type": "object",
+  "description": "A joint insured entity registered under a policy",
+  "properties": {
+    "jointInsuredId": {
+      "type": "xs:string",
+      "description": "Unique identifier for the joint insured"
+    },
+    "policyId": {
+      "type": "xs:string",
+      "description": "Parent policy identifier"
+    },
+    "companyName": {
+      "type": "xs:string",
+      "description": "Legal name of the joint insured company"
+    },
+    "registrationNumber": {
+      "type": "xs:string",
+      "description": "Company registration number"
+    },
+    "country": {
+      "type": "xs:string",
+      "description": "ISO 3166-1 alpha-2 country code"
+    },
+    "status": {
+      "type": "xs:string",
+      "description": "Current status of the joint insured"
+    }
+  }
+}

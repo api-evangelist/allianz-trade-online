@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.allianz-trade.com/schemas/trade-company-grade-error_response-schema.json",
+  "title": "ErrorResponse",
+  "type": "object",
+  "description": "Standard error response",
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "Error code"
+    },
+    "message": {
+      "type": "string",
+      "description": "Human-readable error description"
+    },
+    "requestId": {
+      "type": "string",
+      "description": "Request identifier for support reference"
+    }
+  }
+}

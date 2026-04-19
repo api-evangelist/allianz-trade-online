@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api.allianz-trade.com/structures/trade-payment-overdues-job_response-structure.json",
+  "title": "JobResponse",
+  "type": "object",
+  "description": "Async job status response",
+  "properties": {
+    "jobId": {
+      "type": "xs:string",
+      "description": "Unique identifier for the async job"
+    },
+    "status": {
+      "type": "xs:string",
+      "description": "Current status of the job"
+    },
+    "result": {
+      "type": "object",
+      "description": "Result data after successful job completion"
+    },
+    "createdAt": {
+      "type": "xs:string",
+      "description": "When the job was created"
+    },
+    "completedAt": {
+      "type": "xs:string",
+      "description": "When the job completed (null if still pending)"
+    }
+  }
+}

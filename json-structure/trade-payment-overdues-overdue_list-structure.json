@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api.allianz-trade.com/structures/trade-payment-overdues-overdue_list-structure.json",
+  "title": "OverdueList",
+  "type": "object",
+  "description": "Paginated list of payment overdues",
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "List of payment overdue records"
+    }
+  }
+}

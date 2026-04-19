@@ -1,0 +1,9 @@
+{
+  "jobId": "JOB-500789",
+  "status": "processed",
+  "result": {
+    "gradeId": "GRD-500123"
+  },
+  "createdAt": "2026-04-19T10:30:00Z",
+  "completedAt": "2026-04-19T10:31:00Z"
+}

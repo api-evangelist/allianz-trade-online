@@ -1,0 +1,468 @@
+openapi: 3.0.3
+info:
+  title: Allianz Trade Payment Overdues API
+  description: >-
+    Report payment overdues, request extension periods, and manage debt
+    rescheduling for trade credit insurance policies. Supports three overdue
+    category types: OVD (report default state), EXP (extension period request),
+    and RES (rescheduling/repayment plan agreement).
+  version: 1.0.0
+  contact:
+    name: Allianz Trade API Support
+    email: api@allianz-trade.com
+    url: https://developers.allianz-trade.com/
+  x-generated-from: documentation
+servers:
+  - url: https://api.allianz-trade.com/v1
+    description: Allianz Trade API production server
+security:
+  - OAuth2: []
+tags:
+  - name: Payment Overdues
+    description: Payment overdue reporting and management operations
+paths:
+  /overdues:
+    get:
+      operationId: listOverdues
+      summary: Allianz Trade List Payment Overdues
+      description: Retrieve a paginated list of payment overdues for your trade credit insurance policies.
+      tags:
+        - Payment Overdues
+      parameters:
+        - name: pageSize
+          in: query
+          required: false
+          description: Number of items per page (Allianz Trade pagination standard)
+          schema:
+            type: integer
+            default: 20
+            minimum: 1
+            maximum: 100
+          example: 20
+        - name: page
+          in: query
+          required: false
+          description: Page number starting from 1
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+          example: 1
+        - name: totalRequired
+          in: query
+          required: false
+          description: Whether to include total count in response headers
+          schema:
+            type: boolean
+            default: false
+          example: false
+        - name: overdueCategoryTypeCode
+          in: query
+          required: false
+          description: Filter by overdue category type code
+          schema:
+            type: string
+            enum:
+              - OVD
+              - EXP
+              - RES
+          example: OVD
+        - name: policyId
+          in: query
+          required: false
+          description: Filter overdues by policy identifier
+          schema:
+            type: string
+          example: "POL-500123"
+      responses:
+        '200':
+          description: Overdues retrieved successfully
+          headers:
+            Total-Items:
+              description: Total number of overdues (when totalRequired=true)
+              schema:
+                type: integer
+            Total-Pages:
+              description: Total number of pages (when totalRequired=true)
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OverdueList'
+              examples:
+                ListOverdues200Example:
+                  summary: Default listOverdues 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      - overdueId: "OVD-500123"
+                        policyId: "POL-500123"
+                        overdueCategoryTypeCode: OVD
+                        debtorName: "Acme Corp"
+                        overdueAmount: 50000.00
+                        currency: EUR
+                        dueDate: "2026-03-15"
+                        status: reported
+        '401':
+          description: Unauthorized - invalid or missing OAuth2 token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden - insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+    post:
+      operationId: reportOverdue
+      summary: Allianz Trade Report Payment Overdue
+      description: >-
+        Report a payment overdue to Allianz Trade using the appropriate overdue
+        category type code. OVD to report a default state, EXP to request an
+        extension period, or RES to report a rescheduling agreement.
+      tags:
+        - Payment Overdues
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportOverdueRequest'
+            examples:
+              ReportOverdueRequestExample:
+                summary: Default reportOverdue request
+                x-microcks-default: true
+                value:
+                  policyId: "POL-500123"
+                  overdueCategoryTypeCode: OVD
+                  debtorName: "Acme Corp"
+                  debtorId: "DEB-500456"
+                  overdueAmount: 50000.00
+                  currency: EUR
+                  dueDate: "2026-03-15"
+                  invoiceReference: "INV-2026-001"
+      responses:
+        '202':
+          description: Overdue report accepted for processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobResponse'
+              examples:
+                ReportOverdue202Example:
+                  summary: Default reportOverdue 202 response
+                  x-microcks-default: true
+                  value:
+                    jobId: "JOB-500789"
+                    status: pending
+                    createdAt: "2026-04-19T10:30:00Z"
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /overdues/{overdueId}:
+    get:
+      operationId: getOverdue
+      summary: Allianz Trade Get Payment Overdue
+      description: Retrieve details for a specific payment overdue by its identifier.
+      tags:
+        - Payment Overdues
+      parameters:
+        - name: overdueId
+          in: path
+          required: true
+          description: Unique identifier of the payment overdue
+          schema:
+            type: string
+          example: "OVD-500123"
+      responses:
+        '200':
+          description: Overdue retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Overdue'
+              examples:
+                GetOverdue200Example:
+                  summary: Default getOverdue 200 response
+                  x-microcks-default: true
+                  value:
+                    overdueId: "OVD-500123"
+                    policyId: "POL-500123"
+                    overdueCategoryTypeCode: OVD
+                    debtorName: "Acme Corp"
+                    overdueAmount: 50000.00
+                    currency: EUR
+                    dueDate: "2026-03-15"
+                    status: reported
+                    reportedAt: "2026-04-01T09:00:00Z"
+        '404':
+          description: Overdue not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /jobs/{jobId}:
+    get:
+      operationId: getJobStatus
+      summary: Allianz Trade Get Job Status
+      description: Poll for the status of an asynchronous operation submitted via POST/PATCH/DELETE.
+      tags:
+        - Payment Overdues
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: Unique identifier of the async job
+          schema:
+            type: string
+          example: "JOB-500789"
+      responses:
+        '200':
+          description: Job status retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobResponse'
+              examples:
+                GetJobStatus200Example:
+                  summary: Default getJobStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    jobId: "JOB-500789"
+                    status: processed
+                    result:
+                      overdueId: "OVD-500123"
+                    createdAt: "2026-04-19T10:30:00Z"
+                    completedAt: "2026-04-19T10:31:00Z"
+        '404':
+          description: Job not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth2 client credentials for Allianz Trade API access
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.allianz-trade.com/oauth2/token
+          scopes:
+            overdues:read: Read payment overdues
+            overdues:write: Report and manage payment overdues
+
+  schemas:
+    Overdue:
+      title: Overdue
+      type: object
+      description: A payment overdue reported to Allianz Trade
+      properties:
+        overdueId:
+          type: string
+          description: Unique identifier for the payment overdue
+          example: "OVD-500123"
+        policyId:
+          type: string
+          description: Trade credit insurance policy identifier
+          example: "POL-500123"
+        overdueCategoryTypeCode:
+          type: string
+          description: Overdue category code (OVD=default, EXP=extension, RES=rescheduling)
+          enum:
+            - OVD
+            - EXP
+            - RES
+          example: OVD
+        debtorName:
+          type: string
+          description: Name of the debtor with the payment overdue
+          example: "Acme Corp"
+        debtorId:
+          type: string
+          description: Allianz Trade debtor identifier
+          example: "DEB-500456"
+        overdueAmount:
+          type: number
+          format: double
+          description: Amount overdue in the policy currency
+          example: 50000.00
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: EUR
+        dueDate:
+          type: string
+          format: date
+          description: Original invoice due date
+          example: "2026-03-15"
+        invoiceReference:
+          type: string
+          description: Customer invoice reference number
+          example: "INV-2026-001"
+        status:
+          type: string
+          description: Current status of the overdue report
+          enum:
+            - reported
+            - processed
+            - closed
+          example: reported
+        reportedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the overdue was reported
+          example: "2026-04-01T09:00:00Z"
+
+    OverdueList:
+      title: OverdueList
+      type: object
+      description: Paginated list of payment overdues
+      properties:
+        data:
+          type: array
+          description: List of payment overdue records
+          items:
+            $ref: '#/components/schemas/Overdue'
+
+    ReportOverdueRequest:
+      title: ReportOverdueRequest
+      type: object
+      description: Request body for reporting a payment overdue
+      required:
+        - policyId
+        - overdueCategoryTypeCode
+        - debtorName
+        - overdueAmount
+        - currency
+        - dueDate
+      properties:
+        policyId:
+          type: string
+          description: Trade credit insurance policy identifier
+          example: "POL-500123"
+        overdueCategoryTypeCode:
+          type: string
+          description: Overdue category type code
+          enum:
+            - OVD
+            - EXP
+            - RES
+          example: OVD
+        debtorName:
+          type: string
+          description: Name of the debtor
+          example: "Acme Corp"
+        debtorId:
+          type: string
+          description: Allianz Trade debtor identifier
+          example: "DEB-500456"
+        overdueAmount:
+          type: number
+          format: double
+          description: Amount overdue
+          example: 50000.00
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: EUR
+        dueDate:
+          type: string
+          format: date
+          description: Original invoice due date
+          example: "2026-03-15"
+        invoiceReference:
+          type: string
+          description: Customer invoice reference
+          example: "INV-2026-001"
+
+    JobResponse:
+      title: JobResponse
+      type: object
+      description: Async job status response
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the async job
+          example: "JOB-500789"
+        status:
+          type: string
+          description: Current status of the job
+          enum:
+            - pending
+            - processed
+            - failed
+          example: processed
+        result:
+          type: object
+          description: Result data after successful job completion
+          example:
+            overdueId: "OVD-500123"
+        createdAt:
+          type: string
+          format: date-time
+          description: When the job was created
+          example: "2026-04-19T10:30:00Z"
+        completedAt:
+          type: string
+          format: date-time
+          description: When the job completed (null if still pending)
+          example: "2026-04-19T10:31:00Z"
+
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: INVALID_REQUEST
+        message:
+          type: string
+          description: Human-readable error description
+          example: "The overdueAmount must be a positive number"
+        requestId:
+          type: string
+          description: Request identifier for support reference
+          example: "req-500999"

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api.allianz-trade.com/structures/trade-policy-error_response-structure.json",
+  "title": "ErrorResponse",
+  "type": "object",
+  "description": "Standard error response",
+  "properties": {
+    "code": {
+      "type": "xs:string",
+      "description": "Error code"
+    },
+    "message": {
+      "type": "xs:string",
+      "description": "Human-readable error description"
+    },
+    "requestId": {
+      "type": "xs:string",
+      "description": "Request identifier for support reference"
+    }
+  }
+}

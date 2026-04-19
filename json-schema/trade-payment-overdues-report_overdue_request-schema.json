@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.allianz-trade.com/schemas/trade-payment-overdues-report_overdue_request-schema.json",
+  "title": "ReportOverdueRequest",
+  "type": "object",
+  "description": "Request body for reporting a payment overdue",
+  "properties": {
+    "policyId": {
+      "type": "string",
+      "description": "Trade credit insurance policy identifier"
+    },
+    "overdueCategoryTypeCode": {
+      "type": "string",
+      "description": "Overdue category type code",
+      "enum": [
+        "OVD",
+        "EXP",
+        "RES"
+      ]
+    },
+    "debtorName": {
+      "type": "string",
+      "description": "Name of the debtor"
+    },
+    "debtorId": {
+      "type": "string",
+      "description": "Allianz Trade debtor identifier"
+    },
+    "overdueAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Amount overdue"
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code"
+    },
+    "dueDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Original invoice due date"
+    },
+    "invoiceReference": {
+      "type": "string",
+      "description": "Customer invoice reference"
+    }
+  },
+  "required": [
+    "policyId",
+    "overdueCategoryTypeCode",
+    "debtorName",
+    "overdueAmount",
+    "currency",
+    "dueDate"
+  ]
+}

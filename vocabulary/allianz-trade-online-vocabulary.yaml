@@ -1,0 +1,147 @@
+name: Allianz Trade Vocabulary
+description: Controlled vocabulary for Allianz Trade credit insurance API concepts
+version: 1.0.0
+resources:
+  - name: Policy
+    description: A trade credit insurance policy covering buyer payment defaults
+    properties:
+      - policyId
+      - policyNumber
+      - policyHolderName
+      - policyType
+      - policyStatus
+      - maxCoverageAmount
+      - coveragePercentage
+      - startDate
+      - endDate
+  - name: Overdue
+    description: A reported payment overdue under a trade credit insurance policy
+    properties:
+      - overdueId
+      - policyId
+      - overdueCategoryTypeCode
+      - debtorName
+      - overdueAmount
+      - currency
+      - dueDate
+      - invoiceReference
+      - status
+  - name: CompanyGrade
+    description: A creditworthiness grade assessment for a company buyer
+    properties:
+      - gradeId
+      - companyName
+      - grade
+      - gradeScore
+      - creditLimit
+      - validUntil
+  - name: Claim
+    description: An insurance claim filed following a payment default
+    properties:
+      - claimId
+      - policyId
+      - claimAmount
+      - approvedAmount
+      - claimStatus
+      - lossDate
+  - name: JointInsured
+    description: A subsidiary or related entity registered under a policy
+    properties:
+      - jointInsuredId
+      - policyId
+      - companyName
+      - registrationNumber
+      - country
+  - name: Job
+    description: An asynchronous processing job for write operations
+    properties:
+      - jobId
+      - status
+      - result
+      - createdAt
+      - completedAt
+actions:
+  - name: Report
+    description: Submit a payment overdue notification to Allianz Trade
+    http_method: POST
+    path_pattern: /overdues
+  - name: Request Grade
+    description: Request a creditworthiness grade assessment for a buyer
+    http_method: POST
+    path_pattern: /company-grades
+  - name: Submit Claim
+    description: Declare an insurance claim for an unpaid invoice
+    http_method: POST
+    path_pattern: /claims
+  - name: Add Joint Insured
+    description: Register a subsidiary as joint insured under a policy
+    http_method: POST
+    path_pattern: /policies/{policyId}/joint-insureds
+  - name: Poll Job
+    description: Check the status of an asynchronous operation
+    http_method: GET
+    path_pattern: /jobs/{jobId}
+enumerations:
+  overdueCategoryTypeCode:
+    description: Category codes identifying the type of payment overdue report
+    values:
+      - value: OVD
+        description: Default state — buyer has failed to pay on the due date
+      - value: EXP
+        description: Extension period request — requesting additional time to pay
+      - value: RES
+        description: Rescheduling agreement — debt repayment plan has been agreed
+  policyType:
+    description: Type of Allianz Trade insurance product
+    values:
+      - value: trade_credit
+        description: Standard trade credit insurance for B2B sales
+      - value: surety
+        description: Surety bond / guarantee product
+      - value: ecommerce_b2b
+        description: E-commerce B2B real-time per-transaction credit evaluation
+  grade:
+    description: Creditworthiness grade letters from best to worst
+    values:
+      - value: A
+        description: Excellent creditworthiness
+      - value: B
+        description: Good creditworthiness
+      - value: C
+        description: Acceptable creditworthiness
+      - value: D
+        description: Weak creditworthiness
+      - value: E
+        description: Poor creditworthiness / high risk
+  jobStatus:
+    description: Status values for asynchronous job processing
+    values:
+      - value: pending
+        description: Job has been submitted and is awaiting processing
+      - value: processed
+        description: Job has been successfully completed
+      - value: failed
+        description: Job processing encountered an error
+workflows:
+  - name: Overdue Reporting Workflow
+    description: Process for reporting a payment default to Allianz Trade
+    steps:
+      - Report overdue using OVD category code
+      - Poll job endpoint until status is processed
+      - Retrieve overdue record with assigned overdueId
+  - name: Claims Declaration Workflow
+    description: Process for filing an insurance claim after overdue is established
+    steps:
+      - Verify overdue record exists and is processed
+      - Submit claim referencing the overdueId
+      - Poll job endpoint until claim is assigned claimId
+      - Monitor claim status through resolution
+personas:
+  - name: Credit Manager
+    description: Enterprise professional managing buyer credit limits and overdue reporting
+  - name: Finance Controller
+    description: Finance professional tracking claims and policy coverage amounts
+  - name: ERP Integration Developer
+    description: Technical developer integrating Allianz Trade APIs into SAP or Oracle
+  - name: Risk Analyst
+    description: Professional monitoring buyer creditworthiness grades across a portfolio

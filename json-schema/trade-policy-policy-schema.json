@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.allianz-trade.com/schemas/trade-policy-policy-schema.json",
+  "title": "Policy",
+  "type": "object",
+  "description": "A trade credit insurance policy from Allianz Trade",
+  "properties": {
+    "policyId": {
+      "type": "string",
+      "description": "Unique identifier for the policy"
+    },
+    "policyNumber": {
+      "type": "string",
+      "description": "Official Allianz Trade policy number"
+    },
+    "policyHolderName": {
+      "type": "string",
+      "description": "Legal name of the policy holder"
+    },
+    "policyType": {
+      "type": "string",
+      "description": "Type of trade credit insurance policy",
+      "enum": [
+        "trade_credit",
+        "surety",
+        "ecommerce_b2b"
+      ]
+    },
+    "policyStatus": {
+      "type": "string",
+      "description": "Current status of the policy",
+      "enum": [
+        "active",
+        "suspended",
+        "expired",
+        "cancelled"
+      ]
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 policy currency code"
+    },
+    "maxCoverageAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Maximum total coverage amount under the policy"
+    },
+    "coveragePercentage": {
+      "type": "integer",
+      "description": "Percentage of loss covered by the policy",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Policy start date"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Policy end date"
+    },
+    "country": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 country code for the policy"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the policy was created"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.allianz-trade.com/schemas/trade-claims-job_response-schema.json",
+  "title": "JobResponse",
+  "type": "object",
+  "description": "Async job status response",
+  "properties": {
+    "jobId": {
+      "type": "string",
+      "description": "Unique identifier for the async job"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the job",
+      "enum": [
+        "pending",
+        "processed",
+        "failed"
+      ]
+    },
+    "result": {
+      "type": "object",
+      "description": "Result data after successful job completion"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the job was created"
+    },
+    "completedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the job completed (null if still pending)"
+    }
+  }
+}

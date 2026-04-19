@@ -1,0 +1,15 @@
+{
+  "claimId": "CLM-500123",
+  "policyId": "POL-500123",
+  "debtorName": "Acme Corp",
+  "debtorId": "DEB-500456",
+  "claimAmount": 45000.0,
+  "approvedAmount": 40000.0,
+  "currency": "EUR",
+  "claimStatus": "submitted",
+  "lossDate": "2026-03-01",
+  "invoiceReference": "INV-2026-001",
+  "overdueId": "OVD-500123",
+  "submittedAt": "2026-04-01T09:00:00Z",
+  "resolvedAt": "2026-04-10T14:00:00Z"
+}

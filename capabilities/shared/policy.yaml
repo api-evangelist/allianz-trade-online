@@ -1,0 +1,35 @@
+name: Policy
+description: Shared capability definition for Allianz Trade policy portfolio management operations
+version: 1.0.0
+base_url: https://api.allianz-trade.com/v1
+auth:
+  type: oauth2
+  flow: client_credentials
+  token_url: https://api.allianz-trade.com/oauth2/token
+  scopes:
+    - policy:read
+    - policy:write
+operations:
+  - id: listPolicies
+    method: GET
+    path: /policies
+    summary: List trade credit insurance policies with pagination
+  - id: getPolicy
+    method: GET
+    path: /policies/{policyId}
+    summary: Get a specific policy
+  - id: listJointInsureds
+    method: GET
+    path: /policies/{policyId}/joint-insureds
+    summary: List joint insureds for a policy
+  - id: addJointInsured
+    method: POST
+    path: /policies/{policyId}/joint-insureds
+    summary: Add a joint insured to a policy (returns 202 + jobId)
+    async: true
+  - id: getJobStatus
+    method: GET
+    path: /jobs/{jobId}
+    summary: Poll async job status
+rest_port: 8104
+mcp_port: 9104

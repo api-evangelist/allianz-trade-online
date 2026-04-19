@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.allianz-trade.com/schemas/trade-policy-joint_insured_list-schema.json",
+  "title": "JointInsuredList",
+  "type": "object",
+  "description": "Paginated list of joint insured entities",
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "List of joint insured records",
+      "items": {
+        "$ref": "#/$defs/JointInsured"
+      }
+    }
+  }
+}

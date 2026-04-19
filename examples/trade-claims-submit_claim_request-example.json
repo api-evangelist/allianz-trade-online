@@ -1,0 +1,10 @@
+{
+  "policyId": "POL-500123",
+  "debtorName": "Acme Corp",
+  "debtorId": "DEB-500456",
+  "claimAmount": 45000.0,
+  "currency": "EUR",
+  "lossDate": "2026-03-01",
+  "invoiceReference": "INV-2026-001",
+  "overdueId": "OVD-500123"
+}

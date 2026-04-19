@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api.allianz-trade.com/structures/trade-company-grade-company_grade_list-structure.json",
+  "title": "CompanyGradeList",
+  "type": "object",
+  "description": "Paginated list of company grades",
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "List of company grade records"
+    }
+  }
+}

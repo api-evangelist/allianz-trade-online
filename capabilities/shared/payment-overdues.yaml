@@ -1,0 +1,50 @@
+name: Payment Overdues
+description: Shared capability definition for Allianz Trade payment overdue reporting and management operations
+version: 1.0.0
+base_url: https://api.allianz-trade.com/v1
+auth:
+  type: oauth2
+  flow: client_credentials
+  token_url: https://api.allianz-trade.com/oauth2/token
+  scopes:
+    - overdues:read
+    - overdues:write
+operations:
+  - id: listOverdues
+    method: GET
+    path: /overdues
+    summary: List payment overdues with pagination
+    parameters:
+      - name: pageSize
+        in: query
+        type: integer
+        default: 20
+      - name: page
+        in: query
+        type: integer
+        default: 1
+      - name: totalRequired
+        in: query
+        type: boolean
+      - name: overdueCategoryTypeCode
+        in: query
+        type: string
+        enum: [OVD, EXP, RES]
+      - name: policyId
+        in: query
+        type: string
+  - id: reportOverdue
+    method: POST
+    path: /overdues
+    summary: Report a payment overdue (returns 202 + jobId)
+    async: true
+  - id: getOverdue
+    method: GET
+    path: /overdues/{overdueId}
+    summary: Get a specific payment overdue
+  - id: getJobStatus
+    method: GET
+    path: /jobs/{jobId}
+    summary: Poll async job status
+rest_port: 8101
+mcp_port: 9101

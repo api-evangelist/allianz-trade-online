@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.allianz-trade.com/schemas/trade-claims-submit_claim_request-schema.json",
+  "title": "SubmitClaimRequest",
+  "type": "object",
+  "description": "Request body for submitting an insurance claim",
+  "properties": {
+    "policyId": {
+      "type": "string",
+      "description": "Trade credit insurance policy identifier"
+    },
+    "debtorName": {
+      "type": "string",
+      "description": "Name of the defaulting debtor"
+    },
+    "debtorId": {
+      "type": "string",
+      "description": "Allianz Trade debtor identifier"
+    },
+    "claimAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Total amount to claim"
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code"
+    },
+    "lossDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when the financial loss occurred"
+    },
+    "invoiceReference": {
+      "type": "string",
+      "description": "Customer invoice reference"
+    },
+    "overdueId": {
+      "type": "string",
+      "description": "Related payment overdue identifier"
+    }
+  },
+  "required": [
+    "policyId",
+    "debtorName",
+    "claimAmount",
+    "currency",
+    "lossDate"
+  ]
+}

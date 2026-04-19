@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.allianz-trade.com/schemas/trade-policy-add_joint_insured_request-schema.json",
+  "title": "AddJointInsuredRequest",
+  "type": "object",
+  "description": "Request body for adding a joint insured to a policy",
+  "properties": {
+    "companyName": {
+      "type": "string",
+      "description": "Legal name of the company to add as joint insured"
+    },
+    "registrationNumber": {
+      "type": "string",
+      "description": "Company registration number"
+    },
+    "country": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 country code"
+    }
+  },
+  "required": [
+    "companyName",
+    "country"
+  ]
+}
