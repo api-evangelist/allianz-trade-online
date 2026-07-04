@@ -1,0 +1,25 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from openapi/ servers[] (URI-path version v1) and apis.yml portal
+  links. Versioning/deprecation/SLA policy pages were not separately retrievable
+  (developer portal returned 404 on probed paths; corporate site WAF-blocked),
+  so only observed facts are recorded.
+versioning:
+  scheme: uri-path
+  current: v1
+  evidence: All servers[] use https://api.allianz-trade.com/v1
+  docs: https://developers.allianz-trade.com/docs/api-design-guidelines
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  deprecation_header: unknown
+  notes: No RFC 8594 Sunset/Deprecation header usage declared in the specs.
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+changelog: https://developers.allianz-trade.com/whatsnew
+deprecated_operations: []
+notes: >-
+  No operations are marked deprecated: true in any of the four OpenAPI specs.

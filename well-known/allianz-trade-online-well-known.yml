@@ -1,0 +1,45 @@
+generated: '2026-06-20'
+method: searched
+source: 'Live probe of /.well-known/* discovery surface on each known host'
+hosts:
+  - host: https://api.allianz-trade.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 502
+      - path: /.well-known/openid-configuration
+        status: 502
+      - path: /.well-known/oauth-authorization-server
+        status: 502
+      - path: /.well-known/api-catalog
+        status: 502
+      - path: /.well-known/ai-plugin.json
+        status: 502
+  - host: https://developers.allianz-trade.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://www.allianz-trade.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 403
+      - path: /.well-known/openid-configuration
+        status: 403
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+      - path: /.well-known/api-catalog
+        status: 403
+      - path: /.well-known/ai-plugin.json
+        status: 403
+notes: >-
+  No /.well-known document returned HTTP 200. The api host returned 502 (gateway
+  requires an authenticated/valid request), the developer portal returned 404,
+  and the corporate site returned 403 (WAF). No security.txt, OIDC, or
+  OAuth authorization-server metadata is publicly discoverable at this time.

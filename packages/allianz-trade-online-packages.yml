@@ -1,0 +1,10 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  Searched npm, PyPI, Packagist, RubyGems, crates.io, NuGet, pkg.go.dev, and
+  Maven Central for first-party Allianz Trade API client libraries; also checked
+  apis.yml for SDK/CLI/SourceCode links. None found. Registry hits for "allianz"
+  (e.g. @allianz/ng-aquila design system) are unrelated to the Trade Credit
+  Insurance APIs. Developer portal ships downloadable OpenAPI collections for
+  Postman/Insomnia/HTTPie rather than language SDKs.
+packages: []

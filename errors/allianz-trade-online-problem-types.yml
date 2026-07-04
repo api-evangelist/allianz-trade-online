@@ -1,0 +1,55 @@
+generated: '2026-06-20'
+method: derived
+format: custom
+source: >-
+  Derived from 4xx responses across the four openapi/ specs. Allianz Trade uses
+  a custom application/json ErrorResponse schema (code, message, requestId), not
+  RFC 9457 application/problem+json. Titles/remediation authored from response
+  descriptions; no public error reference page was found to enrich them.
+schema:
+  media_type: application/json
+  fields:
+    - code
+    - message
+    - requestId
+problems:
+  - status: 400
+    code: INVALID_REQUEST
+    title: Invalid request parameters
+    remediation: Validate the request body against the operation schema before retrying.
+    source_operations:
+      - openapi/allianz-trade-payment-overdues.yaml#reportOverdue
+      - openapi/allianz-trade-company-grade.yaml#requestCompanyGrade
+      - openapi/allianz-trade-claims.yaml#submitClaim
+      - openapi/allianz-trade-policy.yaml#addJointInsured
+  - status: 401
+    code: UNAUTHORIZED
+    title: Unauthorized - invalid or missing OAuth2 token
+    remediation: >-
+      Obtain a valid token from https://api.allianz-trade.com/oauth2/token using
+      the client credentials flow and send it as a Bearer token.
+    source_operations:
+      - openapi/allianz-trade-payment-overdues.yaml#listOverdues
+      - openapi/allianz-trade-company-grade.yaml#listCompanyGrades
+      - openapi/allianz-trade-claims.yaml#listClaims
+      - openapi/allianz-trade-policy.yaml#listPolicies
+  - status: 403
+    code: FORBIDDEN
+    title: Forbidden - insufficient permissions
+    remediation: Ensure the token carries the required scope (read/write) for the operation.
+    source_operations:
+      - openapi/allianz-trade-payment-overdues.yaml#listOverdues
+      - openapi/allianz-trade-company-grade.yaml#listCompanyGrades
+      - openapi/allianz-trade-claims.yaml#listClaims
+      - openapi/allianz-trade-policy.yaml#listPolicies
+  - status: 404
+    code: NOT_FOUND
+    title: Resource not found
+    remediation: Verify the resource identifier (overdueId, gradeId, claimId, policyId, jobId).
+    source_operations:
+      - openapi/allianz-trade-payment-overdues.yaml#getOverdue
+      - openapi/allianz-trade-payment-overdues.yaml#getJobStatus
+      - openapi/allianz-trade-company-grade.yaml#getCompanyGrade
+      - openapi/allianz-trade-claims.yaml#getClaim
+      - openapi/allianz-trade-policy.yaml#getPolicy
+      - openapi/allianz-trade-policy.yaml#listJointInsureds

@@ -1,0 +1,26 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Allianz Trade (claims)
+  version: 1.0.0
+# generated: '2026-06-20'
+# method: generated
+# source: openapi/allianz-trade-claims.yaml
+extends: openapi/allianz-trade-claims.yaml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: allianz-trade-online
+      x-apievangelist-index: https://raw.githubusercontent.com/api-evangelist/allianz-trade-online/refs/heads/main/apis.yml
+      x-api-lifecycle: lifecycle/allianz-trade-online-lifecycle.yml
+      x-api-conformance: conformance/allianz-trade-online-conformance.yml
+      x-api-error-catalog: errors/allianz-trade-online-problem-types.yml
+  - target: $.info.contact
+    update:
+      x-support-email: api@allianz-trade.com
+      url: https://developers.allianz-trade.com/
+  - target: $
+    update:
+      x-apievangelist-tags:
+        - Trade Credit
+        - Credit Insurance
+        - Risk Management

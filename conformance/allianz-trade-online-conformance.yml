@@ -1,0 +1,48 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from the four openapi/ specs (securitySchemes, response media types,
+  pagination parameters, async job pattern) and the apis.yml index. No external
+  compliance certification claims were found on the public developer portal.
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      All four specs declare securitySchemes.OAuth2 type oauth2 with a
+      clientCredentials flow (tokenUrl https://api.allianz-trade.com/oauth2/token)
+      and read/write scopes.
+  - id: oidc
+    conforms: false
+    evidence: No openid-configuration document and no OIDC flows in the specs.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Error responses use a custom application/json ErrorResponse schema
+      (code/message/requestId), not application/problem+json.
+  - id: pagination
+    conforms: true
+    evidence: >-
+      List operations use page/pageSize query parameters with Total-Items and
+      Total-Pages response headers (documented Allianz Trade pagination standard).
+  - id: async-jobs
+    conforms: true
+    evidence: >-
+      Write operations return 202 Accepted with a JobResponse and are polled via
+      GET /jobs/{jobId}.
+  - id: idempotency
+    conforms: false
+    evidence: No Idempotency-Key header defined on write operations.
+  - id: json-api
+    conforms: false
+    evidence: Responses are plain JSON objects, not the JSON:API media type.
+  - id: fapi
+    conforms: false
+    evidence: No FAPI security profile, mTLS, or signed request objects declared.
+  - id: psd2
+    conforms: false
+    evidence: Trade credit insurance domain; no PSD2/open-banking endpoints.
+  - id: webhooks
+    conforms: true
+    evidence: >-
+      apis.yml documents webhook notifications for technical and functional
+      events over HTTPS with IP whitelisting.

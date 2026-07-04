@@ -1,0 +1,65 @@
+generated: '2026-06-20'
+method: derived
+status: candidate
+source: >-
+  No official hosted/remote MCP server found for Allianz Trade (checked docs,
+  npm @modelcontextprotocol, and public MCP registries). Tool list derived from
+  OpenAPI operationIds across the four repo specs.
+server:
+  name: allianz-trade
+  transport: http
+  description: >-
+    Candidate MCP surface derived from the Allianz Trade Trade Credit Insurance
+    API operations. Not published by the provider.
+tools:
+  - name: list_payment_overdues
+    description: List payment overdues for your trade credit insurance policies
+    source_operation: openapi/allianz-trade-payment-overdues.yaml#listOverdues
+  - name: report_payment_overdue
+    description: Report a payment overdue (OVD default, EXP extension, RES rescheduling)
+    source_operation: openapi/allianz-trade-payment-overdues.yaml#reportOverdue
+  - name: get_payment_overdue
+    description: Retrieve details for a specific payment overdue
+    source_operation: openapi/allianz-trade-payment-overdues.yaml#getOverdue
+  - name: get_overdue_job_status
+    description: Poll async job status for a payment overdue operation
+    source_operation: openapi/allianz-trade-payment-overdues.yaml#getJobStatus
+  - name: list_company_grades
+    description: List creditworthiness grades for clients and prospects
+    source_operation: openapi/allianz-trade-company-grade.yaml#listCompanyGrades
+  - name: request_company_grade
+    description: Request a company creditworthiness grade
+    source_operation: openapi/allianz-trade-company-grade.yaml#requestCompanyGrade
+  - name: get_company_grade
+    description: Retrieve a specific company grade
+    source_operation: openapi/allianz-trade-company-grade.yaml#getCompanyGrade
+  - name: get_company_grade_job_status
+    description: Poll async job status for a company grade request
+    source_operation: openapi/allianz-trade-company-grade.yaml#getJobStatus
+  - name: list_claims
+    description: List insurance claims declared to Allianz Trade
+    source_operation: openapi/allianz-trade-claims.yaml#listClaims
+  - name: submit_claim
+    description: Submit a new insurance claim
+    source_operation: openapi/allianz-trade-claims.yaml#submitClaim
+  - name: get_claim
+    description: Retrieve a specific insurance claim
+    source_operation: openapi/allianz-trade-claims.yaml#getClaim
+  - name: get_claim_job_status
+    description: Poll async job status for a claim operation
+    source_operation: openapi/allianz-trade-claims.yaml#getJobStatus
+  - name: list_policies
+    description: List trade credit insurance policies
+    source_operation: openapi/allianz-trade-policy.yaml#listPolicies
+  - name: get_policy
+    description: Retrieve details for a specific policy
+    source_operation: openapi/allianz-trade-policy.yaml#getPolicy
+  - name: list_joint_insureds
+    description: List joint insured parties on a policy
+    source_operation: openapi/allianz-trade-policy.yaml#listJointInsureds
+  - name: add_joint_insured
+    description: Add a joint insured party to a policy
+    source_operation: openapi/allianz-trade-policy.yaml#addJointInsured
+  - name: get_policy_job_status
+    description: Poll async job status for a policy operation
+    source_operation: openapi/allianz-trade-policy.yaml#getJobStatus

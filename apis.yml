@@ -18,7 +18,7 @@ description: >-
   REST architecture with OAuth2, the APIs support three business lines: Trade
   Credit Insurance, E-Commerce B2B, and Surety/Guarantee.
 created: '2024-01-01'
-modified: '2026-04-19'
+modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
   - aid: allianz-trade-online:payment-overdues-api
@@ -47,6 +47,8 @@ apis:
         type: Example
       - url: capabilities/shared/payment-overdues.yaml
         type: NaftikoCapability
+      - url: overlays/allianz-trade-online-payment-overdues-overlay.yaml
+        type: Overlay
     description: >-
       Report payment overdues, request extension periods, and manage debt
       rescheduling for trade credit insurance policies. Supports three overdue
@@ -76,6 +78,8 @@ apis:
         type: Example
       - url: capabilities/shared/company-grade.yaml
         type: NaftikoCapability
+      - url: overlays/allianz-trade-online-company-grade-overlay.yaml
+        type: Overlay
     description: >-
       Retrieve the creditworthiness grade of clients after a cover request.
       Supports bulk operations for grading multiple companies simultaneously,
@@ -104,6 +108,8 @@ apis:
         type: Example
       - url: capabilities/shared/claims.yaml
         type: NaftikoCapability
+      - url: overlays/allianz-trade-online-claims-overlay.yaml
+        type: Overlay
     description: >-
       Access and manage all insurance claims declared to Allianz Trade from
       within your ERP system. Retrieve claim status, submit new claims, and
@@ -132,6 +138,8 @@ apis:
         type: Example
       - url: capabilities/shared/policy.yaml
         type: NaftikoCapability
+      - url: overlays/allianz-trade-online-policy-overlay.yaml
+        type: Overlay
     description: >-
       Manage your trade credit insurance policy portfolio. Retrieve policy
       details, create joint insured policies, and manage policy configurations
@@ -158,6 +166,20 @@ common:
     type: Vocabulary
   - url: capabilities/trade-credit-management.yaml
     type: NaftikoCapability
+  - url: packages/allianz-trade-online-packages.yml
+    type: Packages
+  - url: well-known/allianz-trade-online-well-known.yml
+    type: WellKnown
+  - url: mcp/allianz-trade-online-mcp.yml
+    type: MCPServer
+  - url: llms/allianz-trade-online-llms.txt
+    type: LLMsTxt
+  - url: conformance/allianz-trade-online-conformance.yml
+    type: Conformance
+  - url: errors/allianz-trade-online-problem-types.yml
+    type: ErrorCatalog
+  - url: lifecycle/allianz-trade-online-lifecycle.yml
+    type: Lifecycle
   - type: Features
     data:
       - name: Credit Limit Management
