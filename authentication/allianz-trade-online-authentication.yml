@@ -1,0 +1,22 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/allianz-trade-claims.yaml, openapi/allianz-trade-company-grade.yaml, openapi/allianz-trade-payment-overdues.yaml,
+  openapi/allianz-trade-policy.yaml
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.allianz-trade.com/oauth2/token
+    scopes: 2
+  description: OAuth2 client credentials for Allianz Trade API access
+  sources:
+  - openapi/allianz-trade-claims.yaml
+  - openapi/allianz-trade-company-grade.yaml
+  - openapi/allianz-trade-payment-overdues.yaml
+  - openapi/allianz-trade-policy.yaml

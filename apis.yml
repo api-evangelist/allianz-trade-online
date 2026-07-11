@@ -148,6 +148,10 @@ apis:
     baseURL: https://api.allianz-trade.com/v1
 
 common:
+  - type: DomainSecurity
+    url: security/allianz-trade-online-domain-security.yml
+  - type: Authentication
+    url: authentication/allianz-trade-online-authentication.yml
   - type: OAuthScopes
     url: scopes/allianz-trade-online-scopes.yml
   - url: https://www.allianz-trade.com/
