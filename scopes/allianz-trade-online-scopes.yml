@@ -1,0 +1,78 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/allianz-trade-claims.yaml, openapi/allianz-trade-company-grade.yaml, openapi/allianz-trade-payment-overdues.yaml,
+  openapi/allianz-trade-policy.yaml
+schemes:
+- name: OAuth2
+  source: openapi/allianz-trade-claims.yaml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.allianz-trade.com/oauth2/token
+  description: OAuth2 client credentials for Allianz Trade API access
+- name: OAuth2
+  source: openapi/allianz-trade-company-grade.yaml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.allianz-trade.com/oauth2/token
+  description: OAuth2 client credentials for Allianz Trade API access
+- name: OAuth2
+  source: openapi/allianz-trade-payment-overdues.yaml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.allianz-trade.com/oauth2/token
+  description: OAuth2 client credentials for Allianz Trade API access
+- name: OAuth2
+  source: openapi/allianz-trade-policy.yaml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.allianz-trade.com/oauth2/token
+  description: OAuth2 client credentials for Allianz Trade API access
+scopes:
+- scope: claims:read
+  description: Read insurance claims
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/allianz-trade-claims.yaml
+- scope: claims:write
+  description: Submit and manage insurance claims
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/allianz-trade-claims.yaml
+- scope: grades:read
+  description: Read company grades
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/allianz-trade-company-grade.yaml
+- scope: grades:write
+  description: Request company grades
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/allianz-trade-company-grade.yaml
+- scope: overdues:read
+  description: Read payment overdues
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/allianz-trade-payment-overdues.yaml
+- scope: overdues:write
+  description: Report and manage payment overdues
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/allianz-trade-payment-overdues.yaml
+- scope: policy:read
+  description: Read policy details
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/allianz-trade-policy.yaml
+- scope: policy:write
+  description: Manage policy configurations
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/allianz-trade-policy.yaml
