@@ -1,41 +1,58 @@
+# allianz-trade-online — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 4/4 servers on allianz-trade.com
+#   - path-params-casing: camel @ 100% (n=10)
+#   - query-params-casing: camel @ 76% (n=21)
+#   - operationid-casing: camel @ 100% (n=17)
+#   - schema-names-casing: pascal @ 100% (n=22)
+#   - schema-properties-casing: camel @ 69% (n=116)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - error-schema-defined: ErrorResponse
+#   - operation-documents-401: 100% adherence
+#   - pagination params observed: ['page', 'pageSize']
+#   - merge: kept 22 existing, added 9 measured, upgraded 0
+#   - added: servers-https-only, servers-expected-domain, path-params-casing, query-params-casing, operationid-casing, schema-names-casing, schema-properties-casing, error-schema-defined, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
   allianz-trade-operation-summary-prefix:
     description: All operation summaries must start with "Allianz Trade"
     severity: warn
-    given: "$.paths[*][*].summary"
+    given: $.paths[*][*].summary
     then:
       function: pattern
       functionOptions:
-        match: "^Allianz Trade"
-
+        match: ^Allianz Trade
   allianz-trade-operation-tags:
     description: All operations must have at least one tag
     severity: error
-    given: "$.paths[*][*]"
+    given: $.paths[*][*]
     then:
       field: tags
       function: truthy
-
   allianz-trade-operation-id:
     description: All operations must have an operationId
     severity: error
-    given: "$.paths[*][*]"
+    given: $.paths[*][*]
     then:
       field: operationId
       function: truthy
-
   allianz-trade-operation-description:
     description: All operations must have a description
     severity: warn
-    given: "$.paths[*][*]"
+    given: $.paths[*][*]
     then:
       field: description
       function: truthy
-
   allianz-trade-pagination-page-size:
     description: List operations must support pageSize query parameter
     severity: warn
-    given: "$.paths[*].get"
+    given: $.paths[*].get
     then:
       function: schema
       functionOptions:
@@ -48,11 +65,10 @@ rules:
                 properties:
                   name:
                     const: pageSize
-
   allianz-trade-pagination-page:
     description: List operations must support page query parameter
     severity: warn
-    given: "$.paths[*].get"
+    given: $.paths[*].get
     then:
       function: schema
       functionOptions:
@@ -65,11 +81,10 @@ rules:
                 properties:
                   name:
                     const: page
-
   allianz-trade-pagination-total-required:
     description: List operations must support totalRequired query parameter
     severity: warn
-    given: "$.paths[*].get"
+    given: $.paths[*].get
     then:
       function: schema
       functionOptions:
@@ -82,11 +97,10 @@ rules:
                 properties:
                   name:
                     const: totalRequired
-
   allianz-trade-async-202:
     description: Write operations (POST/PATCH/DELETE) must return 202 for async processing
     severity: warn
-    given: "$.paths[*][post,patch,delete]"
+    given: $.paths[*][post,patch,delete]
     then:
       function: schema
       functionOptions:
@@ -95,122 +109,180 @@ rules:
             responses:
               type: object
               required:
-                - "202"
-
+              - '202'
   allianz-trade-async-job-response:
     description: 202 responses must reference JobResponse schema
     severity: warn
-    given: "$.paths[*][post,patch,delete].responses.202.content.application/json.schema.$ref"
+    given: $.paths[*][post,patch,delete].responses.202.content.application/json.schema.$ref
     then:
       function: pattern
       functionOptions:
-        match: "JobResponse"
-
+        match: JobResponse
   allianz-trade-error-response-401:
     description: All operations must document 401 Unauthorized response
     severity: error
-    given: "$.paths[*][*].responses"
+    given: $.paths[*][*].responses
     then:
-      field: "401"
+      field: '401'
       function: truthy
-
   allianz-trade-error-schema-code:
     description: ErrorResponse must have a code property
     severity: warn
-    given: "$.components.schemas.ErrorResponse.properties"
+    given: $.components.schemas.ErrorResponse.properties
     then:
       field: code
       function: truthy
-
   allianz-trade-error-schema-message:
     description: ErrorResponse must have a message property
     severity: warn
-    given: "$.components.schemas.ErrorResponse.properties"
+    given: $.components.schemas.ErrorResponse.properties
     then:
       field: message
       function: truthy
-
   allianz-trade-oauth2-security:
     description: API must use OAuth2 security scheme
     severity: error
-    given: "$.components.securitySchemes"
+    given: $.components.securitySchemes
     then:
       field: OAuth2
       function: truthy
-
   allianz-trade-oauth2-client-credentials:
     description: OAuth2 must use client credentials flow
     severity: error
-    given: "$.components.securitySchemes.OAuth2.flows"
+    given: $.components.securitySchemes.OAuth2.flows
     then:
       field: clientCredentials
       function: truthy
-
   allianz-trade-schema-title:
     description: All schemas must have a title
     severity: warn
-    given: "$.components.schemas[*]"
+    given: $.components.schemas[*]
     then:
       field: title
       function: truthy
-
   allianz-trade-schema-description:
     description: All schemas must have a description
     severity: warn
-    given: "$.components.schemas[*]"
+    given: $.components.schemas[*]
     then:
       field: description
       function: truthy
-
   allianz-trade-property-description:
     description: All schema properties must have a description
     severity: warn
-    given: "$.components.schemas[*].properties[*]"
+    given: $.components.schemas[*].properties[*]
     then:
       field: description
       function: truthy
-
   allianz-trade-property-example:
     description: Schema properties should have examples
     severity: info
-    given: "$.components.schemas[*].properties[*]"
+    given: $.components.schemas[*].properties[*]
     then:
       field: example
       function: truthy
-
   allianz-trade-microcks-operation:
     description: All operations should have x-microcks-operation extension
     severity: info
-    given: "$.paths[*][*]"
+    given: $.paths[*][*]
     then:
       field: x-microcks-operation
       function: truthy
-
   allianz-trade-id-pattern:
     description: Identifier fields should follow Allianz Trade ID pattern (PREFIX-NNNNNN)
     severity: info
-    given: "$.components.schemas[*].properties[?(@property.endsWith('Id'))].example"
+    given: $.components.schemas[*].properties[?(@property.endsWith('Id'))].example
     then:
       function: pattern
       functionOptions:
-        match: "^[A-Z]+-[0-9]+$"
-
+        match: ^[A-Z]+-[0-9]+$
   allianz-trade-currency-iso:
     description: Currency properties must use ISO 4217 format
     severity: warn
-    given: "$.components.schemas[*].properties.currency.description"
+    given: $.components.schemas[*].properties.currency.description
     then:
       function: pattern
       functionOptions:
-        match: "ISO 4217"
-
+        match: ISO 4217
   allianz-trade-date-format:
     description: Date properties must specify date format
     severity: warn
-    given: "$.components.schemas[*].properties[?(@property.endsWith('Date') || @property.endsWith('date'))].format"
+    given: $.components.schemas[*].properties[?(@property.endsWith('Date') || @property.endsWith('date'))].format
     then:
       function: enumeration
       functionOptions:
         values:
-          - date
-          - date-time
+        - date
+        - date-time
+  servers-https-only:
+    description: Server URLs must use HTTPS.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: ^https://
+  servers-expected-domain:
+    description: Server URLs should be on the allianz-trade.com domain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: allianz\-trade\.com
+  path-params-casing:
+    description: Path parameters should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*].parameters[?(@.in=='path')].name
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+  query-params-casing:
+    description: Query parameters should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')]
+    then:
+      field: name
+      function: casing
+      functionOptions:
+        type: camel
+  operationid-casing:
+    description: Operation IDs should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be camelCase (the dominant convention in this API).
+    severity: info
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: camel
+  error-schema-defined:
+    description: A shared error schema (ErrorResponse) should be defined for error payloads.
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: ErrorResponse
+      function: truthy
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
+      function: truthy
