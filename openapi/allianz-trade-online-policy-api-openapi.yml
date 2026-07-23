@@ -1,10 +1,7 @@
 openapi: 3.0.3
 info:
-  title: Allianz Trade Policy API
-  description: >-
-    Manage your trade credit insurance policy portfolio. Retrieve policy
-    details, create joint insured policies, and manage policy configurations
-    directly from your ERP or credit management system.
+  title: Allianz Trade Claims Policy API
+  description: Access and manage all insurance claims declared to Allianz Trade from within your ERP system. Retrieve claim status, submit new claims, and track claim progression for trade credit insurance policies.
   version: 1.0.0
   contact:
     name: Allianz Trade API Support
@@ -12,13 +9,13 @@ info:
     url: https://developers.allianz-trade.com/
   x-generated-from: documentation
 servers:
-  - url: https://api.allianz-trade.com/v1
-    description: Allianz Trade API production server
+- url: https://api.allianz-trade.com/v1
+  description: Allianz Trade API production server
 security:
-  - OAuth2: []
+- OAuth2: []
 tags:
-  - name: Policy
-    description: Trade credit insurance policy management operations
+- name: Policy
+  description: Trade credit insurance policy management operations
 paths:
   /policies:
     get:
@@ -26,47 +23,47 @@ paths:
       summary: Allianz Trade List Policies
       description: Retrieve a paginated list of trade credit insurance policies in your portfolio.
       tags:
-        - Policy
+      - Policy
       parameters:
-        - name: pageSize
-          in: query
-          required: false
-          description: Number of items per page (Allianz Trade pagination standard)
-          schema:
-            type: integer
-            default: 20
-            minimum: 1
-            maximum: 100
-          example: 20
-        - name: page
-          in: query
-          required: false
-          description: Page number starting from 1
-          schema:
-            type: integer
-            default: 1
-            minimum: 1
-          example: 1
-        - name: totalRequired
-          in: query
-          required: false
-          description: Whether to include total count in response headers
-          schema:
-            type: boolean
-            default: false
-          example: false
-        - name: policyStatus
-          in: query
-          required: false
-          description: Filter by policy status
-          schema:
-            type: string
-            enum:
-              - active
-              - suspended
-              - expired
-              - cancelled
-          example: active
+      - name: pageSize
+        in: query
+        required: false
+        description: Number of items per page (Allianz Trade pagination standard)
+        schema:
+          type: integer
+          default: 20
+          minimum: 1
+          maximum: 100
+        example: 20
+      - name: page
+        in: query
+        required: false
+        description: Page number starting from 1
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+        example: 1
+      - name: totalRequired
+        in: query
+        required: false
+        description: Whether to include total count in response headers
+        schema:
+          type: boolean
+          default: false
+        example: false
+      - name: policyStatus
+        in: query
+        required: false
+        description: Filter by policy status
+        schema:
+          type: string
+          enum:
+          - active
+          - suspended
+          - expired
+          - cancelled
+        example: active
       responses:
         '200':
           description: Policies retrieved successfully
@@ -89,15 +86,15 @@ paths:
                   x-microcks-default: true
                   value:
                     data:
-                      - policyId: "POL-500123"
-                        policyNumber: "TC-2026-001"
-                        policyHolderName: "Your Company SAS"
-                        policyType: trade_credit
-                        policyStatus: active
-                        currency: EUR
-                        maxCoverageAmount: 5000000.00
-                        startDate: "2026-01-01"
-                        endDate: "2026-12-31"
+                    - policyId: POL-500123
+                      policyNumber: TC-2026-001
+                      policyHolderName: Your Company SAS
+                      policyType: trade_credit
+                      policyStatus: active
+                      currency: EUR
+                      maxCoverageAmount: 5000000.0
+                      startDate: '2026-01-01'
+                      endDate: '2026-12-31'
         '401':
           description: Unauthorized - invalid or missing OAuth2 token
           content:
@@ -113,22 +110,21 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-
   /policies/{policyId}:
     get:
       operationId: getPolicy
       summary: Allianz Trade Get Policy
       description: Retrieve full details for a specific trade credit insurance policy by its identifier.
       tags:
-        - Policy
+      - Policy
       parameters:
-        - name: policyId
-          in: path
-          required: true
-          description: Unique identifier of the policy
-          schema:
-            type: string
-          example: "POL-500123"
+      - name: policyId
+        in: path
+        required: true
+        description: Unique identifier of the policy
+        schema:
+          type: string
+        example: POL-500123
       responses:
         '200':
           description: Policy retrieved successfully
@@ -141,18 +137,18 @@ paths:
                   summary: Default getPolicy 200 response
                   x-microcks-default: true
                   value:
-                    policyId: "POL-500123"
-                    policyNumber: "TC-2026-001"
-                    policyHolderName: "Your Company SAS"
+                    policyId: POL-500123
+                    policyNumber: TC-2026-001
+                    policyHolderName: Your Company SAS
                     policyType: trade_credit
                     policyStatus: active
                     currency: EUR
-                    maxCoverageAmount: 5000000.00
+                    maxCoverageAmount: 5000000.0
                     coveragePercentage: 90
-                    startDate: "2026-01-01"
-                    endDate: "2026-12-31"
+                    startDate: '2026-01-01'
+                    endDate: '2026-12-31'
                     country: FR
-                    createdAt: "2025-12-01T10:00:00Z"
+                    createdAt: '2025-12-01T10:00:00Z'
         '404':
           description: Policy not found
           content:
@@ -168,46 +164,45 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-
   /policies/{policyId}/joint-insureds:
     get:
       operationId: listJointInsureds
       summary: Allianz Trade List Joint Insureds
       description: Retrieve joint insured entities registered under a policy.
       tags:
-        - Policy
+      - Policy
       parameters:
-        - name: policyId
-          in: path
-          required: true
-          description: Unique identifier of the policy
-          schema:
-            type: string
-          example: "POL-500123"
-        - name: pageSize
-          in: query
-          required: false
-          schema:
-            type: integer
-            default: 20
-            minimum: 1
-            maximum: 100
-          example: 20
-        - name: page
-          in: query
-          required: false
-          schema:
-            type: integer
-            default: 1
-            minimum: 1
-          example: 1
-        - name: totalRequired
-          in: query
-          required: false
-          schema:
-            type: boolean
-            default: false
-          example: false
+      - name: policyId
+        in: path
+        required: true
+        description: Unique identifier of the policy
+        schema:
+          type: string
+        example: POL-500123
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+          minimum: 1
+          maximum: 100
+        example: 20
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+        example: 1
+      - name: totalRequired
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        example: false
       responses:
         '200':
           description: Joint insureds retrieved successfully
@@ -230,12 +225,12 @@ paths:
                   x-microcks-default: true
                   value:
                     data:
-                      - jointInsuredId: "JI-500123"
-                        policyId: "POL-500123"
-                        companyName: "Subsidiary Corp SAS"
-                        registrationNumber: "FR987654321"
-                        country: FR
-                        status: active
+                    - jointInsuredId: JI-500123
+                      policyId: POL-500123
+                      companyName: Subsidiary Corp SAS
+                      registrationNumber: FR987654321
+                      country: FR
+                      status: active
         '404':
           description: Policy not found
           content:
@@ -251,21 +246,20 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-
     post:
       operationId: addJointInsured
       summary: Allianz Trade Add Joint Insured
       description: Add a joint insured entity to a trade credit insurance policy.
       tags:
-        - Policy
+      - Policy
       parameters:
-        - name: policyId
-          in: path
-          required: true
-          description: Unique identifier of the policy
-          schema:
-            type: string
-          example: "POL-500123"
+      - name: policyId
+        in: path
+        required: true
+        description: Unique identifier of the policy
+        schema:
+          type: string
+        example: POL-500123
       requestBody:
         required: true
         content:
@@ -277,8 +271,8 @@ paths:
                 summary: Default addJointInsured request
                 x-microcks-default: true
                 value:
-                  companyName: "Subsidiary Corp SAS"
-                  registrationNumber: "FR987654321"
+                  companyName: Subsidiary Corp SAS
+                  registrationNumber: FR987654321
                   country: FR
       responses:
         '202':
@@ -292,9 +286,9 @@ paths:
                   summary: Default addJointInsured 202 response
                   x-microcks-default: true
                   value:
-                    jobId: "JOB-500789"
+                    jobId: JOB-500789
                     status: pending
-                    createdAt: "2026-04-19T10:30:00Z"
+                    createdAt: '2026-04-19T10:30:00Z'
         '400':
           description: Invalid request parameters
           content:
@@ -310,22 +304,21 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-
   /jobs/{jobId}:
     get:
       operationId: getJobStatus
       summary: Allianz Trade Get Job Status
       description: Poll for the status of an asynchronous policy operation.
       tags:
-        - Policy
+      - Policy
       parameters:
-        - name: jobId
-          in: path
-          required: true
-          description: Unique identifier of the async job
-          schema:
-            type: string
-          example: "JOB-500789"
+      - name: jobId
+        in: path
+        required: true
+        description: Unique identifier of the async job
+        schema:
+          type: string
+        example: JOB-500789
       responses:
         '200':
           description: Job status retrieved
@@ -338,12 +331,12 @@ paths:
                   summary: Default getJobStatus 200 response
                   x-microcks-default: true
                   value:
-                    jobId: "JOB-500789"
+                    jobId: JOB-500789
                     status: processed
                     result:
-                      jointInsuredId: "JI-500123"
-                    createdAt: "2026-04-19T10:30:00Z"
-                    completedAt: "2026-04-19T10:31:00Z"
+                      jointInsuredId: JI-500123
+                    createdAt: '2026-04-19T10:30:00Z'
+                    completedAt: '2026-04-19T10:31:00Z'
         '404':
           description: Job not found
           content:
@@ -359,20 +352,60 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-
 components:
-  securitySchemes:
-    OAuth2:
-      type: oauth2
-      description: OAuth2 client credentials for Allianz Trade API access
-      flows:
-        clientCredentials:
-          tokenUrl: https://api.allianz-trade.com/oauth2/token
-          scopes:
-            policy:read: Read policy details
-            policy:write: Manage policy configurations
-
   schemas:
+    AddJointInsuredRequest:
+      title: AddJointInsuredRequest
+      type: object
+      description: Request body for adding a joint insured to a policy
+      required:
+      - companyName
+      - country
+      properties:
+        companyName:
+          type: string
+          description: Legal name of the company to add as joint insured
+          example: Subsidiary Corp SAS
+        registrationNumber:
+          type: string
+          description: Company registration number
+          example: FR987654321
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: FR
+    JobResponse:
+      title: JobResponse
+      type: object
+      description: Async job status response
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the async job
+          example: JOB-500789
+        status:
+          type: string
+          description: Current status of the job
+          enum:
+          - pending
+          - processed
+          - failed
+          example: processed
+        result:
+          type: object
+          description: Result data after successful job completion
+          example:
+            jointInsuredId: JI-500123
+        createdAt:
+          type: string
+          format: date-time
+          description: When the job was created
+          example: '2026-04-19T10:30:00Z'
+        completedAt:
+          type: string
+          format: date-time
+          description: When the job completed (null if still pending)
+          example: '2026-04-19T10:31:00Z'
     Policy:
       title: Policy
       type: object
@@ -381,31 +414,31 @@ components:
         policyId:
           type: string
           description: Unique identifier for the policy
-          example: "POL-500123"
+          example: POL-500123
         policyNumber:
           type: string
           description: Official Allianz Trade policy number
-          example: "TC-2026-001"
+          example: TC-2026-001
         policyHolderName:
           type: string
           description: Legal name of the policy holder
-          example: "Your Company SAS"
+          example: Your Company SAS
         policyType:
           type: string
           description: Type of trade credit insurance policy
           enum:
-            - trade_credit
-            - surety
-            - ecommerce_b2b
+          - trade_credit
+          - surety
+          - ecommerce_b2b
           example: trade_credit
         policyStatus:
           type: string
           description: Current status of the policy
           enum:
-            - active
-            - suspended
-            - expired
-            - cancelled
+          - active
+          - suspended
+          - expired
+          - cancelled
           example: active
         currency:
           type: string
@@ -415,7 +448,7 @@ components:
           type: number
           format: double
           description: Maximum total coverage amount under the policy
-          example: 5000000.00
+          example: 5000000.0
         coveragePercentage:
           type: integer
           description: Percentage of loss covered by the policy
@@ -426,12 +459,12 @@ components:
           type: string
           format: date
           description: Policy start date
-          example: "2026-01-01"
+          example: '2026-01-01'
         endDate:
           type: string
           format: date
           description: Policy end date
-          example: "2026-12-31"
+          example: '2026-12-31'
         country:
           type: string
           description: ISO 3166-1 alpha-2 country code for the policy
@@ -440,8 +473,7 @@ components:
           type: string
           format: date-time
           description: Timestamp when the policy was created
-          example: "2025-12-01T10:00:00Z"
-
+          example: '2025-12-01T10:00:00Z'
     PolicyList:
       title: PolicyList
       type: object
@@ -452,105 +484,6 @@ components:
           description: List of policy records
           items:
             $ref: '#/components/schemas/Policy'
-
-    JointInsured:
-      title: JointInsured
-      type: object
-      description: A joint insured entity registered under a policy
-      properties:
-        jointInsuredId:
-          type: string
-          description: Unique identifier for the joint insured
-          example: "JI-500123"
-        policyId:
-          type: string
-          description: Parent policy identifier
-          example: "POL-500123"
-        companyName:
-          type: string
-          description: Legal name of the joint insured company
-          example: "Subsidiary Corp SAS"
-        registrationNumber:
-          type: string
-          description: Company registration number
-          example: "FR987654321"
-        country:
-          type: string
-          description: ISO 3166-1 alpha-2 country code
-          example: FR
-        status:
-          type: string
-          description: Current status of the joint insured
-          enum:
-            - active
-            - inactive
-          example: active
-
-    JointInsuredList:
-      title: JointInsuredList
-      type: object
-      description: Paginated list of joint insured entities
-      properties:
-        data:
-          type: array
-          description: List of joint insured records
-          items:
-            $ref: '#/components/schemas/JointInsured'
-
-    AddJointInsuredRequest:
-      title: AddJointInsuredRequest
-      type: object
-      description: Request body for adding a joint insured to a policy
-      required:
-        - companyName
-        - country
-      properties:
-        companyName:
-          type: string
-          description: Legal name of the company to add as joint insured
-          example: "Subsidiary Corp SAS"
-        registrationNumber:
-          type: string
-          description: Company registration number
-          example: "FR987654321"
-        country:
-          type: string
-          description: ISO 3166-1 alpha-2 country code
-          example: FR
-
-    JobResponse:
-      title: JobResponse
-      type: object
-      description: Async job status response
-      properties:
-        jobId:
-          type: string
-          description: Unique identifier for the async job
-          example: "JOB-500789"
-        status:
-          type: string
-          description: Current status of the job
-          enum:
-            - pending
-            - processed
-            - failed
-          example: processed
-        result:
-          type: object
-          description: Result data after successful job completion
-          example:
-            jointInsuredId: "JI-500123"
-        createdAt:
-          type: string
-          format: date-time
-          description: When the job was created
-          example: "2026-04-19T10:30:00Z"
-        completedAt:
-          type: string
-          format: date-time
-          description: When the job completed (null if still pending)
-          example: "2026-04-19T10:31:00Z"
-
     ErrorResponse:
       title: ErrorResponse
       type: object
@@ -563,8 +496,60 @@ components:
         message:
           type: string
           description: Human-readable error description
-          example: "The policyId is required"
+          example: The policyId is required
         requestId:
           type: string
           description: Request identifier for support reference
-          example: "req-500999"
+          example: req-500999
+    JointInsuredList:
+      title: JointInsuredList
+      type: object
+      description: Paginated list of joint insured entities
+      properties:
+        data:
+          type: array
+          description: List of joint insured records
+          items:
+            $ref: '#/components/schemas/JointInsured'
+    JointInsured:
+      title: JointInsured
+      type: object
+      description: A joint insured entity registered under a policy
+      properties:
+        jointInsuredId:
+          type: string
+          description: Unique identifier for the joint insured
+          example: JI-500123
+        policyId:
+          type: string
+          description: Parent policy identifier
+          example: POL-500123
+        companyName:
+          type: string
+          description: Legal name of the joint insured company
+          example: Subsidiary Corp SAS
+        registrationNumber:
+          type: string
+          description: Company registration number
+          example: FR987654321
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: FR
+        status:
+          type: string
+          description: Current status of the joint insured
+          enum:
+          - active
+          - inactive
+          example: active
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth2 client credentials for Allianz Trade API access
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.allianz-trade.com/oauth2/token
+          scopes:
+            claims:read: Read insurance claims
+            claims:write: Submit and manage insurance claims
