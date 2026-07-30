@@ -10,7 +10,19 @@ tags:
   - E-Commerce
   - Surety
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/allianz-trade-online.png
 description: >-
   Allianz Trade APIs enable businesses to automate trade credit insurance
   management including cover requests, credit limit monitoring, payment overdue
@@ -21,132 +33,246 @@ created: '2024-01-01'
 modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
-  - aid: allianz-trade-online:payment-overdues-api
-    name: Allianz Trade Payment Overdues API
-    tags:
-      - Trade Credit
-      - Payment
-      - Overdues
-      - Risk Management
-    properties:
-      - url: https://developers.allianz-trade.com/welcome-trade-credit-insurance-api-world/payment-overdues
-        type: Documentation
-      - url: https://developers.allianz-trade.com/
-        type: Portal
-      - url: openapi/allianz-trade-payment-overdues.yaml
-        type: OpenAPI
-      - url: json-schema/trade-payment-overdues-overdue-schema.json
-        type: JSONSchema
-      - url: json-structure/trade-payment-overdues-overdue-structure.json
-        type: JSONStructure
-      - url: json-ld/allianz-trade-payment-overdues-context.jsonld
-        type: JSONLD
-      - url: examples/trade-payment-overdues-overdue-example.json
-        type: Example
-      - url: examples/trade-payment-overdues-job_response-example.json
-        type: Example
-      - url: capabilities/shared/payment-overdues.yaml
-        type: NaftikoCapability
-      - url: overlays/allianz-trade-online-payment-overdues-overlay.yaml
-        type: Overlay
-    description: >-
-      Report payment overdues, request extension periods, and manage debt
-      rescheduling for trade credit insurance policies. Supports three overdue
-      category types: OVD (report default), EXP (extension period), and RES
-      (rescheduling/repayment plan).
-    humanURL: https://developers.allianz-trade.com/welcome-trade-credit-insurance-api-world/payment-overdues
-    baseURL: https://api.allianz-trade.com/v1
-
-  - aid: allianz-trade-online:company-grade-api
-    name: Allianz Trade Company Grade API
-    tags:
-      - Credit Rating
-      - Risk Assessment
-      - Trade Credit
-    properties:
-      - url: https://developers.allianz-trade.com/api-catalogue
-        type: Documentation
-      - url: openapi/allianz-trade-company-grade.yaml
-        type: OpenAPI
-      - url: json-schema/trade-company-grade-company_grade-schema.json
-        type: JSONSchema
-      - url: json-structure/trade-company-grade-company_grade-structure.json
-        type: JSONStructure
-      - url: json-ld/allianz-trade-company-grade-context.jsonld
-        type: JSONLD
-      - url: examples/trade-company-grade-company_grade-example.json
-        type: Example
-      - url: capabilities/shared/company-grade.yaml
-        type: NaftikoCapability
-      - url: overlays/allianz-trade-online-company-grade-overlay.yaml
-        type: Overlay
-    description: >-
-      Retrieve the creditworthiness grade of clients after a cover request.
-      Supports bulk operations for grading multiple companies simultaneously,
-      enabling automated credit risk assessment within ERP systems.
-    humanURL: https://developers.allianz-trade.com/api-catalogue
-    baseURL: https://api.allianz-trade.com/v1
-
-  - aid: allianz-trade-online:claims-api
-    name: Allianz Trade Claims API
-    tags:
-      - Claims
-      - Insurance
-      - Trade Credit
-    properties:
-      - url: https://developers.allianz-trade.com/api-catalogue
-        type: Documentation
-      - url: openapi/allianz-trade-claims.yaml
-        type: OpenAPI
-      - url: json-schema/trade-claims-claim-schema.json
-        type: JSONSchema
-      - url: json-structure/trade-claims-claim-structure.json
-        type: JSONStructure
-      - url: json-ld/allianz-trade-claims-context.jsonld
-        type: JSONLD
-      - url: examples/trade-claims-claim-example.json
-        type: Example
-      - url: capabilities/shared/claims.yaml
-        type: NaftikoCapability
-      - url: overlays/allianz-trade-online-claims-overlay.yaml
-        type: Overlay
-    description: >-
-      Access and manage all insurance claims declared to Allianz Trade from
-      within your ERP system. Retrieve claim status, submit new claims, and
-      track claim progression for trade credit insurance policies.
-    humanURL: https://developers.allianz-trade.com/api-catalogue
-    baseURL: https://api.allianz-trade.com/v1
-
-  - aid: allianz-trade-online:policy-api
-    name: Allianz Trade Policy API
-    tags:
-      - Policy Management
-      - Insurance
-      - Trade Credit
-    properties:
-      - url: https://developers.allianz-trade.com/api-catalogue
-        type: Documentation
-      - url: openapi/allianz-trade-policy.yaml
-        type: OpenAPI
-      - url: json-schema/trade-policy-policy-schema.json
-        type: JSONSchema
-      - url: json-structure/trade-policy-policy-structure.json
-        type: JSONStructure
-      - url: json-ld/allianz-trade-policy-context.jsonld
-        type: JSONLD
-      - url: examples/trade-policy-policy-example.json
-        type: Example
-      - url: capabilities/shared/policy.yaml
-        type: NaftikoCapability
-      - url: overlays/allianz-trade-online-policy-overlay.yaml
-        type: Overlay
-    description: >-
-      Manage your trade credit insurance policy portfolio. Retrieve policy
-      details, create joint insured policies, and manage policy configurations
-      directly from your ERP or credit management system.
-    humanURL: https://developers.allianz-trade.com/api-catalogue
-    baseURL: https://api.allianz-trade.com/v1
-
+- aid: allianz-trade-online:allianz-trade-online-claims-api
+  name: Allianz Trade Claims API
+  description: Insurance claim management operations
+  humanURL: >-
+    https://developers.allianz-trade.com/welcome-trade-credit-insurance-api-world/payment-overdues
+  baseURL: https://api.allianz-trade.com/v1
+  tags:
+  - Claims
+  properties:
+  - type: OpenAPI
+    url: openapi/allianz-trade-online-claims-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.allianz-trade.com/welcome-trade-credit-insurance-api-world/payment-overdues
+  - type: Portal
+    url: https://developers.allianz-trade.com/
+  - type: JSONSchema
+    url: json-schema/trade-payment-overdues-overdue-schema.json
+  - type: JSONStructure
+    url: json-structure/trade-payment-overdues-overdue-structure.json
+  - type: JSONLD
+    url: json-ld/allianz-trade-payment-overdues-context.jsonld
+  - type: Example
+    url: examples/trade-payment-overdues-overdue-example.json
+  - type: Example
+    url: examples/trade-payment-overdues-job_response-example.json
+  - type: NaftikoCapability
+    url: capabilities/shared/payment-overdues.yaml
+  - type: Documentation
+    url: https://developers.allianz-trade.com/api-catalogue
+  - type: JSONSchema
+    url: json-schema/trade-company-grade-company_grade-schema.json
+  - type: JSONStructure
+    url: json-structure/trade-company-grade-company_grade-structure.json
+  - type: JSONLD
+    url: json-ld/allianz-trade-company-grade-context.jsonld
+  - type: Example
+    url: examples/trade-company-grade-company_grade-example.json
+  - type: NaftikoCapability
+    url: capabilities/shared/company-grade.yaml
+  - type: JSONSchema
+    url: json-schema/trade-claims-claim-schema.json
+  - type: JSONStructure
+    url: json-structure/trade-claims-claim-structure.json
+  - type: JSONLD
+    url: json-ld/allianz-trade-claims-context.jsonld
+  - type: Example
+    url: examples/trade-claims-claim-example.json
+  - type: NaftikoCapability
+    url: capabilities/shared/claims.yaml
+  - type: JSONSchema
+    url: json-schema/trade-policy-policy-schema.json
+  - type: JSONStructure
+    url: json-structure/trade-policy-policy-structure.json
+  - type: JSONLD
+    url: json-ld/allianz-trade-policy-context.jsonld
+  - type: Example
+    url: examples/trade-policy-policy-example.json
+  - type: NaftikoCapability
+    url: capabilities/shared/policy.yaml
+- aid: allianz-trade-online:allianz-trade-online-company-grade-api
+  name: Allianz Trade Company Grade API
+  description: Company creditworthiness grading operations
+  humanURL: >-
+    https://developers.allianz-trade.com/welcome-trade-credit-insurance-api-world/payment-overdues
+  baseURL: https://api.allianz-trade.com/v1
+  tags:
+  - Company Grade
+  properties:
+  - type: OpenAPI
+    url: openapi/allianz-trade-online-company-grade-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.allianz-trade.com/welcome-trade-credit-insurance-api-world/payment-overdues
+  - type: Portal
+    url: https://developers.allianz-trade.com/
+  - type: JSONSchema
+    url: json-schema/trade-payment-overdues-overdue-schema.json
+  - type: JSONStructure
+    url: json-structure/trade-payment-overdues-overdue-structure.json
+  - type: JSONLD
+    url: json-ld/allianz-trade-payment-overdues-context.jsonld
+  - type: Example
+    url: examples/trade-payment-overdues-overdue-example.json
+  - type: Example
+    url: examples/trade-payment-overdues-job_response-example.json
+  - type: NaftikoCapability
+    url: capabilities/shared/payment-overdues.yaml
+  - type: Documentation
+    url: https://developers.allianz-trade.com/api-catalogue
+  - type: JSONSchema
+    url: json-schema/trade-company-grade-company_grade-schema.json
+  - type: JSONStructure
+    url: json-structure/trade-company-grade-company_grade-structure.json
+  - type: JSONLD
+    url: json-ld/allianz-trade-company-grade-context.jsonld
+  - type: Example
+    url: examples/trade-company-grade-company_grade-example.json
+  - type: NaftikoCapability
+    url: capabilities/shared/company-grade.yaml
+  - type: JSONSchema
+    url: json-schema/trade-claims-claim-schema.json
+  - type: JSONStructure
+    url: json-structure/trade-claims-claim-structure.json
+  - type: JSONLD
+    url: json-ld/allianz-trade-claims-context.jsonld
+  - type: Example
+    url: examples/trade-claims-claim-example.json
+  - type: NaftikoCapability
+    url: capabilities/shared/claims.yaml
+  - type: JSONSchema
+    url: json-schema/trade-policy-policy-schema.json
+  - type: JSONStructure
+    url: json-structure/trade-policy-policy-structure.json
+  - type: JSONLD
+    url: json-ld/allianz-trade-policy-context.jsonld
+  - type: Example
+    url: examples/trade-policy-policy-example.json
+  - type: NaftikoCapability
+    url: capabilities/shared/policy.yaml
+- aid: allianz-trade-online:allianz-trade-online-payment-overdues-api
+  name: Allianz Trade Payment Overdues API
+  description: Payment overdue reporting and management operations
+  humanURL: >-
+    https://developers.allianz-trade.com/welcome-trade-credit-insurance-api-world/payment-overdues
+  baseURL: https://api.allianz-trade.com/v1
+  tags:
+  - Payment Overdues
+  properties:
+  - type: OpenAPI
+    url: openapi/allianz-trade-online-payment-overdues-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.allianz-trade.com/welcome-trade-credit-insurance-api-world/payment-overdues
+  - type: Portal
+    url: https://developers.allianz-trade.com/
+  - type: JSONSchema
+    url: json-schema/trade-payment-overdues-overdue-schema.json
+  - type: JSONStructure
+    url: json-structure/trade-payment-overdues-overdue-structure.json
+  - type: JSONLD
+    url: json-ld/allianz-trade-payment-overdues-context.jsonld
+  - type: Example
+    url: examples/trade-payment-overdues-overdue-example.json
+  - type: Example
+    url: examples/trade-payment-overdues-job_response-example.json
+  - type: NaftikoCapability
+    url: capabilities/shared/payment-overdues.yaml
+  - type: Documentation
+    url: https://developers.allianz-trade.com/api-catalogue
+  - type: JSONSchema
+    url: json-schema/trade-company-grade-company_grade-schema.json
+  - type: JSONStructure
+    url: json-structure/trade-company-grade-company_grade-structure.json
+  - type: JSONLD
+    url: json-ld/allianz-trade-company-grade-context.jsonld
+  - type: Example
+    url: examples/trade-company-grade-company_grade-example.json
+  - type: NaftikoCapability
+    url: capabilities/shared/company-grade.yaml
+  - type: JSONSchema
+    url: json-schema/trade-claims-claim-schema.json
+  - type: JSONStructure
+    url: json-structure/trade-claims-claim-structure.json
+  - type: JSONLD
+    url: json-ld/allianz-trade-claims-context.jsonld
+  - type: Example
+    url: examples/trade-claims-claim-example.json
+  - type: NaftikoCapability
+    url: capabilities/shared/claims.yaml
+  - type: JSONSchema
+    url: json-schema/trade-policy-policy-schema.json
+  - type: JSONStructure
+    url: json-structure/trade-policy-policy-structure.json
+  - type: JSONLD
+    url: json-ld/allianz-trade-policy-context.jsonld
+  - type: Example
+    url: examples/trade-policy-policy-example.json
+  - type: NaftikoCapability
+    url: capabilities/shared/policy.yaml
+- aid: allianz-trade-online:allianz-trade-online-policy-api
+  name: Allianz Trade Policy API
+  description: Trade credit insurance policy management operations
+  humanURL: >-
+    https://developers.allianz-trade.com/welcome-trade-credit-insurance-api-world/payment-overdues
+  baseURL: https://api.allianz-trade.com/v1
+  tags:
+  - Policy
+  properties:
+  - type: OpenAPI
+    url: openapi/allianz-trade-online-policy-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.allianz-trade.com/welcome-trade-credit-insurance-api-world/payment-overdues
+  - type: Portal
+    url: https://developers.allianz-trade.com/
+  - type: JSONSchema
+    url: json-schema/trade-payment-overdues-overdue-schema.json
+  - type: JSONStructure
+    url: json-structure/trade-payment-overdues-overdue-structure.json
+  - type: JSONLD
+    url: json-ld/allianz-trade-payment-overdues-context.jsonld
+  - type: Example
+    url: examples/trade-payment-overdues-overdue-example.json
+  - type: Example
+    url: examples/trade-payment-overdues-job_response-example.json
+  - type: NaftikoCapability
+    url: capabilities/shared/payment-overdues.yaml
+  - type: Documentation
+    url: https://developers.allianz-trade.com/api-catalogue
+  - type: JSONSchema
+    url: json-schema/trade-company-grade-company_grade-schema.json
+  - type: JSONStructure
+    url: json-structure/trade-company-grade-company_grade-structure.json
+  - type: JSONLD
+    url: json-ld/allianz-trade-company-grade-context.jsonld
+  - type: Example
+    url: examples/trade-company-grade-company_grade-example.json
+  - type: NaftikoCapability
+    url: capabilities/shared/company-grade.yaml
+  - type: JSONSchema
+    url: json-schema/trade-claims-claim-schema.json
+  - type: JSONStructure
+    url: json-structure/trade-claims-claim-structure.json
+  - type: JSONLD
+    url: json-ld/allianz-trade-claims-context.jsonld
+  - type: Example
+    url: examples/trade-claims-claim-example.json
+  - type: NaftikoCapability
+    url: capabilities/shared/claims.yaml
+  - type: JSONSchema
+    url: json-schema/trade-policy-policy-schema.json
+  - type: JSONStructure
+    url: json-structure/trade-policy-policy-structure.json
+  - type: JSONLD
+    url: json-ld/allianz-trade-policy-context.jsonld
+  - type: Example
+    url: examples/trade-policy-policy-example.json
+  - type: NaftikoCapability
+    url: capabilities/shared/policy.yaml
 common:
   - type: AgenticAccess
     url: agentic-access/allianz-trade-online-agentic-access.yml
