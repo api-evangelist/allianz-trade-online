@@ -1,0 +1,20 @@
+{
+  "provider": "allianz-trade-online",
+  "sources": [
+    "allianz-trade-online-claims-api-openapi.yml",
+    "allianz-trade-online-company-grade-api-openapi.yml",
+    "allianz-trade-online-payment-overdues-api-openapi.yml",
+    "allianz-trade-online-policy-api-openapi.yml"
+  ],
+  "outputs": [
+    "allianz-trade-online-claims-api-openapi.yml",
+    "allianz-trade-online-company-grade-api-openapi.yml",
+    "allianz-trade-online-payment-overdues-api-openapi.yml",
+    "allianz-trade-online-policy-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,474 @@
+openapi: 3.0.3
+info:
+  title: Allianz Trade Claims API
+  description: >-
+    Access and manage all insurance claims declared to Allianz Trade from
+    within your ERP system. Retrieve claim status, submit new claims, and
+    track claim progression for trade credit insurance policies.
+  version: 1.0.0
+  contact:
+    name: Allianz Trade API Support
+    email: api@allianz-trade.com
+    url: https://developers.allianz-trade.com/
+  x-generated-from: documentation
+servers:
+  - url: https://api.allianz-trade.com/v1
+    description: Allianz Trade API production server
+security:
+  - OAuth2: []
+tags:
+  - name: Claims
+    description: Insurance claim management operations
+paths:
+  /claims:
+    get:
+      operationId: listClaims
+      summary: Allianz Trade List Claims
+      description: Retrieve a paginated list of insurance claims for your trade credit insurance policies.
+      tags:
+        - Claims
+      parameters:
+        - name: pageSize
+          in: query
+          required: false
+          description: Number of items per page (Allianz Trade pagination standard)
+          schema:
+            type: integer
+            default: 20
+            minimum: 1
+            maximum: 100
+          example: 20
+        - name: page
+          in: query
+          required: false
+          description: Page number starting from 1
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+          example: 1
+        - name: totalRequired
+          in: query
+          required: false
+          description: Whether to include total count in response headers
+          schema:
+            type: boolean
+            default: false
+          example: false
+        - name: policyId
+          in: query
+          required: false
+          description: Filter claims by policy identifier
+          schema:
+            type: string
+          example: "POL-500123"
+        - name: claimStatus
+          in: query
+          required: false
+          description: Filter by claim status
+          schema:
+            type: string
+            enum:
+              - submitted
+              - under_review
+              - approved
+              - rejected
+              - paid
+          example: submitted
+      responses:
+        '200':
+          description: Claims retrieved successfully
+          headers:
+            Total-Items:
+              description: Total number of claims (when totalRequired=true)
+              schema:
+                type: integer
+            Total-Pages:
+              description: Total number of pages (when totalRequired=true)
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClaimList'
+              examples:
+                ListClaims200Example:
+                  summary: Default listClaims 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      - claimId: "CLM-500123"
+                        policyId: "POL-500123"
+                        debtorName: "Acme Corp"
+                        claimAmount: 45000.00
+                        currency: EUR
+                        claimStatus: submitted
+                        submittedAt: "2026-04-01T09:00:00Z"
+        '401':
+          description: Unauthorized - invalid or missing OAuth2 token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden - insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+    post:
+      operationId: submitClaim
+      summary: Allianz Trade Submit Claim
+      description: >-
+        Submit a new insurance claim to Allianz Trade for a trade credit
+        insurance policy when a debtor has defaulted on payment.
+      tags:
+        - Claims
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitClaimRequest'
+            examples:
+              SubmitClaimRequestExample:
+                summary: Default submitClaim request
+                x-microcks-default: true
+                value:
+                  policyId: "POL-500123"
+                  debtorName: "Acme Corp"
+                  debtorId: "DEB-500456"
+                  claimAmount: 45000.00
+                  currency: EUR
+                  lossDate: "2026-03-01"
+                  invoiceReference: "INV-2026-001"
+                  overdueId: "OVD-500123"
+      responses:
+        '202':
+          description: Claim submitted and accepted for processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobResponse'
+              examples:
+                SubmitClaim202Example:
+                  summary: Default submitClaim 202 response
+                  x-microcks-default: true
+                  value:
+                    jobId: "JOB-500789"
+                    status: pending
+                    createdAt: "2026-04-19T10:30:00Z"
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /claims/{claimId}:
+    get:
+      operationId: getClaim
+      summary: Allianz Trade Get Claim
+      description: Retrieve details and current status for a specific insurance claim by its identifier.
+      tags:
+        - Claims
+      parameters:
+        - name: claimId
+          in: path
+          required: true
+          description: Unique identifier of the claim
+          schema:
+            type: string
+          example: "CLM-500123"
+      responses:
+        '200':
+          description: Claim retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+              examples:
+                GetClaim200Example:
+                  summary: Default getClaim 200 response
+                  x-microcks-default: true
+                  value:
+                    claimId: "CLM-500123"
+                    policyId: "POL-500123"
+                    debtorName: "Acme Corp"
+                    debtorId: "DEB-500456"
+                    claimAmount: 45000.00
+                    approvedAmount: 40000.00
+                    currency: EUR
+                    claimStatus: approved
+                    lossDate: "2026-03-01"
+                    invoiceReference: "INV-2026-001"
+                    overdueId: "OVD-500123"
+                    submittedAt: "2026-04-01T09:00:00Z"
+                    resolvedAt: "2026-04-10T14:00:00Z"
+        '404':
+          description: Claim not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /jobs/{jobId}:
+    get:
+      operationId: getJobStatus
+      summary: Allianz Trade Get Job Status
+      description: Poll for the status of an asynchronous claim submission operation.
+      tags:
+        - Claims
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: Unique identifier of the async job
+          schema:
+            type: string
+          example: "JOB-500789"
+      responses:
+        '200':
+          description: Job status retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobResponse'
+              examples:
+                GetJobStatus200Example:
+                  summary: Default getJobStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    jobId: "JOB-500789"
+                    status: processed
+                    result:
+                      claimId: "CLM-500123"
+                    createdAt: "2026-04-19T10:30:00Z"
+                    completedAt: "2026-04-19T10:31:00Z"
+        '404':
+          description: Job not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth2 client credentials for Allianz Trade API access
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.allianz-trade.com/oauth2/token
+          scopes:
+            claims:read: Read insurance claims
+            claims:write: Submit and manage insurance claims
+
+  schemas:
+    Claim:
+      title: Claim
+      type: object
+      description: An insurance claim filed with Allianz Trade
+      properties:
+        claimId:
+          type: string
+          description: Unique identifier for the insurance claim
+          example: "CLM-500123"
+        policyId:
+          type: string
+          description: Trade credit insurance policy identifier
+          example: "POL-500123"
+        debtorName:
+          type: string
+          description: Name of the debtor who defaulted on payment
+          example: "Acme Corp"
+        debtorId:
+          type: string
+          description: Allianz Trade debtor identifier
+          example: "DEB-500456"
+        claimAmount:
+          type: number
+          format: double
+          description: Total amount claimed
+          example: 45000.00
+        approvedAmount:
+          type: number
+          format: double
+          description: Amount approved by Allianz Trade (after processing)
+          example: 40000.00
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: EUR
+        claimStatus:
+          type: string
+          description: Current status of the claim
+          enum:
+            - submitted
+            - under_review
+            - approved
+            - rejected
+            - paid
+          example: submitted
+        lossDate:
+          type: string
+          format: date
+          description: Date when the financial loss occurred
+          example: "2026-03-01"
+        invoiceReference:
+          type: string
+          description: Customer invoice reference number
+          example: "INV-2026-001"
+        overdueId:
+          type: string
+          description: Related payment overdue identifier
+          example: "OVD-500123"
+        submittedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the claim was submitted
+          example: "2026-04-01T09:00:00Z"
+        resolvedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the claim was resolved
+          example: "2026-04-10T14:00:00Z"
+
+    ClaimList:
+      title: ClaimList
+      type: object
+      description: Paginated list of insurance claims
+      properties:
+        data:
+          type: array
+          description: List of insurance claim records
+          items:
+            $ref: '#/components/schemas/Claim'
+
+    SubmitClaimRequest:
+      title: SubmitClaimRequest
+      type: object
+      description: Request body for submitting an insurance claim
+      required:
+        - policyId
+        - debtorName
+        - claimAmount
+        - currency
+        - lossDate
+      properties:
+        policyId:
+          type: string
+          description: Trade credit insurance policy identifier
+          example: "POL-500123"
+        debtorName:
+          type: string
+          description: Name of the defaulting debtor
+          example: "Acme Corp"
+        debtorId:
+          type: string
+          description: Allianz Trade debtor identifier
+          example: "DEB-500456"
+        claimAmount:
+          type: number
+          format: double
+          description: Total amount to claim
+          example: 45000.00
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: EUR
+        lossDate:
+          type: string
+          format: date
+          description: Date when the financial loss occurred
+          example: "2026-03-01"
+        invoiceReference:
+          type: string
+          description: Customer invoice reference
+          example: "INV-2026-001"
+        overdueId:
+          type: string
+          description: Related payment overdue identifier
+          example: "OVD-500123"
+
+    JobResponse:
+      title: JobResponse
+      type: object
+      description: Async job status response
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the async job
+          example: "JOB-500789"
+        status:
+          type: string
+          description: Current status of the job
+          enum:
+            - pending
+            - processed
+            - failed
+          example: processed
+        result:
+          type: object
+          description: Result data after successful job completion
+          example:
+            claimId: "CLM-500123"
+        createdAt:
+          type: string
+          format: date-time
+          description: When the job was created
+          example: "2026-04-19T10:30:00Z"
+        completedAt:
+          type: string
+          format: date-time
+          description: When the job completed (null if still pending)
+          example: "2026-04-19T10:31:00Z"
+
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: INVALID_REQUEST
+        message:
+          type: string
+          description: Human-readable error description
+          example: "The claimAmount must be a positive number"
+        requestId:
+          type: string
+          description: Request identifier for support reference
+          example: "req-500999"
