@@ -274,6 +274,8 @@ apis:
   - type: NaftikoCapability
     url: capabilities/shared/policy.yaml
 common:
+  - type: Overlay
+    url: overlays/allianz-trade-online-claims-overlay.yaml
   - type: AgenticAccess
     url: agentic-access/allianz-trade-online-agentic-access.yml
   - type: DomainSecurity
