@@ -1,0 +1,902 @@
+{
+  "item": [
+    {
+      "id": "d168e9a8-6512-4251-baa1-b7b301f8c36b",
+      "name": "Company Grade",
+      "description": {
+        "content": "Company creditworthiness grading operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "67c49fcb-4776-4db5-93c9-37cacce36d64",
+          "name": "Allianz Trade List Company Grades",
+          "request": {
+            "name": "Allianz Trade List Company Grades",
+            "description": {
+              "content": "Retrieve a paginated list of company creditworthiness grades for your portfolio.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "company-grades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "20",
+                  "description": "Number of items per page (Allianz Trade pagination standard)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number starting from 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "totalRequired",
+                  "value": "false",
+                  "description": "Whether to include total count in response headers"
+                },
+                {
+                  "disabled": false,
+                  "key": "policyId",
+                  "value": "<string>",
+                  "description": "Filter grades by policy identifier"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fb3f616e-b9af-41db-9745-5a8eb1fa250b",
+              "name": "Company grades retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company-grades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "totalRequired",
+                      "value": "false"
+                    },
+                    {
+                      "key": "policyId",
+                      "value": "POL-500123"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Total number of grades (when totalRequired=true)",
+                  "key": "Total-Items",
+                  "value": "8855"
+                },
+                {
+                  "disabled": false,
+                  "description": "Total number of pages (when totalRequired=true)",
+                  "key": "Total-Pages",
+                  "value": "8855"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"gradeId\": \"GRD-500123\",\n      \"policyId\": \"POL-500123\",\n      \"companyName\": \"Acme Corp\",\n      \"grade\": \"B\",\n      \"gradeScore\": 65,\n      \"currency\": \"EUR\",\n      \"creditLimit\": 100000,\n      \"validUntil\": \"2026-12-31\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6dead213-8fc2-4c92-a2a2-33b1cd94ae13",
+              "name": "Unauthorized - invalid or missing OAuth2 token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company-grades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "totalRequired",
+                      "value": "false"
+                    },
+                    {
+                      "key": "policyId",
+                      "value": "POL-500123"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"The requestedCreditLimit must be a positive number\",\n  \"requestId\": \"req-500999\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1413b9d0-200f-403e-8e8f-d890d4f1bf4d",
+              "name": "Forbidden - insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company-grades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "totalRequired",
+                      "value": "false"
+                    },
+                    {
+                      "key": "policyId",
+                      "value": "POL-500123"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"The requestedCreditLimit must be a positive number\",\n  \"requestId\": \"req-500999\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4dc3e7a6-7fc3-472e-a4ad-a2e9334a624d",
+          "name": "Allianz Trade Request Company Grade",
+          "request": {
+            "name": "Allianz Trade Request Company Grade",
+            "description": {
+              "content": "Request a creditworthiness grade for a company or submit a bulk grading request for multiple companies within the same policy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "company-grades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policyId\": \"<string>\",\n  \"companyName\": \"<string>\",\n  \"country\": \"<string>\",\n  \"requestedCreditLimit\": \"<double>\",\n  \"currency\": \"<string>\",\n  \"companyRegistrationNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f92db688-55e2-4f17-9ada-faa25e3f5552",
+              "name": "Grade request accepted for processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company-grades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyId\": \"POL-500123\",\n  \"companyName\": \"Acme Corp\",\n  \"companyRegistrationNumber\": \"FR123456789\",\n  \"country\": \"FR\",\n  \"requestedCreditLimit\": 100000,\n  \"currency\": \"EUR\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"JOB-500789\",\n  \"status\": \"pending\",\n  \"createdAt\": \"2026-04-19T10:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ede2de74-977e-43c5-9361-b45f0cb70793",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company-grades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyId\": \"POL-500123\",\n  \"companyName\": \"Acme Corp\",\n  \"companyRegistrationNumber\": \"FR123456789\",\n  \"country\": \"FR\",\n  \"requestedCreditLimit\": 100000,\n  \"currency\": \"EUR\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"The requestedCreditLimit must be a positive number\",\n  \"requestId\": \"req-500999\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3372c2e3-4d0d-4a15-b4f1-5aeb27c2187b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company-grades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyId\": \"POL-500123\",\n  \"companyName\": \"Acme Corp\",\n  \"companyRegistrationNumber\": \"FR123456789\",\n  \"country\": \"FR\",\n  \"requestedCreditLimit\": 100000,\n  \"currency\": \"EUR\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"The requestedCreditLimit must be a positive number\",\n  \"requestId\": \"req-500999\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf22d538-5ce3-42a3-8019-0b976fce0505",
+          "name": "Allianz Trade Get Company Grade",
+          "request": {
+            "name": "Allianz Trade Get Company Grade",
+            "description": {
+              "content": "Retrieve the creditworthiness grade for a specific company by grade identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "company-grades",
+                ":gradeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "gradeId",
+                  "description": "(Required) Unique identifier of the company grade"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "91dfb3f9-d29c-44f3-920e-857b034782da",
+              "name": "Company grade retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company-grades",
+                    ":gradeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gradeId",
+                      "description": "(Required) Unique identifier of the company grade"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"gradeId\": \"GRD-500123\",\n  \"policyId\": \"POL-500123\",\n  \"companyName\": \"Acme Corp\",\n  \"companyRegistrationNumber\": \"FR123456789\",\n  \"country\": \"FR\",\n  \"grade\": \"B\",\n  \"gradeScore\": 65,\n  \"currency\": \"EUR\",\n  \"creditLimit\": 100000,\n  \"requestedCreditLimit\": 100000,\n  \"validUntil\": \"2026-12-31\",\n  \"gradedAt\": \"2026-04-19T10:31:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16e20289-fb6b-4770-950a-08822188b11e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company-grades",
+                    ":gradeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gradeId",
+                      "description": "(Required) Unique identifier of the company grade"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"The requestedCreditLimit must be a positive number\",\n  \"requestId\": \"req-500999\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90fcabda-2213-4077-85e4-6c896ae63fbd",
+              "name": "Grade not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company-grades",
+                    ":gradeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gradeId",
+                      "description": "(Required) Unique identifier of the company grade"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"The requestedCreditLimit must be a positive number\",\n  \"requestId\": \"req-500999\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3dca43d-5c1d-4bff-9b22-944322bd3ebf",
+          "name": "Allianz Trade Get Job Status",
+          "request": {
+            "name": "Allianz Trade Get Job Status",
+            "description": {
+              "content": "Poll for the status of an asynchronous grading operation submitted via POST.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobs",
+                ":jobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobId",
+                  "description": "(Required) Unique identifier of the async job"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "598c74be-2729-4139-bb1c-ab608371bb5b",
+              "name": "Job status retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) Unique identifier of the async job"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"JOB-500789\",\n  \"status\": \"processed\",\n  \"result\": {\n    \"gradeId\": \"GRD-500123\"\n  },\n  \"createdAt\": \"2026-04-19T10:30:00Z\",\n  \"completedAt\": \"2026-04-19T10:31:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01c7b827-7e0e-4996-8edb-43b26f9e61c5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) Unique identifier of the async job"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"The requestedCreditLimit must be a positive number\",\n  \"requestId\": \"req-500999\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67757525-c8fa-49dc-a36f-b5a806bf628e",
+              "name": "Job not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) Unique identifier of the async job"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"The requestedCreditLimit must be a positive number\",\n  \"requestId\": \"req-500999\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.allianz-trade.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "claims:read claims:write"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.allianz-trade.com/oauth2/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cb6b4917-0bf0-44df-b3ed-e7bbcf423bbb",
+    "name": "Allianz Trade Claims Company Grade API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Access and manage all insurance claims declared to Allianz Trade from within your ERP system. Retrieve claim status, submit new claims, and track claim progression for trade credit insurance policies.\n\nContact Support:\n Name: Allianz Trade API Support\n Email: api@allianz-trade.com",
+      "type": "text/plain"
+    }
+  }
+}

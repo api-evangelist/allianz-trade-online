@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Allianz Trade Claims Company Grade API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.allianz-trade.com/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Company Grade",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Allianz Trade List Company Grades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.allianz-trade.com/v1/company-grades",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page (Allianz Trade pagination standard)"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number starting from 1"
+              },
+              {
+                "name": "totalRequired",
+                "value": "false",
+                "type": "query",
+                "description": "Whether to include total count in response headers"
+              },
+              {
+                "name": "policyId",
+                "value": "POL-500123",
+                "type": "query",
+                "description": "Filter grades by policy identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of company creditworthiness grades for your portfolio."
+        },
+        {
+          "info": {
+            "name": "Allianz Trade Request Company Grade",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.allianz-trade.com/v1/company-grades",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request a creditworthiness grade for a company or submit a bulk grading request for multiple companies within the same policy."
+        },
+        {
+          "info": {
+            "name": "Allianz Trade Get Company Grade",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.allianz-trade.com/v1/company-grades/:gradeId",
+            "params": [
+              {
+                "name": "gradeId",
+                "value": "GRD-500123",
+                "type": "path",
+                "description": "Unique identifier of the company grade"
+              }
+            ]
+          },
+          "docs": "Retrieve the creditworthiness grade for a specific company by grade identifier."
+        },
+        {
+          "info": {
+            "name": "Allianz Trade Get Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.allianz-trade.com/v1/jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "JOB-500789",
+                "type": "path",
+                "description": "Unique identifier of the async job"
+              }
+            ]
+          },
+          "docs": "Poll for the status of an asynchronous grading operation submitted via POST."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Allianz Trade Claims Payment Overdues API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.allianz-trade.com/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Overdues",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Allianz Trade List Payment Overdues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.allianz-trade.com/v1/overdues",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page (Allianz Trade pagination standard)"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number starting from 1"
+              },
+              {
+                "name": "totalRequired",
+                "value": "false",
+                "type": "query",
+                "description": "Whether to include total count in response headers"
+              },
+              {
+                "name": "overdueCategoryTypeCode",
+                "value": "OVD",
+                "type": "query",
+                "description": "Filter by overdue category type code"
+              },
+              {
+                "name": "policyId",
+                "value": "POL-500123",
+                "type": "query",
+                "description": "Filter overdues by policy identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of payment overdues for your trade credit insurance policies."
+        },
+        {
+          "info": {
+            "name": "Allianz Trade Report Payment Overdue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.allianz-trade.com/v1/overdues",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Report a payment overdue to Allianz Trade using the appropriate overdue category type code. OVD to report a default state, EXP to request an extension period, or RES to report a rescheduling agreement."
+        },
+        {
+          "info": {
+            "name": "Allianz Trade Get Payment Overdue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.allianz-trade.com/v1/overdues/:overdueId",
+            "params": [
+              {
+                "name": "overdueId",
+                "value": "OVD-500123",
+                "type": "path",
+                "description": "Unique identifier of the payment overdue"
+              }
+            ]
+          },
+          "docs": "Retrieve details for a specific payment overdue by its identifier."
+        },
+        {
+          "info": {
+            "name": "Allianz Trade Get Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.allianz-trade.com/v1/jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "JOB-500789",
+                "type": "path",
+                "description": "Unique identifier of the async job"
+              }
+            ]
+          },
+          "docs": "Poll for the status of an asynchronous operation submitted via POST/PATCH/DELETE."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Allianz Trade Claims Policy API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.allianz-trade.com/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Policy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Allianz Trade List Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.allianz-trade.com/v1/policies",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page (Allianz Trade pagination standard)"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number starting from 1"
+              },
+              {
+                "name": "totalRequired",
+                "value": "false",
+                "type": "query",
+                "description": "Whether to include total count in response headers"
+              },
+              {
+                "name": "policyStatus",
+                "value": "active",
+                "type": "query",
+                "description": "Filter by policy status"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of trade credit insurance policies in your portfolio."
+        },
+        {
+          "info": {
+            "name": "Allianz Trade Get Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.allianz-trade.com/v1/policies/:policyId",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "POL-500123",
+                "type": "path",
+                "description": "Unique identifier of the policy"
+              }
+            ]
+          },
+          "docs": "Retrieve full details for a specific trade credit insurance policy by its identifier."
+        },
+        {
+          "info": {
+            "name": "Allianz Trade List Joint Insureds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.allianz-trade.com/v1/policies/:policyId/joint-insureds",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "POL-500123",
+                "type": "path",
+                "description": "Unique identifier of the policy"
+              },
+              {
+                "name": "pageSize",
+                "value": "20",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query"
+              },
+              {
+                "name": "totalRequired",
+                "value": "false",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve joint insured entities registered under a policy."
+        },
+        {
+          "info": {
+            "name": "Allianz Trade Add Joint Insured",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.allianz-trade.com/v1/policies/:policyId/joint-insureds",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "POL-500123",
+                "type": "path",
+                "description": "Unique identifier of the policy"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a joint insured entity to a trade credit insurance policy."
+        },
+        {
+          "info": {
+            "name": "Allianz Trade Get Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.allianz-trade.com/v1/jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "JOB-500789",
+                "type": "path",
+                "description": "Unique identifier of the async job"
+              }
+            ]
+          },
+          "docs": "Poll for the status of an asynchronous policy operation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

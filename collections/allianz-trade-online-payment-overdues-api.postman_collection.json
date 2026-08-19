@@ -1,0 +1,920 @@
+{
+  "item": [
+    {
+      "id": "d82f773b-a922-405a-a837-1584e655bb54",
+      "name": "Payment Overdues",
+      "description": {
+        "content": "Payment overdue reporting and management operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "df0ea940-66fd-48c2-b3b2-1adeabce69d2",
+          "name": "Allianz Trade List Payment Overdues",
+          "request": {
+            "name": "Allianz Trade List Payment Overdues",
+            "description": {
+              "content": "Retrieve a paginated list of payment overdues for your trade credit insurance policies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "overdues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "20",
+                  "description": "Number of items per page (Allianz Trade pagination standard)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number starting from 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "totalRequired",
+                  "value": "false",
+                  "description": "Whether to include total count in response headers"
+                },
+                {
+                  "disabled": false,
+                  "key": "overdueCategoryTypeCode",
+                  "value": "<string>",
+                  "description": "Filter by overdue category type code"
+                },
+                {
+                  "disabled": false,
+                  "key": "policyId",
+                  "value": "<string>",
+                  "description": "Filter overdues by policy identifier"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ded7fd92-5b03-4ffe-85b8-f5763045f76b",
+              "name": "Overdues retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "overdues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "totalRequired",
+                      "value": "false"
+                    },
+                    {
+                      "key": "overdueCategoryTypeCode",
+                      "value": "OVD"
+                    },
+                    {
+                      "key": "policyId",
+                      "value": "POL-500123"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Total number of overdues (when totalRequired=true)",
+                  "key": "Total-Items",
+                  "value": "376"
+                },
+                {
+                  "disabled": false,
+                  "description": "Total number of pages (when totalRequired=true)",
+                  "key": "Total-Pages",
+                  "value": "376"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"overdueId\": \"OVD-500123\",\n      \"policyId\": \"POL-500123\",\n      \"overdueCategoryTypeCode\": \"OVD\",\n      \"debtorName\": \"Acme Corp\",\n      \"overdueAmount\": 50000,\n      \"currency\": \"EUR\",\n      \"dueDate\": \"2026-03-15\",\n      \"status\": \"reported\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "589e3ec2-6691-4f1e-ab8a-6702469a54d0",
+              "name": "Unauthorized - invalid or missing OAuth2 token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "overdues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "totalRequired",
+                      "value": "false"
+                    },
+                    {
+                      "key": "overdueCategoryTypeCode",
+                      "value": "OVD"
+                    },
+                    {
+                      "key": "policyId",
+                      "value": "POL-500123"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"The overdueAmount must be a positive number\",\n  \"requestId\": \"req-500999\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a15e565-3a0f-4363-be53-6317d00a5a6b",
+              "name": "Forbidden - insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "overdues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "totalRequired",
+                      "value": "false"
+                    },
+                    {
+                      "key": "overdueCategoryTypeCode",
+                      "value": "OVD"
+                    },
+                    {
+                      "key": "policyId",
+                      "value": "POL-500123"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"The overdueAmount must be a positive number\",\n  \"requestId\": \"req-500999\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac726e53-da18-4ba4-a907-3f964f39e087",
+          "name": "Allianz Trade Report Payment Overdue",
+          "request": {
+            "name": "Allianz Trade Report Payment Overdue",
+            "description": {
+              "content": "Report a payment overdue to Allianz Trade using the appropriate overdue category type code. OVD to report a default state, EXP to request an extension period, or RES to report a rescheduling agreement.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "overdues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policyId\": \"<string>\",\n  \"overdueCategoryTypeCode\": \"<string>\",\n  \"debtorName\": \"<string>\",\n  \"overdueAmount\": \"<double>\",\n  \"currency\": \"<string>\",\n  \"dueDate\": \"<date>\",\n  \"debtorId\": \"<string>\",\n  \"invoiceReference\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3112ab82-9787-4b85-bdc2-089991eac681",
+              "name": "Overdue report accepted for processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "overdues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyId\": \"POL-500123\",\n  \"overdueCategoryTypeCode\": \"OVD\",\n  \"debtorName\": \"Acme Corp\",\n  \"debtorId\": \"DEB-500456\",\n  \"overdueAmount\": 50000,\n  \"currency\": \"EUR\",\n  \"dueDate\": \"2026-03-15\",\n  \"invoiceReference\": \"INV-2026-001\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"JOB-500789\",\n  \"status\": \"pending\",\n  \"createdAt\": \"2026-04-19T10:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2d8275f-1ac2-4b99-ab9e-4d35df52ff0f",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "overdues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyId\": \"POL-500123\",\n  \"overdueCategoryTypeCode\": \"OVD\",\n  \"debtorName\": \"Acme Corp\",\n  \"debtorId\": \"DEB-500456\",\n  \"overdueAmount\": 50000,\n  \"currency\": \"EUR\",\n  \"dueDate\": \"2026-03-15\",\n  \"invoiceReference\": \"INV-2026-001\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"The overdueAmount must be a positive number\",\n  \"requestId\": \"req-500999\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82c4b644-b4aa-41ef-98f3-328ad68f349d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "overdues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyId\": \"POL-500123\",\n  \"overdueCategoryTypeCode\": \"OVD\",\n  \"debtorName\": \"Acme Corp\",\n  \"debtorId\": \"DEB-500456\",\n  \"overdueAmount\": 50000,\n  \"currency\": \"EUR\",\n  \"dueDate\": \"2026-03-15\",\n  \"invoiceReference\": \"INV-2026-001\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"The overdueAmount must be a positive number\",\n  \"requestId\": \"req-500999\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5104ea2a-bbb4-467a-836f-7d7689c98b01",
+          "name": "Allianz Trade Get Payment Overdue",
+          "request": {
+            "name": "Allianz Trade Get Payment Overdue",
+            "description": {
+              "content": "Retrieve details for a specific payment overdue by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "overdues",
+                ":overdueId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "overdueId",
+                  "description": "(Required) Unique identifier of the payment overdue"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6dffef94-1167-4793-a824-94b3d34ce384",
+              "name": "Overdue retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "overdues",
+                    ":overdueId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "overdueId",
+                      "description": "(Required) Unique identifier of the payment overdue"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"overdueId\": \"OVD-500123\",\n  \"policyId\": \"POL-500123\",\n  \"overdueCategoryTypeCode\": \"OVD\",\n  \"debtorName\": \"Acme Corp\",\n  \"overdueAmount\": 50000,\n  \"currency\": \"EUR\",\n  \"dueDate\": \"2026-03-15\",\n  \"status\": \"reported\",\n  \"reportedAt\": \"2026-04-01T09:00:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "968caa59-62b1-471b-bddf-22ab09896a7c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "overdues",
+                    ":overdueId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "overdueId",
+                      "description": "(Required) Unique identifier of the payment overdue"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"The overdueAmount must be a positive number\",\n  \"requestId\": \"req-500999\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7e8183a-b7c2-4bec-93f6-2ebf9d71deab",
+              "name": "Overdue not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "overdues",
+                    ":overdueId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "overdueId",
+                      "description": "(Required) Unique identifier of the payment overdue"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"The overdueAmount must be a positive number\",\n  \"requestId\": \"req-500999\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a272599-882b-4e8e-9914-24743306cd3b",
+          "name": "Allianz Trade Get Job Status",
+          "request": {
+            "name": "Allianz Trade Get Job Status",
+            "description": {
+              "content": "Poll for the status of an asynchronous operation submitted via POST/PATCH/DELETE.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobs",
+                ":jobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobId",
+                  "description": "(Required) Unique identifier of the async job"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "060a2b36-f1de-4551-b0d7-c889c4c0de70",
+              "name": "Job status retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) Unique identifier of the async job"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"JOB-500789\",\n  \"status\": \"processed\",\n  \"result\": {\n    \"overdueId\": \"OVD-500123\"\n  },\n  \"createdAt\": \"2026-04-19T10:30:00Z\",\n  \"completedAt\": \"2026-04-19T10:31:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d969b6e-c933-4145-ae26-cfea99a32184",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) Unique identifier of the async job"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"The overdueAmount must be a positive number\",\n  \"requestId\": \"req-500999\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6fbfd56-989d-4e51-a287-62df21e87afc",
+              "name": "Job not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) Unique identifier of the async job"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\",\n  \"message\": \"The overdueAmount must be a positive number\",\n  \"requestId\": \"req-500999\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.allianz-trade.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "claims:read claims:write"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.allianz-trade.com/oauth2/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "11ce26d5-4207-4362-8126-1df4ab56c3b9",
+    "name": "Allianz Trade Claims Payment Overdues API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Access and manage all insurance claims declared to Allianz Trade from within your ERP system. Retrieve claim status, submit new claims, and track claim progression for trade credit insurance policies.\n\nContact Support:\n Name: Allianz Trade API Support\n Email: api@allianz-trade.com",
+      "type": "text/plain"
+    }
+  }
+}
