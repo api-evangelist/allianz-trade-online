@@ -29,7 +29,7 @@ description: >-
   Surety/Guarantee.
 created: '2024-01-01'
 modified: '2026-06-20'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
   - aid: allianz-trade-online:allianz-trade-online-claims-api
     name: Allianz Trade Claims API
