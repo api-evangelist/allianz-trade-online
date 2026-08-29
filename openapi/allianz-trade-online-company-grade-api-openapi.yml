@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Allianz Trade Claims Company Grade API
   description: Access and manage all insurance claims declared to Allianz Trade from within your ERP system. Retrieve claim status, submit new claims, and track claim progression for trade credit insurance policies.
@@ -261,6 +261,38 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    JobResponse:
+      title: JobResponse
+      type: object
+      description: Async job status response
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the async job
+          example: JOB-500789
+        status:
+          type: string
+          description: Current status of the job
+          enum:
+          - pending
+          - processed
+          - failed
+          example: processed
+        result:
+          type: object
+          description: Result data after successful job completion
+          example:
+            gradeId: GRD-500123
+        createdAt:
+          type: string
+          format: date-time
+          description: When the job was created
+          example: '2026-04-19T10:30:00Z'
+        completedAt:
+          type: string
+          format: date-time
+          description: When the job completed (null if still pending)
+          example: '2026-04-19T10:31:00Z'
     CompanyGradeList:
       title: CompanyGradeList
       type: object
@@ -372,38 +404,6 @@ components:
           type: string
           description: ISO 4217 currency code
           example: EUR
-    JobResponse:
-      title: JobResponse
-      type: object
-      description: Async job status response
-      properties:
-        jobId:
-          type: string
-          description: Unique identifier for the async job
-          example: JOB-500789
-        status:
-          type: string
-          description: Current status of the job
-          enum:
-          - pending
-          - processed
-          - failed
-          example: processed
-        result:
-          type: object
-          description: Result data after successful job completion
-          example:
-            gradeId: GRD-500123
-        createdAt:
-          type: string
-          format: date-time
-          description: When the job was created
-          example: '2026-04-19T10:30:00Z'
-        completedAt:
-          type: string
-          format: date-time
-          description: When the job completed (null if still pending)
-          example: '2026-04-19T10:31:00Z'
     ErrorResponse:
       title: ErrorResponse
       type: object

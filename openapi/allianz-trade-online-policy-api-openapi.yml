@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Allianz Trade Claims Policy API
   description: Access and manage all insurance claims declared to Allianz Trade from within your ERP system. Retrieve claim status, submit new claims, and track claim progression for trade credit insurance policies.
@@ -374,38 +374,26 @@ components:
           type: string
           description: ISO 3166-1 alpha-2 country code
           example: FR
-    JobResponse:
-      title: JobResponse
+    PolicyList:
+      title: PolicyList
       type: object
-      description: Async job status response
+      description: Paginated list of trade credit insurance policies
       properties:
-        jobId:
-          type: string
-          description: Unique identifier for the async job
-          example: JOB-500789
-        status:
-          type: string
-          description: Current status of the job
-          enum:
-          - pending
-          - processed
-          - failed
-          example: processed
-        result:
-          type: object
-          description: Result data after successful job completion
-          example:
-            jointInsuredId: JI-500123
-        createdAt:
-          type: string
-          format: date-time
-          description: When the job was created
-          example: '2026-04-19T10:30:00Z'
-        completedAt:
-          type: string
-          format: date-time
-          description: When the job completed (null if still pending)
-          example: '2026-04-19T10:31:00Z'
+        data:
+          type: array
+          description: List of policy records
+          items:
+            $ref: '#/components/schemas/Policy'
+    JointInsuredList:
+      title: JointInsuredList
+      type: object
+      description: Paginated list of joint insured entities
+      properties:
+        data:
+          type: array
+          description: List of joint insured records
+          items:
+            $ref: '#/components/schemas/JointInsured'
     Policy:
       title: Policy
       type: object
@@ -474,16 +462,38 @@ components:
           format: date-time
           description: Timestamp when the policy was created
           example: '2025-12-01T10:00:00Z'
-    PolicyList:
-      title: PolicyList
+    JobResponse:
+      title: JobResponse
       type: object
-      description: Paginated list of trade credit insurance policies
+      description: Async job status response
       properties:
-        data:
-          type: array
-          description: List of policy records
-          items:
-            $ref: '#/components/schemas/Policy'
+        jobId:
+          type: string
+          description: Unique identifier for the async job
+          example: JOB-500789
+        status:
+          type: string
+          description: Current status of the job
+          enum:
+          - pending
+          - processed
+          - failed
+          example: processed
+        result:
+          type: object
+          description: Result data after successful job completion
+          example:
+            jointInsuredId: JI-500123
+        createdAt:
+          type: string
+          format: date-time
+          description: When the job was created
+          example: '2026-04-19T10:30:00Z'
+        completedAt:
+          type: string
+          format: date-time
+          description: When the job completed (null if still pending)
+          example: '2026-04-19T10:31:00Z'
     ErrorResponse:
       title: ErrorResponse
       type: object
@@ -501,16 +511,6 @@ components:
           type: string
           description: Request identifier for support reference
           example: req-500999
-    JointInsuredList:
-      title: JointInsuredList
-      type: object
-      description: Paginated list of joint insured entities
-      properties:
-        data:
-          type: array
-          description: List of joint insured records
-          items:
-            $ref: '#/components/schemas/JointInsured'
     JointInsured:
       title: JointInsured
       type: object

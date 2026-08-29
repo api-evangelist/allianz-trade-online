@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Allianz Trade Claims API
   description: Access and manage all insurance claims declared to Allianz Trade from within your ERP system. Retrieve claim status, submit new claims, and track claim progression for trade credit insurance policies.
@@ -276,93 +276,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    SubmitClaimRequest:
-      title: SubmitClaimRequest
-      type: object
-      description: Request body for submitting an insurance claim
-      required:
-      - policyId
-      - debtorName
-      - claimAmount
-      - currency
-      - lossDate
-      properties:
-        policyId:
-          type: string
-          description: Trade credit insurance policy identifier
-          example: POL-500123
-        debtorName:
-          type: string
-          description: Name of the defaulting debtor
-          example: Acme Corp
-        debtorId:
-          type: string
-          description: Allianz Trade debtor identifier
-          example: DEB-500456
-        claimAmount:
-          type: number
-          format: double
-          description: Total amount to claim
-          example: 45000.0
-        currency:
-          type: string
-          description: ISO 4217 currency code
-          example: EUR
-        lossDate:
-          type: string
-          format: date
-          description: Date when the financial loss occurred
-          example: '2026-03-01'
-        invoiceReference:
-          type: string
-          description: Customer invoice reference
-          example: INV-2026-001
-        overdueId:
-          type: string
-          description: Related payment overdue identifier
-          example: OVD-500123
-    ClaimList:
-      title: ClaimList
-      type: object
-      description: Paginated list of insurance claims
-      properties:
-        data:
-          type: array
-          description: List of insurance claim records
-          items:
-            $ref: '#/components/schemas/Claim'
-    JobResponse:
-      title: JobResponse
-      type: object
-      description: Async job status response
-      properties:
-        jobId:
-          type: string
-          description: Unique identifier for the async job
-          example: JOB-500789
-        status:
-          type: string
-          description: Current status of the job
-          enum:
-          - pending
-          - processed
-          - failed
-          example: processed
-        result:
-          type: object
-          description: Result data after successful job completion
-          example:
-            claimId: CLM-500123
-        createdAt:
-          type: string
-          format: date-time
-          description: When the job was created
-          example: '2026-04-19T10:30:00Z'
-        completedAt:
-          type: string
-          format: date-time
-          description: When the job completed (null if still pending)
-          example: '2026-04-19T10:31:00Z'
     Claim:
       title: Claim
       type: object
@@ -431,6 +344,93 @@ components:
           format: date-time
           description: Timestamp when the claim was resolved
           example: '2026-04-10T14:00:00Z'
+    SubmitClaimRequest:
+      title: SubmitClaimRequest
+      type: object
+      description: Request body for submitting an insurance claim
+      required:
+      - policyId
+      - debtorName
+      - claimAmount
+      - currency
+      - lossDate
+      properties:
+        policyId:
+          type: string
+          description: Trade credit insurance policy identifier
+          example: POL-500123
+        debtorName:
+          type: string
+          description: Name of the defaulting debtor
+          example: Acme Corp
+        debtorId:
+          type: string
+          description: Allianz Trade debtor identifier
+          example: DEB-500456
+        claimAmount:
+          type: number
+          format: double
+          description: Total amount to claim
+          example: 45000.0
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: EUR
+        lossDate:
+          type: string
+          format: date
+          description: Date when the financial loss occurred
+          example: '2026-03-01'
+        invoiceReference:
+          type: string
+          description: Customer invoice reference
+          example: INV-2026-001
+        overdueId:
+          type: string
+          description: Related payment overdue identifier
+          example: OVD-500123
+    JobResponse:
+      title: JobResponse
+      type: object
+      description: Async job status response
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the async job
+          example: JOB-500789
+        status:
+          type: string
+          description: Current status of the job
+          enum:
+          - pending
+          - processed
+          - failed
+          example: processed
+        result:
+          type: object
+          description: Result data after successful job completion
+          example:
+            claimId: CLM-500123
+        createdAt:
+          type: string
+          format: date-time
+          description: When the job was created
+          example: '2026-04-19T10:30:00Z'
+        completedAt:
+          type: string
+          format: date-time
+          description: When the job completed (null if still pending)
+          example: '2026-04-19T10:31:00Z'
+    ClaimList:
+      title: ClaimList
+      type: object
+      description: Paginated list of insurance claims
+      properties:
+        data:
+          type: array
+          description: List of insurance claim records
+          items:
+            $ref: '#/components/schemas/Claim'
     ErrorResponse:
       title: ErrorResponse
       type: object
