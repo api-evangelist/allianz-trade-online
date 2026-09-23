@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Allianz Trade Claims Payment Overdues API
-  description: Access and manage all insurance claims declared to Allianz Trade from within your ERP system. Retrieve claim status, submit new claims, and track claim progression for trade credit insurance policies.
+  title: Allianz Trade Payment Overdues API
+  description: 'Report payment overdues, request extension periods, and manage debt rescheduling for trade credit insurance policies. Supports three overdue category types: OVD (report default state), EXP (extension period request), and RES (rescheduling/repayment plan agreement).'
   version: 1.0.0
   contact:
     name: Allianz Trade API Support
@@ -271,6 +271,88 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    JobResponse:
+      title: JobResponse
+      type: object
+      description: Async job status response
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the async job
+          example: JOB-500789
+        status:
+          type: string
+          description: Current status of the job
+          enum:
+          - pending
+          - processed
+          - failed
+          example: processed
+        result:
+          type: object
+          description: Result data after successful job completion
+          example:
+            overdueId: OVD-500123
+        createdAt:
+          type: string
+          format: date-time
+          description: When the job was created
+          example: '2026-04-19T10:30:00Z'
+        completedAt:
+          type: string
+          format: date-time
+          description: When the job completed (null if still pending)
+          example: '2026-04-19T10:31:00Z'
+    ReportOverdueRequest:
+      title: ReportOverdueRequest
+      type: object
+      description: Request body for reporting a payment overdue
+      required:
+      - policyId
+      - overdueCategoryTypeCode
+      - debtorName
+      - overdueAmount
+      - currency
+      - dueDate
+      properties:
+        policyId:
+          type: string
+          description: Trade credit insurance policy identifier
+          example: POL-500123
+        overdueCategoryTypeCode:
+          type: string
+          description: Overdue category type code
+          enum:
+          - OVD
+          - EXP
+          - RES
+          example: OVD
+        debtorName:
+          type: string
+          description: Name of the debtor
+          example: Acme Corp
+        debtorId:
+          type: string
+          description: Allianz Trade debtor identifier
+          example: DEB-500456
+        overdueAmount:
+          type: number
+          format: double
+          description: Amount overdue
+          example: 50000.0
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: EUR
+        dueDate:
+          type: string
+          format: date
+          description: Original invoice due date
+          example: '2026-03-15'
+        invoiceReference:
+          type: string
+          description: Customer invoice reference
+          example: INV-2026-001
     Overdue:
       title: Overdue
       type: object
@@ -331,88 +413,6 @@ components:
           format: date-time
           description: Timestamp when the overdue was reported
           example: '2026-04-01T09:00:00Z'
-    ReportOverdueRequest:
-      title: ReportOverdueRequest
-      type: object
-      description: Request body for reporting a payment overdue
-      required:
-      - policyId
-      - overdueCategoryTypeCode
-      - debtorName
-      - overdueAmount
-      - currency
-      - dueDate
-      properties:
-        policyId:
-          type: string
-          description: Trade credit insurance policy identifier
-          example: POL-500123
-        overdueCategoryTypeCode:
-          type: string
-          description: Overdue category type code
-          enum:
-          - OVD
-          - EXP
-          - RES
-          example: OVD
-        debtorName:
-          type: string
-          description: Name of the debtor
-          example: Acme Corp
-        debtorId:
-          type: string
-          description: Allianz Trade debtor identifier
-          example: DEB-500456
-        overdueAmount:
-          type: number
-          format: double
-          description: Amount overdue
-          example: 50000.0
-        currency:
-          type: string
-          description: ISO 4217 currency code
-          example: EUR
-        dueDate:
-          type: string
-          format: date
-          description: Original invoice due date
-          example: '2026-03-15'
-        invoiceReference:
-          type: string
-          description: Customer invoice reference
-          example: INV-2026-001
-    JobResponse:
-      title: JobResponse
-      type: object
-      description: Async job status response
-      properties:
-        jobId:
-          type: string
-          description: Unique identifier for the async job
-          example: JOB-500789
-        status:
-          type: string
-          description: Current status of the job
-          enum:
-          - pending
-          - processed
-          - failed
-          example: processed
-        result:
-          type: object
-          description: Result data after successful job completion
-          example:
-            overdueId: OVD-500123
-        createdAt:
-          type: string
-          format: date-time
-          description: When the job was created
-          example: '2026-04-19T10:30:00Z'
-        completedAt:
-          type: string
-          format: date-time
-          description: When the job completed (null if still pending)
-          example: '2026-04-19T10:31:00Z'
     OverdueList:
       title: OverdueList
       type: object
@@ -448,5 +448,5 @@ components:
         clientCredentials:
           tokenUrl: https://api.allianz-trade.com/oauth2/token
           scopes:
-            claims:read: Read insurance claims
-            claims:write: Submit and manage insurance claims
+            overdues:read: Read payment overdues
+            overdues:write: Report and manage payment overdues

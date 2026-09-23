@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Allianz Trade Claims Policy API
-  description: Access and manage all insurance claims declared to Allianz Trade from within your ERP system. Retrieve claim status, submit new claims, and track claim progression for trade credit insurance policies.
+  title: Allianz Trade Policy API
+  description: Manage your trade credit insurance policy portfolio. Retrieve policy details, create joint insured policies, and manage policy configurations directly from your ERP or credit management system.
   version: 1.0.0
   contact:
     name: Allianz Trade API Support
@@ -354,46 +354,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AddJointInsuredRequest:
-      title: AddJointInsuredRequest
-      type: object
-      description: Request body for adding a joint insured to a policy
-      required:
-      - companyName
-      - country
-      properties:
-        companyName:
-          type: string
-          description: Legal name of the company to add as joint insured
-          example: Subsidiary Corp SAS
-        registrationNumber:
-          type: string
-          description: Company registration number
-          example: FR987654321
-        country:
-          type: string
-          description: ISO 3166-1 alpha-2 country code
-          example: FR
-    PolicyList:
-      title: PolicyList
-      type: object
-      description: Paginated list of trade credit insurance policies
-      properties:
-        data:
-          type: array
-          description: List of policy records
-          items:
-            $ref: '#/components/schemas/Policy'
-    JointInsuredList:
-      title: JointInsuredList
-      type: object
-      description: Paginated list of joint insured entities
-      properties:
-        data:
-          type: array
-          description: List of joint insured records
-          items:
-            $ref: '#/components/schemas/JointInsured'
     Policy:
       title: Policy
       type: object
@@ -494,6 +454,36 @@ components:
           format: date-time
           description: When the job completed (null if still pending)
           example: '2026-04-19T10:31:00Z'
+    PolicyList:
+      title: PolicyList
+      type: object
+      description: Paginated list of trade credit insurance policies
+      properties:
+        data:
+          type: array
+          description: List of policy records
+          items:
+            $ref: '#/components/schemas/Policy'
+    AddJointInsuredRequest:
+      title: AddJointInsuredRequest
+      type: object
+      description: Request body for adding a joint insured to a policy
+      required:
+      - companyName
+      - country
+      properties:
+        companyName:
+          type: string
+          description: Legal name of the company to add as joint insured
+          example: Subsidiary Corp SAS
+        registrationNumber:
+          type: string
+          description: Company registration number
+          example: FR987654321
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: FR
     ErrorResponse:
       title: ErrorResponse
       type: object
@@ -543,6 +533,16 @@ components:
           - active
           - inactive
           example: active
+    JointInsuredList:
+      title: JointInsuredList
+      type: object
+      description: Paginated list of joint insured entities
+      properties:
+        data:
+          type: array
+          description: List of joint insured records
+          items:
+            $ref: '#/components/schemas/JointInsured'
   securitySchemes:
     OAuth2:
       type: oauth2
@@ -551,5 +551,5 @@ components:
         clientCredentials:
           tokenUrl: https://api.allianz-trade.com/oauth2/token
           scopes:
-            claims:read: Read insurance claims
-            claims:write: Submit and manage insurance claims
+            policy:read: Read policy details
+            policy:write: Manage policy configurations

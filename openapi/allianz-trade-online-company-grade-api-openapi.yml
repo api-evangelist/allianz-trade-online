@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Allianz Trade Claims Company Grade API
-  description: Access and manage all insurance claims declared to Allianz Trade from within your ERP system. Retrieve claim status, submit new claims, and track claim progression for trade credit insurance policies.
+  title: Allianz Trade Company Grade API
+  description: Retrieve creditworthiness grades for clients and prospects after cover requests. Supports bulk operations for grading multiple companies simultaneously, enabling automated credit risk assessment within ERP systems.
   version: 1.0.0
   contact:
     name: Allianz Trade API Support
@@ -293,6 +293,42 @@ components:
           format: date-time
           description: When the job completed (null if still pending)
           example: '2026-04-19T10:31:00Z'
+    CompanyGradeRequest:
+      title: CompanyGradeRequest
+      type: object
+      description: Request body for requesting a company creditworthiness grade
+      required:
+      - policyId
+      - companyName
+      - country
+      - requestedCreditLimit
+      - currency
+      properties:
+        policyId:
+          type: string
+          description: Trade credit insurance policy identifier
+          example: POL-500123
+        companyName:
+          type: string
+          description: Name of the company to grade
+          example: Acme Corp
+        companyRegistrationNumber:
+          type: string
+          description: Official company registration number
+          example: FR123456789
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code of the company
+          example: FR
+        requestedCreditLimit:
+          type: number
+          format: double
+          description: Requested credit limit amount
+          example: 100000.0
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: EUR
     CompanyGradeList:
       title: CompanyGradeList
       type: object
@@ -368,42 +404,6 @@ components:
           format: date-time
           description: Timestamp when the grade was issued
           example: '2026-04-19T10:31:00Z'
-    CompanyGradeRequest:
-      title: CompanyGradeRequest
-      type: object
-      description: Request body for requesting a company creditworthiness grade
-      required:
-      - policyId
-      - companyName
-      - country
-      - requestedCreditLimit
-      - currency
-      properties:
-        policyId:
-          type: string
-          description: Trade credit insurance policy identifier
-          example: POL-500123
-        companyName:
-          type: string
-          description: Name of the company to grade
-          example: Acme Corp
-        companyRegistrationNumber:
-          type: string
-          description: Official company registration number
-          example: FR123456789
-        country:
-          type: string
-          description: ISO 3166-1 alpha-2 country code of the company
-          example: FR
-        requestedCreditLimit:
-          type: number
-          format: double
-          description: Requested credit limit amount
-          example: 100000.0
-        currency:
-          type: string
-          description: ISO 4217 currency code
-          example: EUR
     ErrorResponse:
       title: ErrorResponse
       type: object
@@ -429,5 +429,5 @@ components:
         clientCredentials:
           tokenUrl: https://api.allianz-trade.com/oauth2/token
           scopes:
-            claims:read: Read insurance claims
-            claims:write: Submit and manage insurance claims
+            grades:read: Read company grades
+            grades:write: Request company grades
