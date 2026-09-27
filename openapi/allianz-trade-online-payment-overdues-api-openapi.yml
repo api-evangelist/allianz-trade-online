@@ -303,56 +303,16 @@ components:
           format: date-time
           description: When the job completed (null if still pending)
           example: '2026-04-19T10:31:00Z'
-    ReportOverdueRequest:
-      title: ReportOverdueRequest
+    OverdueList:
+      title: OverdueList
       type: object
-      description: Request body for reporting a payment overdue
-      required:
-      - policyId
-      - overdueCategoryTypeCode
-      - debtorName
-      - overdueAmount
-      - currency
-      - dueDate
+      description: Paginated list of payment overdues
       properties:
-        policyId:
-          type: string
-          description: Trade credit insurance policy identifier
-          example: POL-500123
-        overdueCategoryTypeCode:
-          type: string
-          description: Overdue category type code
-          enum:
-          - OVD
-          - EXP
-          - RES
-          example: OVD
-        debtorName:
-          type: string
-          description: Name of the debtor
-          example: Acme Corp
-        debtorId:
-          type: string
-          description: Allianz Trade debtor identifier
-          example: DEB-500456
-        overdueAmount:
-          type: number
-          format: double
-          description: Amount overdue
-          example: 50000.0
-        currency:
-          type: string
-          description: ISO 4217 currency code
-          example: EUR
-        dueDate:
-          type: string
-          format: date
-          description: Original invoice due date
-          example: '2026-03-15'
-        invoiceReference:
-          type: string
-          description: Customer invoice reference
-          example: INV-2026-001
+        data:
+          type: array
+          description: List of payment overdue records
+          items:
+            $ref: '#/components/schemas/Overdue'
     Overdue:
       title: Overdue
       type: object
@@ -413,16 +373,56 @@ components:
           format: date-time
           description: Timestamp when the overdue was reported
           example: '2026-04-01T09:00:00Z'
-    OverdueList:
-      title: OverdueList
+    ReportOverdueRequest:
+      title: ReportOverdueRequest
       type: object
-      description: Paginated list of payment overdues
+      description: Request body for reporting a payment overdue
+      required:
+      - policyId
+      - overdueCategoryTypeCode
+      - debtorName
+      - overdueAmount
+      - currency
+      - dueDate
       properties:
-        data:
-          type: array
-          description: List of payment overdue records
-          items:
-            $ref: '#/components/schemas/Overdue'
+        policyId:
+          type: string
+          description: Trade credit insurance policy identifier
+          example: POL-500123
+        overdueCategoryTypeCode:
+          type: string
+          description: Overdue category type code
+          enum:
+          - OVD
+          - EXP
+          - RES
+          example: OVD
+        debtorName:
+          type: string
+          description: Name of the debtor
+          example: Acme Corp
+        debtorId:
+          type: string
+          description: Allianz Trade debtor identifier
+          example: DEB-500456
+        overdueAmount:
+          type: number
+          format: double
+          description: Amount overdue
+          example: 50000.0
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: EUR
+        dueDate:
+          type: string
+          format: date
+          description: Original invoice due date
+          example: '2026-03-15'
+        invoiceReference:
+          type: string
+          description: Customer invoice reference
+          example: INV-2026-001
     ErrorResponse:
       title: ErrorResponse
       type: object

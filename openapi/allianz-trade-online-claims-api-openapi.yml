@@ -276,38 +276,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    JobResponse:
-      title: JobResponse
-      type: object
-      description: Async job status response
-      properties:
-        jobId:
-          type: string
-          description: Unique identifier for the async job
-          example: JOB-500789
-        status:
-          type: string
-          description: Current status of the job
-          enum:
-          - pending
-          - processed
-          - failed
-          example: processed
-        result:
-          type: object
-          description: Result data after successful job completion
-          example:
-            claimId: CLM-500123
-        createdAt:
-          type: string
-          format: date-time
-          description: When the job was created
-          example: '2026-04-19T10:30:00Z'
-        completedAt:
-          type: string
-          format: date-time
-          description: When the job completed (null if still pending)
-          example: '2026-04-19T10:31:00Z'
     Claim:
       title: Claim
       type: object
@@ -376,6 +344,38 @@ components:
           format: date-time
           description: Timestamp when the claim was resolved
           example: '2026-04-10T14:00:00Z'
+    JobResponse:
+      title: JobResponse
+      type: object
+      description: Async job status response
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the async job
+          example: JOB-500789
+        status:
+          type: string
+          description: Current status of the job
+          enum:
+          - pending
+          - processed
+          - failed
+          example: processed
+        result:
+          type: object
+          description: Result data after successful job completion
+          example:
+            claimId: CLM-500123
+        createdAt:
+          type: string
+          format: date-time
+          description: When the job was created
+          example: '2026-04-19T10:30:00Z'
+        completedAt:
+          type: string
+          format: date-time
+          description: When the job completed (null if still pending)
+          example: '2026-04-19T10:31:00Z'
     ErrorResponse:
       title: ErrorResponse
       type: object
@@ -393,6 +393,16 @@ components:
           type: string
           description: Request identifier for support reference
           example: req-500999
+    ClaimList:
+      title: ClaimList
+      type: object
+      description: Paginated list of insurance claims
+      properties:
+        data:
+          type: array
+          description: List of insurance claim records
+          items:
+            $ref: '#/components/schemas/Claim'
     SubmitClaimRequest:
       title: SubmitClaimRequest
       type: object
@@ -438,16 +448,6 @@ components:
           type: string
           description: Related payment overdue identifier
           example: OVD-500123
-    ClaimList:
-      title: ClaimList
-      type: object
-      description: Paginated list of insurance claims
-      properties:
-        data:
-          type: array
-          description: List of insurance claim records
-          items:
-            $ref: '#/components/schemas/Claim'
   securitySchemes:
     OAuth2:
       type: oauth2
