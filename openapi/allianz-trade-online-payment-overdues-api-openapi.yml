@@ -271,6 +271,23 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: INVALID_REQUEST
+        message:
+          type: string
+          description: Human-readable error description
+          example: The overdueAmount must be a positive number
+        requestId:
+          type: string
+          description: Request identifier for support reference
+          example: req-500999
     JobResponse:
       title: JobResponse
       type: object
@@ -303,16 +320,6 @@ components:
           format: date-time
           description: When the job completed (null if still pending)
           example: '2026-04-19T10:31:00Z'
-    OverdueList:
-      title: OverdueList
-      type: object
-      description: Paginated list of payment overdues
-      properties:
-        data:
-          type: array
-          description: List of payment overdue records
-          items:
-            $ref: '#/components/schemas/Overdue'
     Overdue:
       title: Overdue
       type: object
@@ -423,23 +430,16 @@ components:
           type: string
           description: Customer invoice reference
           example: INV-2026-001
-    ErrorResponse:
-      title: ErrorResponse
+    OverdueList:
+      title: OverdueList
       type: object
-      description: Standard error response
+      description: Paginated list of payment overdues
       properties:
-        code:
-          type: string
-          description: Error code
-          example: INVALID_REQUEST
-        message:
-          type: string
-          description: Human-readable error description
-          example: The overdueAmount must be a positive number
-        requestId:
-          type: string
-          description: Request identifier for support reference
-          example: req-500999
+        data:
+          type: array
+          description: List of payment overdue records
+          items:
+            $ref: '#/components/schemas/Overdue'
   securitySchemes:
     OAuth2:
       type: oauth2

@@ -261,6 +261,65 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CompanyGradeList:
+      title: CompanyGradeList
+      type: object
+      description: Paginated list of company grades
+      properties:
+        data:
+          type: array
+          description: List of company grade records
+          items:
+            $ref: '#/components/schemas/CompanyGrade'
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: INVALID_REQUEST
+        message:
+          type: string
+          description: Human-readable error description
+          example: The requestedCreditLimit must be a positive number
+        requestId:
+          type: string
+          description: Request identifier for support reference
+          example: req-500999
+    JobResponse:
+      title: JobResponse
+      type: object
+      description: Async job status response
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the async job
+          example: JOB-500789
+        status:
+          type: string
+          description: Current status of the job
+          enum:
+          - pending
+          - processed
+          - failed
+          example: processed
+        result:
+          type: object
+          description: Result data after successful job completion
+          example:
+            gradeId: GRD-500123
+        createdAt:
+          type: string
+          format: date-time
+          description: When the job was created
+          example: '2026-04-19T10:30:00Z'
+        completedAt:
+          type: string
+          format: date-time
+          description: When the job completed (null if still pending)
+          example: '2026-04-19T10:31:00Z'
     CompanyGradeRequest:
       title: CompanyGradeRequest
       type: object
@@ -297,48 +356,6 @@ components:
           type: string
           description: ISO 4217 currency code
           example: EUR
-    JobResponse:
-      title: JobResponse
-      type: object
-      description: Async job status response
-      properties:
-        jobId:
-          type: string
-          description: Unique identifier for the async job
-          example: JOB-500789
-        status:
-          type: string
-          description: Current status of the job
-          enum:
-          - pending
-          - processed
-          - failed
-          example: processed
-        result:
-          type: object
-          description: Result data after successful job completion
-          example:
-            gradeId: GRD-500123
-        createdAt:
-          type: string
-          format: date-time
-          description: When the job was created
-          example: '2026-04-19T10:30:00Z'
-        completedAt:
-          type: string
-          format: date-time
-          description: When the job completed (null if still pending)
-          example: '2026-04-19T10:31:00Z'
-    CompanyGradeList:
-      title: CompanyGradeList
-      type: object
-      description: Paginated list of company grades
-      properties:
-        data:
-          type: array
-          description: List of company grade records
-          items:
-            $ref: '#/components/schemas/CompanyGrade'
     CompanyGrade:
       title: CompanyGrade
       type: object
@@ -404,23 +421,6 @@ components:
           format: date-time
           description: Timestamp when the grade was issued
           example: '2026-04-19T10:31:00Z'
-    ErrorResponse:
-      title: ErrorResponse
-      type: object
-      description: Standard error response
-      properties:
-        code:
-          type: string
-          description: Error code
-          example: INVALID_REQUEST
-        message:
-          type: string
-          description: Human-readable error description
-          example: The requestedCreditLimit must be a positive number
-        requestId:
-          type: string
-          description: Request identifier for support reference
-          example: req-500999
   securitySchemes:
     OAuth2:
       type: oauth2

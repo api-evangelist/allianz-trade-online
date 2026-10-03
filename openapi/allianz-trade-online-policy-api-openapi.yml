@@ -354,16 +354,23 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    PolicyList:
-      title: PolicyList
+    ErrorResponse:
+      title: ErrorResponse
       type: object
-      description: Paginated list of trade credit insurance policies
+      description: Standard error response
       properties:
-        data:
-          type: array
-          description: List of policy records
-          items:
-            $ref: '#/components/schemas/Policy'
+        code:
+          type: string
+          description: Error code
+          example: INVALID_REQUEST
+        message:
+          type: string
+          description: Human-readable error description
+          example: The policyId is required
+        requestId:
+          type: string
+          description: Request identifier for support reference
+          example: req-500999
     JointInsuredList:
       title: JointInsuredList
       type: object
@@ -474,6 +481,16 @@ components:
           format: date-time
           description: Timestamp when the policy was created
           example: '2025-12-01T10:00:00Z'
+    PolicyList:
+      title: PolicyList
+      type: object
+      description: Paginated list of trade credit insurance policies
+      properties:
+        data:
+          type: array
+          description: List of policy records
+          items:
+            $ref: '#/components/schemas/Policy'
     AddJointInsuredRequest:
       title: AddJointInsuredRequest
       type: object
@@ -494,23 +511,6 @@ components:
           type: string
           description: ISO 3166-1 alpha-2 country code
           example: FR
-    ErrorResponse:
-      title: ErrorResponse
-      type: object
-      description: Standard error response
-      properties:
-        code:
-          type: string
-          description: Error code
-          example: INVALID_REQUEST
-        message:
-          type: string
-          description: Human-readable error description
-          example: The policyId is required
-        requestId:
-          type: string
-          description: Request identifier for support reference
-          example: req-500999
     JointInsured:
       title: JointInsured
       type: object
