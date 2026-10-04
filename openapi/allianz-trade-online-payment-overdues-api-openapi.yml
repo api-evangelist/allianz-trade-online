@@ -271,55 +271,16 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      title: ErrorResponse
+    OverdueList:
+      title: OverdueList
       type: object
-      description: Standard error response
+      description: Paginated list of payment overdues
       properties:
-        code:
-          type: string
-          description: Error code
-          example: INVALID_REQUEST
-        message:
-          type: string
-          description: Human-readable error description
-          example: The overdueAmount must be a positive number
-        requestId:
-          type: string
-          description: Request identifier for support reference
-          example: req-500999
-    JobResponse:
-      title: JobResponse
-      type: object
-      description: Async job status response
-      properties:
-        jobId:
-          type: string
-          description: Unique identifier for the async job
-          example: JOB-500789
-        status:
-          type: string
-          description: Current status of the job
-          enum:
-          - pending
-          - processed
-          - failed
-          example: processed
-        result:
-          type: object
-          description: Result data after successful job completion
-          example:
-            overdueId: OVD-500123
-        createdAt:
-          type: string
-          format: date-time
-          description: When the job was created
-          example: '2026-04-19T10:30:00Z'
-        completedAt:
-          type: string
-          format: date-time
-          description: When the job completed (null if still pending)
-          example: '2026-04-19T10:31:00Z'
+        data:
+          type: array
+          description: List of payment overdue records
+          items:
+            $ref: '#/components/schemas/Overdue'
     Overdue:
       title: Overdue
       type: object
@@ -380,6 +341,38 @@ components:
           format: date-time
           description: Timestamp when the overdue was reported
           example: '2026-04-01T09:00:00Z'
+    JobResponse:
+      title: JobResponse
+      type: object
+      description: Async job status response
+      properties:
+        jobId:
+          type: string
+          description: Unique identifier for the async job
+          example: JOB-500789
+        status:
+          type: string
+          description: Current status of the job
+          enum:
+          - pending
+          - processed
+          - failed
+          example: processed
+        result:
+          type: object
+          description: Result data after successful job completion
+          example:
+            overdueId: OVD-500123
+        createdAt:
+          type: string
+          format: date-time
+          description: When the job was created
+          example: '2026-04-19T10:30:00Z'
+        completedAt:
+          type: string
+          format: date-time
+          description: When the job completed (null if still pending)
+          example: '2026-04-19T10:31:00Z'
     ReportOverdueRequest:
       title: ReportOverdueRequest
       type: object
@@ -430,16 +423,23 @@ components:
           type: string
           description: Customer invoice reference
           example: INV-2026-001
-    OverdueList:
-      title: OverdueList
+    ErrorResponse:
+      title: ErrorResponse
       type: object
-      description: Paginated list of payment overdues
+      description: Standard error response
       properties:
-        data:
-          type: array
-          description: List of payment overdue records
-          items:
-            $ref: '#/components/schemas/Overdue'
+        code:
+          type: string
+          description: Error code
+          example: INVALID_REQUEST
+        message:
+          type: string
+          description: Human-readable error description
+          example: The overdueAmount must be a positive number
+        requestId:
+          type: string
+          description: Request identifier for support reference
+          example: req-500999
   securitySchemes:
     OAuth2:
       type: oauth2

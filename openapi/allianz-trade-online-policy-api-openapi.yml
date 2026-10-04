@@ -354,23 +354,16 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      title: ErrorResponse
+    PolicyList:
+      title: PolicyList
       type: object
-      description: Standard error response
+      description: Paginated list of trade credit insurance policies
       properties:
-        code:
-          type: string
-          description: Error code
-          example: INVALID_REQUEST
-        message:
-          type: string
-          description: Human-readable error description
-          example: The policyId is required
-        requestId:
-          type: string
-          description: Request identifier for support reference
-          example: req-500999
+        data:
+          type: array
+          description: List of policy records
+          items:
+            $ref: '#/components/schemas/Policy'
     JointInsuredList:
       title: JointInsuredList
       type: object
@@ -413,6 +406,43 @@ components:
           format: date-time
           description: When the job completed (null if still pending)
           example: '2026-04-19T10:31:00Z'
+    AddJointInsuredRequest:
+      title: AddJointInsuredRequest
+      type: object
+      description: Request body for adding a joint insured to a policy
+      required:
+      - companyName
+      - country
+      properties:
+        companyName:
+          type: string
+          description: Legal name of the company to add as joint insured
+          example: Subsidiary Corp SAS
+        registrationNumber:
+          type: string
+          description: Company registration number
+          example: FR987654321
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: FR
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      description: Standard error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: INVALID_REQUEST
+        message:
+          type: string
+          description: Human-readable error description
+          example: The policyId is required
+        requestId:
+          type: string
+          description: Request identifier for support reference
+          example: req-500999
     Policy:
       title: Policy
       type: object
@@ -481,36 +511,6 @@ components:
           format: date-time
           description: Timestamp when the policy was created
           example: '2025-12-01T10:00:00Z'
-    PolicyList:
-      title: PolicyList
-      type: object
-      description: Paginated list of trade credit insurance policies
-      properties:
-        data:
-          type: array
-          description: List of policy records
-          items:
-            $ref: '#/components/schemas/Policy'
-    AddJointInsuredRequest:
-      title: AddJointInsuredRequest
-      type: object
-      description: Request body for adding a joint insured to a policy
-      required:
-      - companyName
-      - country
-      properties:
-        companyName:
-          type: string
-          description: Legal name of the company to add as joint insured
-          example: Subsidiary Corp SAS
-        registrationNumber:
-          type: string
-          description: Company registration number
-          example: FR987654321
-        country:
-          type: string
-          description: ISO 3166-1 alpha-2 country code
-          example: FR
     JointInsured:
       title: JointInsured
       type: object
