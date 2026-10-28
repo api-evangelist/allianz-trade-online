@@ -1,4 +1,4 @@
-# Allianz Trade (allianz-trade-online)
+# Allianz Trade
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,90 +66,227 @@
 
 Allianz Trade APIs enable businesses to automate trade credit insurance management including cover requests, credit limit monitoring, payment overdue reporting, claims management, and company credit grading. Built on secure REST architecture with OAuth2, the APIs support three business lines: Trade Credit Insurance, E-Commerce B2B, and Surety/Guarantee.
 
-**Portal:** [https://developers.allianz-trade.com/](https://developers.allianz-trade.com/)
+**Areas:** Credit Insurance · Insurance · Risk Management · Trade Credit · E-Commerce · Surety
 
-## APIs
+## Allianz Trade on APIs.io
 
-### Allianz Trade Payment Overdues API
+Everything profiled for Allianz Trade is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/allianz-trade-online/](https://apis.io/providers/allianz-trade-online/)** — or go straight to one of the APIs or properties below.
 
-Report payment overdues, request extension periods, and manage debt rescheduling for trade credit insurance policies. Supports three overdue category types: OVD (report default), EXP (extension period), and RES (rescheduling/repayment plan).
+### APIs (4)
 
-- **Documentation:** [https://developers.allianz-trade.com/welcome-trade-credit-insurance-api-world/payment-overdues](https://developers.allianz-trade.com/welcome-trade-credit-insurance-api-world/payment-overdues)
-- **OpenAPI:** [openapi/allianz-trade-payment-overdues.yaml](openapi/allianz-trade-payment-overdues.yaml)
-- **JSON Schema:** [json-schema/trade-payment-overdues-overdue-schema.json](json-schema/trade-payment-overdues-overdue-schema.json)
-- **JSON-LD Context:** [json-ld/allianz-trade-payment-overdues-context.jsonld](json-ld/allianz-trade-payment-overdues-context.jsonld)
-- **Capability:** [capabilities/shared/payment-overdues.yaml](capabilities/shared/payment-overdues.yaml)
+- [Allianz Trade Claims API](https://apis.io/apis/allianz-trade-online/allianz-trade-online-claims-api/) — Insurance claim management operations
+- [Allianz Trade Company Grade API](https://apis.io/apis/allianz-trade-online/allianz-trade-online-company-grade-api/) — Company creditworthiness grading operations
+- [Allianz Trade Payment Overdues API](https://apis.io/apis/allianz-trade-online/allianz-trade-online-payment-overdues-api/) — Payment overdue reporting and management operations
+- [Allianz Trade Policy API](https://apis.io/apis/allianz-trade-online/allianz-trade-online-policy-api/) — Trade credit insurance policy management operations
 
-### Allianz Trade Company Grade API
+### Published properties
 
-Retrieve creditworthiness grades for clients and prospects after cover requests. Supports bulk operations for grading multiple companies simultaneously, enabling automated credit risk assessment within ERP systems.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **OpenAPI:** [openapi/allianz-trade-company-grade.yaml](openapi/allianz-trade-company-grade.yaml)
-- **JSON Schema:** [json-schema/trade-company-grade-company_grade-schema.json](json-schema/trade-company-grade-company_grade-schema.json)
-- **JSON-LD Context:** [json-ld/allianz-trade-company-grade-context.jsonld](json-ld/allianz-trade-company-grade-context.jsonld)
-- **Capability:** [capabilities/shared/company-grade.yaml](capabilities/shared/company-grade.yaml)
+#### MCP servers (1)
 
-### Allianz Trade Claims API
+Model Context Protocol servers that expose the API to agents.
 
-Access and manage all insurance claims declared to Allianz Trade from within your ERP system. Retrieve claim status, submit new claims, and track claim progression for trade credit insurance policies.
+- [allianz-trade](https://apis.io/servers/allianz-trade-online/allianz-trade/)
 
-- **OpenAPI:** [openapi/allianz-trade-claims.yaml](openapi/allianz-trade-claims.yaml)
-- **JSON Schema:** [json-schema/trade-claims-claim-schema.json](json-schema/trade-claims-claim-schema.json)
-- **JSON-LD Context:** [json-ld/allianz-trade-claims-context.jsonld](json-ld/allianz-trade-claims-context.jsonld)
-- **Capability:** [capabilities/shared/claims.yaml](capabilities/shared/claims.yaml)
+#### Agentic access (1)
 
-### Allianz Trade Policy API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Manage your trade credit insurance policy portfolio. Retrieve policy details, create joint insured policies, and manage policy configurations directly from your ERP or credit management system.
+- [Allianz Trade Online Agentic Access](https://apis.io/agentic-access/allianz-trade-online/allianz-trade-online-agentic-access/)
 
-- **OpenAPI:** [openapi/allianz-trade-policy.yaml](openapi/allianz-trade-policy.yaml)
-- **JSON Schema:** [json-schema/trade-policy-policy-schema.json](json-schema/trade-policy-policy-schema.json)
-- **JSON-LD Context:** [json-ld/allianz-trade-policy-context.jsonld](json-ld/allianz-trade-policy-context.jsonld)
-- **Capability:** [capabilities/shared/policy.yaml](capabilities/shared/policy.yaml)
+#### JSON Schema (22)
 
-## Generated Artifacts
+The data models the API reads and writes.
 
-| Directory | Count | Description |
-|-----------|-------|-------------|
-| `openapi/` | 4 | OpenAPI 3.0.3 specifications |
-| `json-schema/` | 22 | JSON Schema (draft 2020-12) files |
-| `json-structure/` | 22 | JSON Structure documentation files |
-| `json-ld/` | 4 | JSON-LD 1.1 context files |
-| `examples/` | 22 | Example request/response JSON files |
-| `capabilities/shared/` | 4 | Per-API Naftiko capability definitions |
-| `capabilities/` | 1 | Workflow capability composition |
-| `rules/` | 1 | Spectral ruleset (22 rules) |
-| `vocabulary/` | 1 | Domain vocabulary and taxonomy |
+- [Claim](https://apis.io/schemas/allianz-trade-online/trade-claims-claim/)
+- [ClaimList](https://apis.io/schemas/allianz-trade-online/trade-claims-claim_list/)
+- [ErrorResponse](https://apis.io/schemas/allianz-trade-online/trade-claims-error_response/)
+- [JobResponse](https://apis.io/schemas/allianz-trade-online/trade-claims-job_response/)
+- [SubmitClaimRequest](https://apis.io/schemas/allianz-trade-online/trade-claims-submit_claim_request/)
+- [CompanyGrade](https://apis.io/schemas/allianz-trade-online/trade-company-grade-company_grade/)
+- [CompanyGradeList](https://apis.io/schemas/allianz-trade-online/trade-company-grade-company_grade_list/)
+- [CompanyGradeRequest](https://apis.io/schemas/allianz-trade-online/trade-company-grade-company_grade_request/)
+- [ErrorResponse](https://apis.io/schemas/allianz-trade-online/trade-company-grade-error_response/)
+- [JobResponse](https://apis.io/schemas/allianz-trade-online/trade-company-grade-job_response/)
+- [ErrorResponse](https://apis.io/schemas/allianz-trade-online/trade-payment-overdues-error_response/)
+- [JobResponse](https://apis.io/schemas/allianz-trade-online/trade-payment-overdues-job_response/)
+- [Overdue](https://apis.io/schemas/allianz-trade-online/trade-payment-overdues-overdue/)
+- [OverdueList](https://apis.io/schemas/allianz-trade-online/trade-payment-overdues-overdue_list/)
+- [ReportOverdueRequest](https://apis.io/schemas/allianz-trade-online/trade-payment-overdues-report_overdue_request/)
+- [AddJointInsuredRequest](https://apis.io/schemas/allianz-trade-online/trade-policy-add_joint_insured_request/)
+- [ErrorResponse](https://apis.io/schemas/allianz-trade-online/trade-policy-error_response/)
+- [JobResponse](https://apis.io/schemas/allianz-trade-online/trade-policy-job_response/)
+- [JointInsured](https://apis.io/schemas/allianz-trade-online/trade-policy-joint_insured/)
+- [JointInsuredList](https://apis.io/schemas/allianz-trade-online/trade-policy-joint_insured_list/)
+- [Policy](https://apis.io/schemas/allianz-trade-online/trade-policy-policy/)
+- [PolicyList](https://apis.io/schemas/allianz-trade-online/trade-policy-policy_list/)
 
-## Workflow Capabilities
+#### JSON Structure (22)
 
-The [trade-credit-management.yaml](capabilities/trade-credit-management.yaml) capability composition supports three business workflows:
+Data models expressed in JSON Structure.
 
-- **Credit Risk Monitoring** — Grade buyer creditworthiness and report payment defaults
-- **Claims Declaration** — Submit and track insurance claims after payment default
-- **Policy Onboarding** — Register subsidiaries as joint insureds under policies
+- [Trade Claims Claim Structure](https://apis.io/json-structure/allianz-trade-online/trade-claims-claim-structure/)
+- [Trade Claims Claim_List Structure](https://apis.io/json-structure/allianz-trade-online/trade-claims-claim_list-structure/)
+- [Trade Claims Error_Response Structure](https://apis.io/json-structure/allianz-trade-online/trade-claims-error_response-structure/)
+- [Trade Claims Job_Response Structure](https://apis.io/json-structure/allianz-trade-online/trade-claims-job_response-structure/)
+- [Trade Claims Submit_Claim_Request Structure](https://apis.io/json-structure/allianz-trade-online/trade-claims-submit_claim_request-structure/)
+- [Trade Company Grade Company_Grade Structure](https://apis.io/json-structure/allianz-trade-online/trade-company-grade-company_grade-structure/)
+- [Trade Company Grade Company_Grade_List Structure](https://apis.io/json-structure/allianz-trade-online/trade-company-grade-company_grade_list-structure/)
+- [Trade Company Grade Company_Grade_Request Structure](https://apis.io/json-structure/allianz-trade-online/trade-company-grade-company_grade_request-structure/)
+- [Trade Company Grade Error_Response Structure](https://apis.io/json-structure/allianz-trade-online/trade-company-grade-error_response-structure/)
+- [Trade Company Grade Job_Response Structure](https://apis.io/json-structure/allianz-trade-online/trade-company-grade-job_response-structure/)
+- [Trade Payment Overdues Error_Response Structure](https://apis.io/json-structure/allianz-trade-online/trade-payment-overdues-error_response-structure/)
+- [Trade Payment Overdues Job_Response Structure](https://apis.io/json-structure/allianz-trade-online/trade-payment-overdues-job_response-structure/)
+- [Trade Payment Overdues Overdue Structure](https://apis.io/json-structure/allianz-trade-online/trade-payment-overdues-overdue-structure/)
+- [Trade Payment Overdues Overdue_List Structure](https://apis.io/json-structure/allianz-trade-online/trade-payment-overdues-overdue_list-structure/)
+- [Trade Payment Overdues Report_Overdue_Request Structure](https://apis.io/json-structure/allianz-trade-online/trade-payment-overdues-report_overdue_request-structure/)
+- [Trade Policy Add_Joint_Insured_Request Structure](https://apis.io/json-structure/allianz-trade-online/trade-policy-add_joint_insured_request-structure/)
+- [Trade Policy Error_Response Structure](https://apis.io/json-structure/allianz-trade-online/trade-policy-error_response-structure/)
+- [Trade Policy Job_Response Structure](https://apis.io/json-structure/allianz-trade-online/trade-policy-job_response-structure/)
+- [Trade Policy Joint_Insured Structure](https://apis.io/json-structure/allianz-trade-online/trade-policy-joint_insured-structure/)
+- [Trade Policy Joint_Insured_List Structure](https://apis.io/json-structure/allianz-trade-online/trade-policy-joint_insured_list-structure/)
+- [Trade Policy Policy Structure](https://apis.io/json-structure/allianz-trade-online/trade-policy-policy-structure/)
+- [Trade Policy Policy_List Structure](https://apis.io/json-structure/allianz-trade-online/trade-policy-policy_list-structure/)
 
-## Authentication
+#### JSON-LD (4)
 
-All APIs use OAuth2 client credentials flow:
+Linked-data contexts for the provider's vocabulary.
 
-- **Token URL:** `https://api.allianz-trade.com/oauth2/token`
-- **Scopes:** `overdues:read`, `overdues:write`, `grades:read`, `grades:write`, `claims:read`, `claims:write`, `policy:read`, `policy:write`
+- [Allianz Trade Claims Context](https://apis.io/jsonld/allianz-trade-online/allianz-trade-claims-context/)
+- [Allianz Trade Company Grade Context](https://apis.io/jsonld/allianz-trade-online/allianz-trade-company-grade-context/)
+- [Allianz Trade Payment Overdues Context](https://apis.io/jsonld/allianz-trade-online/allianz-trade-payment-overdues-context/)
+- [Allianz Trade Policy Context](https://apis.io/jsonld/allianz-trade-online/allianz-trade-policy-context/)
 
-## API Patterns
+#### Vocabulary (1)
 
-- **Pagination:** `pageSize` / `page` / `totalRequired` query parameters; `Total-Items` / `Total-Pages` response headers
-- **Async Operations:** POST/PATCH/DELETE return `202 Accepted` with a `jobId`; poll `GET /jobs/{jobId}` until `status: processed`
-- **Overdue Categories:** OVD (default), EXP (extension), RES (rescheduling)
+The provider's domain terms, defined.
 
-## Common Resources
+- [Allianz Trade Vocabulary](https://apis.io/vocabularies/allianz-trade-online/allianz-trade-online-vocabulary/)
 
-- **Website:** [https://www.allianz-trade.com/](https://www.allianz-trade.com/)
-- **Developer Portal:** [https://developers.allianz-trade.com/](https://developers.allianz-trade.com/)
-- **Getting Started:** [https://developers.allianz-trade.com/docs/getting-started](https://developers.allianz-trade.com/docs/getting-started)
-- **Change Log:** [https://developers.allianz-trade.com/whatsnew](https://developers.allianz-trade.com/whatsnew)
-- **Support:** api@allianz-trade.com
+#### Examples (22)
 
-## Maintainer
+Example requests and responses.
 
-Kin Lane — kin@apievangelist.com
+- [Trade Claims Claim Example](https://apis.io/examples/allianz-trade-online/trade-claims-claim-example/)
+- [Trade Claims Claim_List Example](https://apis.io/examples/allianz-trade-online/trade-claims-claim_list-example/)
+- [Trade Claims Error_Response Example](https://apis.io/examples/allianz-trade-online/trade-claims-error_response-example/)
+- [Trade Claims Job_Response Example](https://apis.io/examples/allianz-trade-online/trade-claims-job_response-example/)
+- [Trade Claims Submit_Claim_Request Example](https://apis.io/examples/allianz-trade-online/trade-claims-submit_claim_request-example/)
+- [Trade Company Grade Company_Grade Example](https://apis.io/examples/allianz-trade-online/trade-company-grade-company_grade-example/)
+- [Trade Company Grade Company_Grade_List Example](https://apis.io/examples/allianz-trade-online/trade-company-grade-company_grade_list-example/)
+- [Trade Company Grade Company_Grade_Request Example](https://apis.io/examples/allianz-trade-online/trade-company-grade-company_grade_request-example/)
+- [Trade Company Grade Error_Response Example](https://apis.io/examples/allianz-trade-online/trade-company-grade-error_response-example/)
+- [Trade Company Grade Job_Response Example](https://apis.io/examples/allianz-trade-online/trade-company-grade-job_response-example/)
+- [Trade Payment Overdues Error_Response Example](https://apis.io/examples/allianz-trade-online/trade-payment-overdues-error_response-example/)
+- [Trade Payment Overdues Job_Response Example](https://apis.io/examples/allianz-trade-online/trade-payment-overdues-job_response-example/)
+- [Trade Payment Overdues Overdue Example](https://apis.io/examples/allianz-trade-online/trade-payment-overdues-overdue-example/)
+- [Trade Payment Overdues Overdue_List Example](https://apis.io/examples/allianz-trade-online/trade-payment-overdues-overdue_list-example/)
+- [Trade Payment Overdues Report_Overdue_Request Example](https://apis.io/examples/allianz-trade-online/trade-payment-overdues-report_overdue_request-example/)
+- [Trade Policy Add_Joint_Insured_Request Example](https://apis.io/examples/allianz-trade-online/trade-policy-add_joint_insured_request-example/)
+- [Trade Policy Error_Response Example](https://apis.io/examples/allianz-trade-online/trade-policy-error_response-example/)
+- [Trade Policy Job_Response Example](https://apis.io/examples/allianz-trade-online/trade-policy-job_response-example/)
+- [Trade Policy Joint_Insured Example](https://apis.io/examples/allianz-trade-online/trade-policy-joint_insured-example/)
+- [Trade Policy Joint_Insured_List Example](https://apis.io/examples/allianz-trade-online/trade-policy-joint_insured_list-example/)
+- [Trade Policy Policy Example](https://apis.io/examples/allianz-trade-online/trade-policy-policy-example/)
+- [Trade Policy Policy_List Example](https://apis.io/examples/allianz-trade-online/trade-policy-policy_list-example/)
+
+#### Collections (4)
+
+Postman and Open Collection request collections.
+
+- [Allianz Trade Claims API](https://apis.io/collections/allianz-trade-online/open-allianz-trade-online-claims-api/)
+- [Allianz Trade Claims Company Grade API](https://apis.io/collections/allianz-trade-online/open-allianz-trade-online-company-grade-api/)
+- [Allianz Trade Claims Payment Overdues API](https://apis.io/collections/allianz-trade-online/open-allianz-trade-online-payment-overdues-api/)
+- [Allianz Trade Claims Policy API](https://apis.io/collections/allianz-trade-online/open-allianz-trade-online-policy-api/)
+
+#### Overlays (4)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Allianz Trade Online Claims Overlay](https://apis.io/overlays/allianz-trade-online/allianz-trade-online-claims-overlay/)
+- [Allianz Trade Online Company Grade Overlay](https://apis.io/overlays/allianz-trade-online/allianz-trade-online-company-grade-overlay/)
+- [Allianz Trade Online Payment Overdues Overlay](https://apis.io/overlays/allianz-trade-online/allianz-trade-online-payment-overdues-overlay/)
+- [Allianz Trade Online Policy Overlay](https://apis.io/overlays/allianz-trade-online/allianz-trade-online-policy-overlay/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Allianz Trade — jsonschema rules](https://apis.io/rules/allianz-trade-online/allianz-trade-online-jsonschema-spectral-rules/)
+- [Allianz Trade API Rules](https://apis.io/rules/allianz-trade-online/allianz-trade-online-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Allianz Trade Online Authentication](https://apis.io/security/allianz-trade-online/allianz-trade-online-authentication/)
+- [Allianz Trade Online Domain Security](https://apis.io/security/allianz-trade-online/allianz-trade-online-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Allianz Trade Online Scopes](https://apis.io/scopes/allianz-trade-online/allianz-trade-online-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.allianz-trade.com/)
+- [Documentation](https://developers.allianz-trade.com/docs/api-design-guidelines)
+- [Getting started](https://developers.allianz-trade.com/docs/getting-started)
+- [Changelog](https://developers.allianz-trade.com/whatsnew)
+
+## API Evangelist rating
+
+**Kin Score 31.3** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 29.8 |
+| Contract governance | 31.8 |
+| Operational transparency | 15.8 |
+| Developer ergonomics | 47.6 |
+| Access clarity | 0.0 |
+
+**Agent readiness 30.9** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 29.8** — Insurance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/allianz-trade-online/](https://apis.io/providers/allianz-trade-online/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Allianz Trade: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/allianz-trade-online/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
